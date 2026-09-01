@@ -1,14 +1,207 @@
-01:43:33 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+03:43:28 **** Incremental Build of configuration Debug for project Level2_ADC ****
 make -j16 all 
-arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:102:12: warning: unused variable 'result' [-Wunused-variable]
+  102 |   uint16_t result = 0x0000;
+      |            ^~~~~~
+arm-none-eabi-gcc -o "Level2_ADC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level2\Level2_ADC\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level2_ADC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level2_ADC.elf
+ 
+arm-none-eabi-size  Level2_ADC.elf 
+arm-none-eabi-objdump -h -S Level2_ADC.elf  > "Level2_ADC.list"
    text	   data	    bss	    dec	    hex	filename
-  11168	     12	   1644	  12824	   3218	Level1_GPIO_IRQ_UART.elf
+  15844	     92	   2148	  18084	   46a4	Level2_ADC.elf
 Finished building: default.size.stdout
  
-01:44:58 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+Finished building: Level2_ADC.list
+ 
+03:43:31 **** Incremental Build of configuration Debug for project Level2_ADC ****
 make -j16 all 
-arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-size  Level2_ADC.elf 
    text	   data	    bss	    dec	    hex	filename
-  11168	     12	   1644	  12824	   3218	Level1_GPIO_IRQ_UART.elf
+  15844	     92	   2148	  18084	   46a4	Level2_ADC.elf
 Finished building: default.size.stdout
+ 
+03:45:32 **** Incremental Build of configuration Debug for project Level2_ADC ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:102:12: warning: unused variable 'result' [-Wunused-variable]
+  102 |   uint16_t result = 0x0000;
+      |            ^~~~~~
+arm-none-eabi-gcc -o "Level2_ADC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level2\Level2_ADC\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level2_ADC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level2_ADC.elf
+ 
+arm-none-eabi-size  Level2_ADC.elf 
+arm-none-eabi-objdump -h -S Level2_ADC.elf  > "Level2_ADC.list"
+   text	   data	    bss	    dec	    hex	filename
+  15844	     92	   2148	  18084	   46a4	Level2_ADC.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level2_ADC.list
+ 
+03:46:21 **** Incremental Build of configuration Debug for project Level2_ADC ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:102:12: warning: unused variable 'result' [-Wunused-variable]
+  102 |   uint16_t result = 0x0000;
+      |            ^~~~~~
+arm-none-eabi-gcc -o "Level2_ADC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level2\Level2_ADC\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level2_ADC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level2_ADC.elf
+ 
+arm-none-eabi-size  Level2_ADC.elf 
+arm-none-eabi-objdump -h -S Level2_ADC.elf  > "Level2_ADC.list"
+   text	   data	    bss	    dec	    hex	filename
+  15852	     92	   2148	  18092	   46ac	Level2_ADC.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level2_ADC.list
+ 
+03:48:59 **** Incremental Build of configuration Debug for project Level2_ADC ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:102:12: warning: unused variable 'result' [-Wunused-variable]
+  102 |   uint16_t result = 0x0000;
+      |            ^~~~~~
+arm-none-eabi-gcc -o "Level2_ADC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level2\Level2_ADC\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level2_ADC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level2_ADC.elf
+ 
+arm-none-eabi-size  Level2_ADC.elf 
+arm-none-eabi-objdump -h -S Level2_ADC.elf  > "Level2_ADC.list"
+   text	   data	    bss	    dec	    hex	filename
+  15928	     92	   2148	  18168	   46f8	Level2_ADC.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level2_ADC.list
+ 
+03:52:46 **** Incremental Build of configuration Debug for project Level2_ADC ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:102:12: warning: unused variable 'result' [-Wunused-variable]
+  102 |   uint16_t result = 0x0000;
+      |            ^~~~~~
+arm-none-eabi-gcc -o "Level2_ADC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level2\Level2_ADC\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level2_ADC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level2_ADC.elf
+ 
+arm-none-eabi-size  Level2_ADC.elf 
+arm-none-eabi-objdump -h -S Level2_ADC.elf  > "Level2_ADC.list"
+   text	   data	    bss	    dec	    hex	filename
+  15928	     92	   2148	  18168	   46f8	Level2_ADC.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level2_ADC.list
+ 
+03:53:55 **** Incremental Build of configuration Debug for project Level2_ADC ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:102:12: warning: unused variable 'result' [-Wunused-variable]
+  102 |   uint16_t result = 0x0000;
+      |            ^~~~~~
+arm-none-eabi-gcc -o "Level2_ADC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level2\Level2_ADC\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level2_ADC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level2_ADC.elf
+ 
+arm-none-eabi-size  Level2_ADC.elf 
+arm-none-eabi-objdump -h -S Level2_ADC.elf  > "Level2_ADC.list"
+   text	   data	    bss	    dec	    hex	filename
+  15928	     92	   2148	  18168	   46f8	Level2_ADC.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level2_ADC.list
+ 
+03:56:38 **** Incremental Build of configuration Debug for project Level2_ADC ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:102:12: warning: unused variable 'result' [-Wunused-variable]
+  102 |   uint16_t result = 0x0000;
+      |            ^~~~~~
+arm-none-eabi-gcc -o "Level2_ADC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level2\Level2_ADC\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level2_ADC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level2_ADC.elf
+ 
+arm-none-eabi-size  Level2_ADC.elf 
+arm-none-eabi-objdump -h -S Level2_ADC.elf  > "Level2_ADC.list"
+   text	   data	    bss	    dec	    hex	filename
+  15928	     92	   2148	  18168	   46f8	Level2_ADC.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level2_ADC.list
+ 
+03:57:28 **** Incremental Build of configuration Debug for project Level2_ADC ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:102:12: warning: unused variable 'result' [-Wunused-variable]
+  102 |   uint16_t result = 0x0000;
+      |            ^~~~~~
+arm-none-eabi-gcc -o "Level2_ADC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level2\Level2_ADC\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level2_ADC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level2_ADC.elf
+ 
+arm-none-eabi-size  Level2_ADC.elf 
+arm-none-eabi-objdump -h -S Level2_ADC.elf  > "Level2_ADC.list"
+   text	   data	    bss	    dec	    hex	filename
+  15920	     92	   2148	  18160	   46f0	Level2_ADC.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level2_ADC.list
+ 
+03:59:54 **** Incremental Build of configuration Debug for project Level2_ADC ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:102:12: warning: unused variable 'result' [-Wunused-variable]
+  102 |   uint16_t result = 0x0000;
+      |            ^~~~~~
+arm-none-eabi-gcc -o "Level2_ADC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level2\Level2_ADC\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level2_ADC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level2_ADC.elf
+ 
+arm-none-eabi-size  Level2_ADC.elf 
+arm-none-eabi-objdump -h -S Level2_ADC.elf  > "Level2_ADC.list"
+   text	   data	    bss	    dec	    hex	filename
+  15936	     92	   2148	  18176	   4700	Level2_ADC.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level2_ADC.list
+ 
+04:02:14 **** Incremental Build of configuration Debug for project Level2_ADC ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:102:12: warning: unused variable 'result' [-Wunused-variable]
+  102 |   uint16_t result = 0x0000;
+      |            ^~~~~~
+arm-none-eabi-gcc -o "Level2_ADC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level2\Level2_ADC\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level2_ADC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level2_ADC.elf
+ 
+arm-none-eabi-size  Level2_ADC.elf 
+arm-none-eabi-objdump -h -S Level2_ADC.elf  > "Level2_ADC.list"
+   text	   data	    bss	    dec	    hex	filename
+  15932	     92	   2148	  18172	   46fc	Level2_ADC.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level2_ADC.list
+ 
+04:03:06 **** Incremental Build of configuration Debug for project Level2_ADC ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:102:12: warning: unused variable 'result' [-Wunused-variable]
+  102 |   uint16_t result = 0x0000;
+      |            ^~~~~~
+arm-none-eabi-gcc -o "Level2_ADC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level2\Level2_ADC\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level2_ADC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level2_ADC.elf
+ 
+arm-none-eabi-size  Level2_ADC.elf 
+arm-none-eabi-objdump -h -S Level2_ADC.elf  > "Level2_ADC.list"
+   text	   data	    bss	    dec	    hex	filename
+  15936	     92	   2148	  18176	   4700	Level2_ADC.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level2_ADC.list
  
