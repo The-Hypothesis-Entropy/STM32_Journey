@@ -136,3 +136,47 @@ COM17
 
 !ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-09-01 02:19:17.716
 !MESSAGE port: COM17
+!SESSION 2026-09-01 04:22:35.527 -----------------------------------------------
+eclipse.buildId=Version 2.2.0
+java.version=21.0.10
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-09-01 04:22:43.086
+!MESSAGE Log4j2 initialized with config file C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\.metadata\.log4j2.xml
+
+!ENTRY org.eclipse.core.net 1 0 2026-09-01 04:22:47.743
+!MESSAGE System property http.proxyHost is set to 127.0.0.1 but should not be set.
+
+!ENTRY org.eclipse.core.net 1 0 2026-09-01 04:22:47.744
+!MESSAGE System property http.proxyPort is set to 59908 but should not be set.
+
+!ENTRY org.eclipse.core.net 1 0 2026-09-01 04:22:47.745
+!MESSAGE System property https.proxyHost is set to 127.0.0.1 but should not be set.
+
+!ENTRY org.eclipse.core.net 1 0 2026-09-01 04:22:47.746
+!MESSAGE System property https.proxyPort is set to 59908 but should not be set.
+
+!ENTRY org.eclipse.core.net 1 0 2026-09-01 04:22:47.747
+!MESSAGE System property socksProxyHost is set to 127.0.0.1 but should not be set.
+
+!ENTRY org.eclipse.core.net 1 0 2026-09-01 04:22:47.748
+!MESSAGE System property socksProxyPort is set to 59907 but should not be set.
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-09-01 04:22:51.337
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-09-01 04:22:52.749
+!MESSAGE Executed PowerShell command powershell.exe -Command "Get-CimInstance -ClassName Win32_SerialPort | Select-Object -ExpandProperty DeviceID":
+COM17
+
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-09-01 04:22:52.750
+!MESSAGE port: COM17
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-09-01 04:23:34.924
+!MESSAGE Indexed 'Level3_TIM' (25 sources, 156 headers) in 2.29 sec: 16,029 declarations; 74,249 references; 1 unresolved inclusions; 92 syntax errors; 238 unresolved names (0.26%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-09-01 04:41:04.643
+!MESSAGE Indexed 'Level3_TIM' (24 sources, 123 headers) in 1.74 sec: 13,270 declarations; 67,318 references; 1 unresolved inclusions; 92 syntax errors; 238 unresolved names (0.29%)
