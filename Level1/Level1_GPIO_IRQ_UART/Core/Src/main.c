@@ -58,6 +58,8 @@ static void MX_USART2_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 uint8_t pressed = 0x00;
+uint8_t rcvd[25];
+uint8_t idx = 0x00ul;
 /* USER CODE END 0 */
 
 /**
@@ -92,6 +94,14 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   char msg[] = "Button pressed! LED Toggled\r\n!!!";
+
+
+ //---------- #2
+  //HAL_UART_Receive_IT(&huart2, rcvd, 10);
+ //----------
+
+  HAL_UART_Receive_IT(&huart2, &rcvd[idx], 1);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -106,6 +116,18 @@ int main(void)
 		  HAL_UART_Transmit(&huart2, (uint8_t *)msg, strlen(msg), HAL_MAX_DELAY);
 		  pressed = 0x00;
 	  }
+	  //HAL_UART_Receive(&huart2, rcvd, 5, HAL_MAX_DELAY); //we are receiving bytes, but only 1 at a time. tell me the size and we will not give HAL_OK until we have received so many bytes 1 by 1.
+	  //HAL_UART_Transmit(&huart2, rcvd, 5, HAL_MAX_DELAY);
+
+	  //HAL_UART_Receive(&huart2, rcvd, 5, 3000); //within 3 seconds, write to the first 5 elements of that array in RAM, or else
+	  //HAL_UART_Transmit(&huart2, rcvd, 5, HAL_MAX_DELAY); //print whatever is in that array in RAM
+
+	  //HAL_UART_Receive_IT(&huart2, rcvd, 5);//the size condition remains necessary for HAL_OK, but time condition will not block. time cant expire, and we are incrementing index on array till size completion.
+	  //HAL_UART_Transmit(&huart2, rcvd, 5, HAL_MAX_DELAY);
+	  //HAL_Delay(1000);
+	  //the above is for demonstration purposes only..in practice, the receive_it should be outside the loop, and another receive_it should be in the callback (which runs when receive is complete)
+
+
   }
   /* USER CODE END 3 */
 }
@@ -236,6 +258,48 @@ static void MX_GPIO_Init(void)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	if ((GPIO_Pin == GPIO_PIN_13)&&(!pressed)){
 		pressed = 0x01;
+	}
+}
+
+//---------- #2
+/*void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+	if(huart->Instance == USART2){
+		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+		HAL_UART_Receive_IT(&huart2, rcvd, 10); //restart listening for start bit condition, byte parsing and storage, for that length of data.
+		uint8_t msg[50];
+		uint8_t preamble[] = "Received: ";
+		uint8_t last_idx = 0;
+		for (uint8_t i = 0; i<sizeof(preamble); i++){
+			msg[i] = preamble[i];
+			last_idx = i+1;
+		}
+		for (uint8_t i = 0; i<sizeof(rcvd); i++){
+			msg[sizeof(preamble) + i] = rcvd[i];
+			last_idx = sizeof(preamble) + i + 1;
+		}
+		msg[last_idx] = '\r';
+		msg[last_idx + 1] = '\n';
+		HAL_UART_Transmit_IT(&huart2, msg, last_idx+2);
+	}
+}
+*/
+//----------
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+	if (huart->Instance == USART2){
+		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+		//AL_UART_Transmit(&huart2, &rcvd[idx], 1, 100);
+		//
+		if(rcvd[idx] == '\n' || rcvd[idx] == '\r'){
+			HAL_UART_Transmit(&huart2, rcvd, idx + 1, 100);
+			HAL_UART_Transmit(&huart2, (uint8_t *)"\r\n", 2, 100); //if not blocking, perhaps too fast for serial...gets skipped because of HAL_BUSY
+			idx = 0x00;
+		}
+		else{
+			//HAL_UART_Transmit_IT(&huart2, &idx, 1);
+			idx++;
+		}
+		HAL_UART_Receive_IT(&huart2, &rcvd[idx], 1);
 	}
 }
 

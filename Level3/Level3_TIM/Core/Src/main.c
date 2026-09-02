@@ -99,9 +99,11 @@ int main(void)
   MX_ADC1_Init();
   MX_USART2_UART_Init();
   MX_TIM2_Init();
-
-  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_1);
+
+
   char msg[] = "Button Press Detected!\r\n";
   uint16_t result = 0x0000;
   uint32_t duty = 0x00;
@@ -134,7 +136,7 @@ int main(void)
 
 		  duty = (result * 1000) >> 12; //dividing by 4096~~4095
 	  }
-	  else{
+	  /*else{
 		  char buf[30];
 		  int len = sprintf(buf, "obtained: %u\r\n", (int)recv);
 		  HAL_UART_Transmit(&huart2, (uint8_t *)buf, len, 100);
@@ -142,7 +144,7 @@ int main(void)
 		  if (recv<=100 && recv>=0){
 			  duty = ((int)(recv-48))*100;
 		  }
-	  }
+		  */
 
 	  HAL_Delay(10);
   }
@@ -269,7 +271,7 @@ static void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 83;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 999;
+  htim2.Init.Period = 999999;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -386,6 +388,12 @@ static void MX_GPIO_Init(void)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	if (GPIO_Pin == GPIO_PIN_13){
 		post = 0x01;
+	}
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+	if(htim->Instance == TIM2){
+		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
 	}
 }
 

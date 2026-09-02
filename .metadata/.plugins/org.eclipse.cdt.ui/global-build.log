@@ -697,3 +697,607 @@ Finished building: default.size.stdout
  
 Finished building: Level3_TIM.list
  
+22:01:10 **** Incremental Build of configuration Debug for project Level3_TIM ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level3_TIM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level3\Level3_TIM\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level3_TIM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level3_TIM.elf
+ 
+arm-none-eabi-size  Level3_TIM.elf 
+arm-none-eabi-objdump -h -S Level3_TIM.elf  > "Level3_TIM.list"
+   text	   data	    bss	    dec	    hex	filename
+  17732	     92	   2124	  19948	   4dec	Level3_TIM.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level3_TIM.list
+ 
+22:02:29 **** Incremental Build of configuration Debug for project Level3_TIM ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level3_TIM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level3\Level3_TIM\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level3_TIM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level3_TIM.elf
+ 
+arm-none-eabi-size  Level3_TIM.elf 
+arm-none-eabi-objdump -h -S Level3_TIM.elf  > "Level3_TIM.list"
+   text	   data	    bss	    dec	    hex	filename
+  17940	     92	   2124	  20156	   4ebc	Level3_TIM.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level3_TIM.list
+ 
+22:05:01 **** Incremental Build of configuration Debug for project Level3_TIM ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level3_TIM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level3\Level3_TIM\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level3_TIM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level3_TIM.elf
+ 
+arm-none-eabi-size  Level3_TIM.elf 
+arm-none-eabi-objdump -h -S Level3_TIM.elf  > "Level3_TIM.list"
+   text	   data	    bss	    dec	    hex	filename
+  17940	     92	   2124	  20156	   4ebc	Level3_TIM.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level3_TIM.list
+ 
+22:07:12 **** Incremental Build of configuration Debug for project Level3_TIM ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level3_TIM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level3\Level3_TIM\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level3_TIM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level3_TIM.elf
+ 
+arm-none-eabi-size  Level3_TIM.elf 
+arm-none-eabi-objdump -h -S Level3_TIM.elf  > "Level3_TIM.list"
+   text	   data	    bss	    dec	    hex	filename
+  17732	     92	   2124	  19948	   4dec	Level3_TIM.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level3_TIM.list
+ 
+22:11:52 **** Incremental Build of configuration Debug for project Level3_TIM ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+arm-none-eabi-gcc -o "Level3_TIM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level3\Level3_TIM\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level3_TIM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level3_TIM.elf
+ 
+arm-none-eabi-size  Level3_TIM.elf 
+arm-none-eabi-objdump -h -S Level3_TIM.elf  > "Level3_TIM.list"
+   text	   data	    bss	    dec	    hex	filename
+  18404	     92	   2124	  20620	   508c	Level3_TIM.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level3_TIM.list
+ 
+22:14:26 **** Incremental Build of configuration Debug for project Level3_TIM ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:108:12: warning: unused variable 'recv' [-Wunused-variable]
+  108 |   uint16_t recv = 0x00;
+      |            ^~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:151:1: error: expected identifier or '(' before '}' token
+  151 | }
+      | ^
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+22:15:02 **** Incremental Build of configuration Debug for project Level3_TIM ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:108:12: warning: unused variable 'recv' [-Wunused-variable]
+  108 |   uint16_t recv = 0x00;
+      |            ^~~~
+arm-none-eabi-gcc -o "Level3_TIM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level3\Level3_TIM\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level3_TIM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level3_TIM.elf
+ 
+arm-none-eabi-size  Level3_TIM.elf 
+arm-none-eabi-objdump -h -S Level3_TIM.elf  > "Level3_TIM.list"
+   text	   data	    bss	    dec	    hex	filename
+  18168	     92	   2124	  20384	   4fa0	Level3_TIM.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level3_TIM.list
+ 
+22:16:14 **** Incremental Build of configuration Debug for project Level3_TIM ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:110:12: warning: unused variable 'recv' [-Wunused-variable]
+  110 |   uint16_t recv = 0x00;
+      |            ^~~~
+arm-none-eabi-gcc -o "Level3_TIM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level3\Level3_TIM\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level3_TIM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level3_TIM.elf
+ 
+arm-none-eabi-size  Level3_TIM.elf 
+arm-none-eabi-objdump -h -S Level3_TIM.elf  > "Level3_TIM.list"
+   text	   data	    bss	    dec	    hex	filename
+  18372	     92	   2124	  20588	   506c	Level3_TIM.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level3_TIM.list
+ 
+22:16:49 **** Incremental Build of configuration Debug for project Level3_TIM ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:110:12: warning: unused variable 'recv' [-Wunused-variable]
+  110 |   uint16_t recv = 0x00;
+      |            ^~~~
+arm-none-eabi-gcc -o "Level3_TIM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level3\Level3_TIM\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level3_TIM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level3_TIM.elf
+ 
+arm-none-eabi-size  Level3_TIM.elf 
+arm-none-eabi-objdump -h -S Level3_TIM.elf  > "Level3_TIM.list"
+   text	   data	    bss	    dec	    hex	filename
+  18372	     92	   2124	  20588	   506c	Level3_TIM.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level3_TIM.list
+ 
+22:32:50 **** Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11504	     12	   1644	  13160	   3368	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+22:42:58 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11504	     12	   1644	  13160	   3368	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+23:00:35 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:116:11: error: too many arguments to function 'HAL_UART_Receive_IT'
+  116 |           HAL_UART_Receive_IT(&huart2, rcvd, 5, HAL_MAX_DELAY);//the size condition remains necessary for HAL_OK, but time condition will not block. time can still expire, but until then we are incrementing index on array.
+      |           ^~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:411,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:748:19: note: declared here
+  748 | HAL_StatusTypeDef HAL_UART_Receive_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
+      |                   ^~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+23:02:55 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11468	     12	   1644	  13124	   3344	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+23:05:07 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11504	     12	   1644	  13160	   3368	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+23:05:41 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11468	     12	   1644	  13124	   3344	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+23:32:46 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:261:46: error: 'rcvd' undeclared (first use in this function)
+  261 |                 HAL_UART_Receive_IT(&huart2, rcvd, 10);
+      |                                              ^~~~
+../Core/Src/main.c:261:46: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:262:17: error: too many arguments to function 'HAL_UART_Transmit_IT'
+  262 |                 HAL_UART_Transmit_IT(&huart2, (uint8_t *)"done\r\n", sizeof("done\r\n")-1, 100);
+      |                 ^~~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:411,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:747:19: note: declared here
+  747 | HAL_StatusTypeDef HAL_UART_Transmit_IT(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size);
+      |                   ^~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+23:33:22 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11544	     12	   1676	  13232	   33b0	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+23:48:00 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11720	     12	   1676	  13408	   3460	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+23:58:34 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11724	     12	   1676	  13412	   3464	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+00:01:00 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11732	     12	   1676	  13420	   346c	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+00:39:10 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11596	     12	   1676	  13284	   33e4	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+00:41:45 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11608	     12	   1676	  13296	   33f0	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+00:44:09 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11600	     12	   1676	  13288	   33e8	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+00:44:58 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11608	     12	   1676	  13296	   33f0	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+00:46:09 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+   text	   data	    bss	    dec	    hex	filename
+  11608	     12	   1676	  13296	   33f0	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+00:46:58 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11620	     12	   1676	  13308	   33fc	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+00:47:23 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+   text	   data	    bss	    dec	    hex	filename
+  11620	     12	   1676	  13308	   33fc	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+00:50:19 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+   text	   data	    bss	    dec	    hex	filename
+  11620	     12	   1676	  13308	   33fc	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+00:55:46 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11612	     12	   1676	  13300	   33f4	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+01:01:21 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:298:55: warning: passing argument 2 of 'HAL_UART_Transmit_IT' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  298 |                         HAL_UART_Transmit_IT(&huart2, &idx, 1);
+      |                                                       ^~~~
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:411,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:747:82: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  747 | HAL_StatusTypeDef HAL_UART_Transmit_IT(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size);
+      |                                                                   ~~~~~~~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11620	     12	   1676	  13308	   33fc	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+01:02:41 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:298:55: error: passing argument 2 of 'HAL_UART_Transmit_IT' makes pointer from integer without a cast [-Wint-conversion]
+  298 |                         HAL_UART_Transmit_IT(&huart2, idx, 1);
+      |                                                       ^~~
+      |                                                       |
+      |                                                       uint8_t {aka unsigned char}
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:411,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:747:82: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'uint8_t' {aka 'unsigned char'}
+  747 | HAL_StatusTypeDef HAL_UART_Transmit_IT(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size);
+      |                                                                   ~~~~~~~~~~~~~~~^~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+01:03:42 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11608	     12	   1676	  13296	   33f0	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+01:06:40 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11608	     12	   1676	  13296	   33f0	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+01:14:21 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11612	     12	   1676	  13300	   33f4	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+01:17:37 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:292:44: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  292 |                 HAL_UART_Transmit(&huart2, "\r\n", 2, 100);
+      |                                            ^~~~~~
+      |                                            |
+      |                                            char *
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:411,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:745:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+  745 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11652	     12	   1676	  13340	   341c	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+01:18:07 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11652	     12	   1676	  13340	   341c	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+01:19:11 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11612	     12	   1676	  13300	   33f4	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+01:20:24 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11632	     12	   1676	  13320	   3408	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+01:23:17 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11632	     12	   1676	  13320	   3408	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 
+01:24:09 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Core/Src/main.c:294:25: error: too few arguments to function 'HAL_UART_Transmit'
+  294 |                         HAL_UART_Transmit(&huart2, rcvd, idx + 1);
+      |                         ^~~~~~~~~~~~~~~~~
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:411,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:745:19: note: declared here
+  745 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                   ^~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+01:24:16 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Level1_GPIO_IRQ_UART.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level1\Level1_GPIO_IRQ_UART\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level1_GPIO_IRQ_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Level1_GPIO_IRQ_UART.elf
+ 
+arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
+arm-none-eabi-objdump -h -S Level1_GPIO_IRQ_UART.elf  > "Level1_GPIO_IRQ_UART.list"
+   text	   data	    bss	    dec	    hex	filename
+  11524	     12	   1676	  13212	   339c	Level1_GPIO_IRQ_UART.elf
+Finished building: default.size.stdout
+ 
+Finished building: Level1_GPIO_IRQ_UART.list
+ 

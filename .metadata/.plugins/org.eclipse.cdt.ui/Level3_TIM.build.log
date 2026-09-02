@@ -1,17 +1,21 @@
-05:30:53 **** Incremental Build of configuration Debug for project Level3_TIM ****
+22:16:49 **** Incremental Build of configuration Debug for project Level3_TIM ****
 make -j16 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:110:12: warning: unused variable 'recv' [-Wunused-variable]
+  110 |   uint16_t recv = 0x00;
+      |            ^~~~
 arm-none-eabi-gcc -o "Level3_TIM.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Level3\Level3_TIM\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Level3_TIM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: Level3_TIM.elf
  
 arm-none-eabi-size  Level3_TIM.elf 
 arm-none-eabi-objdump -h -S Level3_TIM.elf  > "Level3_TIM.list"
    text	   data	    bss	    dec	    hex	filename
-  17732	     92	   2124	  19948	   4dec	Level3_TIM.elf
+  18372	     92	   2124	  20588	   506c	Level3_TIM.elf
 Finished building: default.size.stdout
  
 Finished building: Level3_TIM.list
  
 
-05:30:54 Build Finished. 0 errors, 0 warnings. (took 601ms)
+22:16:49 Build Finished. 0 errors, 1 warnings. (took 559ms)
 
