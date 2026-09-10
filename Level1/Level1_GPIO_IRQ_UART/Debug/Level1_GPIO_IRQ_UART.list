@@ -895,7 +895,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
  800081c:	4913      	ldr	r1, [pc, #76]	@ (800086c <HAL_UART_RxCpltCallback+0x90>)
  800081e:	4814      	ldr	r0, [pc, #80]	@ (8000870 <HAL_UART_RxCpltCallback+0x94>)
  8000820:	f001 f9f4 	bl	8001c0c <HAL_UART_Transmit>
-			HAL_UART_Transmit(&huart2, (uint8_t *)"\r\n", 2, 100);
+			HAL_UART_Transmit(&huart2, (uint8_t *)"\r\n", 2, 100); //if not blocking, perhaps too fast for serial...gets skipped because of HAL_BUSY
  8000824:	2364      	movs	r3, #100	@ 0x64
  8000826:	2202      	movs	r2, #2
  8000828:	4912      	ldr	r1, [pc, #72]	@ (8000874 <HAL_UART_RxCpltCallback+0x98>)

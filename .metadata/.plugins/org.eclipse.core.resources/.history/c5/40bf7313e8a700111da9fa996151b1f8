@@ -1,0 +1,18 @@
+#include "stm32f401xe.h"
+
+int main(void){
+	// Enable clock to GPIOA
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+
+	//Config PA5 as output
+	GPIOA->MODER &= ~(0x11<<10);
+	GPIOA->MODER |= 0x10<<10;
+	while(1){
+
+		GPIOA->BSRR |= 0x01<<5;
+		for (volatile int i = 0; i<500000; i++);
+
+		GPIOA->BSRR |= 0x01<<5;
+		for (volatile int i = 0; i<500000; i++);
+	}
+}

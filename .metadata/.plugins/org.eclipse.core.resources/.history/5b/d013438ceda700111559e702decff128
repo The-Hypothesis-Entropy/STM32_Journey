@@ -1,0 +1,16 @@
+#include "stm32f401xe.h"
+
+int main(){
+	//Enable the power to GPIOA
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+
+	//Config PA5
+	GPIOA->MODER |= 0x01<<10;
+
+	while(1){
+		GPIOA->BSRR = 0x01<<5;
+		for(volatile int i=0; i<1000000; i++);
+		GPIOA->BSRR = 0x01<<(5+16);
+		for(volatile int i=0; i<1000000; i++);
+	}
+}

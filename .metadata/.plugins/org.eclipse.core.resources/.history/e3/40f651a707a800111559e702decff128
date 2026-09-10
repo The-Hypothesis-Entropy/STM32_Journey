@@ -1,0 +1,65 @@
+#include "stm32f401xe.h"
+
+int main_one(){
+	//Enable the power to GPIOA
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN;
+
+	//Config PA5
+	GPIOA->MODER |= 0x01<<10;
+
+	//Config PC13
+
+
+	while(1){
+		if(GPIOC->IDR & 0x01<<13){
+			GPIOA->BSRR = 0x01<<5;
+		}
+		else{
+			GPIOA->BSRR = 0x01<<(5+16);
+		}
+	}
+}
+
+int main_one_example(){
+	//Activate GPIOB
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN;
+
+	//Configure PB3
+	GPIOB->MODER &= ~(0x11<<6);
+	GPIOB->MODER |= 0x01<<6;
+
+	GPIOB->OTYPER |= 0x01<<3;
+
+	//Pull PB3 low
+	GPIOB->BSRR = 0x01<<(3+16);
+}
+
+int main(){
+	//Power up GPIOA
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+	//Configure PA5
+	GPIOA->MODER |= 0x01<<10;
+
+	//Power up GPIOC
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN;
+	//Configure PC13
+	//defaults from reset are fine
+
+	//Interrupt Workflow: SYSCFG, EXTI, NVIC, Handler
+
+	//SYSCFG config
+	RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN; //Power enabled
+	SYSCFG->EXTICR[3] |= 0x01<<5; //Choose port c to supply t
+
+	//EXTI config
+	EXTI->IMR |= 0x01<<13; //unmask line 13, allow EXTI to send requests to the NVIC
+	EXTI->FTSR |= 0x01<<13;
+
+	while(1){
+		GPIOA->BSRR = 0x01<<5;
+		for(volatile int i=0; i<500000; i++);
+		GPIOA->BSRR = 0x01<<(5+16);
+		for(volatile int i=0; i<500000; i++);
+	}
+}

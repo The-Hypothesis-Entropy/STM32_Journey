@@ -1,0 +1,7 @@
+../../Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	2
+../../Drivers/CMSIS/Include/core_cm4.h:1814:22:__NVIC_SetPriority	2
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:3:5:main_one	2
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:24:5:main_one_example	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:38:5:main_interrupt_one	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:76:5:main	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:111:6:EXTI0_IRQHandler	2

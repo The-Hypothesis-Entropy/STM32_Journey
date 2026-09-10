@@ -1,0 +1,25 @@
+04:51:27 **** Incremental Build of configuration Debug for project start ****
+make -j16 all 
+arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_FULL_LL_DRIVER -DHSE_VALUE=8000000 -DHSE_STARTUP_TIMEOUT=100 -DLSE_STARTUP_TIMEOUT=5000 -DLSE_VALUE=32768 -DEXTERNAL_CLOCK_VALUE=12288000 -DHSI_VALUE=16000000 -DLSI_VALUE=32000 -DVDD_VALUE=3300 -DPREFETCH_ENABLE=1 -DINSTRUCTION_CACHE_ENABLE=1 -DDATA_CACHE_ENABLE=1 -DSTM32F401xE -c -I../../Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/main.d" -MT"Application/User/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/main.o"
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c: In function 'main_one_example':
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:36:1: warning: control reaches end of non-void function [-Wreturn-type]
+   36 | }
+      | ^
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c: At top level:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:67:14: warning: 'EXTI15_10_IRQHandler' defined but not used [-Wunused-function]
+   67 |         void EXTI15_10_IRQHandler(void){
+      |              ^~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "start.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Bare Metal\start\STM32CubeIDE\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="start.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: start.elf
+ 
+arm-none-eabi-size  start.elf 
+arm-none-eabi-objdump -h -S start.elf  > "start.list"
+   text	   data	    bss	    dec	    hex	filename
+   1168	      0	   1568	   2736	    ab0	start.elf
+Finished building: default.size.stdout
+ 
+Finished building: start.list
+ 
+
+04:51:27 Build Finished. 0 errors, 2 warnings. (took 575ms)
+
