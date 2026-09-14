@@ -1,0 +1,157 @@
+#include "stm32f401xe.h"
+#include "mhal_exti.h"
+#include "mhal_gpio.h"
+
+
+/*
+ * ACTIVITY ON GPIO -> SYSCFG (ROUTING) -> EXTI (EDGE DETECTION) -> NVIC (PRIORITY) -> CPU CORE (ISR)
+ * SYSCFG: Which port is EXTI line x watching? (PAx, PBx, PCx, PDx, PEx, PHx?)
+ * EXTI: What are we watching for (rise or fall) and has it happened?
+ * NVIC: Should cpu care about this? and if so, how urgently?
+ */
+
+/*----------------------------------------------
+ *                    SYSCFG
+ ----------------------------------------------*/
+
+// Enable SYSCFG
+void mhal_syscfg_enable(){
+	/*
+	 * Clock and power to SYSCFG
+	 */
+	RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;
+}
+
+// Route GPIO Port to SYSCFG
+void mhal_syscfg_route(GPIO_TypeDef *port, uint32_t pin){
+	/*
+	 * Use SYSCFG->EXTICR[] to choose port whose pin x connects to exti line x
+	 */
+	uint32_t mask = SYSCFG_EXTICR1_EXTI0_Msk;
+	uint32_t port_config, syscfg_reg_num;
+	uint8_t reg_pos;
+
+	// Get port configuration
+	if(port == GPIOA){port_config = SYSCFG_EXTICR1_EXTI0_PA;}
+	else if(port == GPIOB){port_config = SYSCFG_EXTICR1_EXTI0_PB;}
+	else if(port == GPIOC){port_config = SYSCFG_EXTICR1_EXTI0_PC;}
+	else if(port == GPIOD){port_config = SYSCFG_EXTICR1_EXTI0_PD;}
+	else if(port == GPIOE){port_config = SYSCFG_EXTICR1_EXTI0_PE;}
+	else if(port == GPIOH){port_config = SYSCFG_EXTICR1_EXTI0_PH;}
+
+	// Get pin (register and position) configuration
+	syscfg_reg_num = (pin<4) ? 0 : ((pin<8) ? 1 : ((pin<12) ? 2 : 3));
+	reg_pos = pin & 3U; //pin_ref % 4U
+
+	// Configure
+	SYSCFG->EXTICR[syscfg_reg_num] &= ~(mask<<(reg_pos*4U));
+	SYSCFG->EXTICR[syscfg_reg_num] |= (port_config<<(reg_pos*4U));
+}
+
+/*----------------------------------------------
+ *                    EXTI
+ * - Unmask Line of Interest
+ * - Select Trigger
+ * - Once trigger is selected, pending bit will be active when activity occurs
+ *   Note that the pending bit will be marked regardless of the masking state
+ * - When trigger occurs, if unmasked then interrupt request sent to NVIC.
+ ----------------------------------------------*/
+
+void mhal_exti_unmask(uint8_t line){
+	/*
+	 * Allow line to send request to NVIC
+	 */
+	EXTI->IMR |= (uint32_t)1U << line; //(1U<<line);
+}
+
+void mhal_exti_mask(uint8_t line){
+	/*
+	 * Disallow line to send requests to NVIC
+	 */
+	EXTI->IMR &= ~((uint32_t)1U << line); //~(1U<<line);
+}
+
+void mhal_exti_rise_enable(uint8_t line){
+	/*
+	 * Let EXTI watch for rising edge on line
+	 */
+	EXTI->RTSR |= (uint32_t)1U << line;
+}
+
+void mhal_exti_rise_disable(uint8_t line){
+	/*
+	* Do not let EXTI watch for rising edge on line
+	*/
+	EXTI->RTSR &= ~((uint32_t)1U << line);
+}
+
+void mhal_exti_fall_enable(uint8_t line){
+	/*
+	* Let EXTI watch for falling edge on line
+	*/
+	EXTI->FTSR |= (uint32_t)1U << line;
+}
+
+void mhal_exti_fall_disable(uint8_t line){
+	/*
+	* Do not let EXTI watch for falling edge on line
+	*/
+	EXTI->FTSR &= ~((uint32_t)1U << line);
+}
+
+void mhal_exti_clear_pr(uint8_t line){
+	/*
+	* Clear pending bit
+	* Should be done once isr is entered, to acknowledge that cpu has served it
+	*/
+	EXTI->PR |= (uint32_t)1U << line;
+}
+
+
+/*----------------------------------------------
+ *                    NVIC
+ * - Receives requests from all peripherals (EXTI, timers, UART, etc)
+ * - Decides which peripheral gets the cpu, and manages nesting(preemption)
+ * -
+ ----------------------------------------------*/
+
+void mhal_irq_enable(IRQn_Type irqn){
+	NVIC_EnableIRQ(irqn);
+}
+
+void mhal_irq_disable(IRQn_Type irqn){
+	NVIC_DisableIRQ(irqn);
+}
+
+void mhal_irq_priority(IRQn_Type irqn, uint32_t priority){
+	NVIC_SetPriority(irqn, priority);
+}
+
+void mhal_interrupt(GPIO_TypeDef *port, uint32_t pin, uint8_t edge, uint32_t priority){
+/*
+ * ALL-IN-ONE
+ *
+ */
+	mhal_gpio_init(port, pin, &MHAL_GPIO_CFG_INPUT_PULLUP);
+	mhal_syscfg_enable();
+	mhal_syscfg_route(port, pin);
+	mhal_exti_unmask(pin);
+	if(edge==GPIO_RISING_EDGE){mhal_exti_rise_enable(pin);}
+	else if(edge==GPIO_FALLING_EDGE){mhal_exti_fall_enable(pin);}
+	else if(edge==GPIO_EDGE)
+	{mhal_exti_rise_enable(pin);
+	mhal_exti_fall_enable(pin);}
+	IRQn_Type num;
+
+	if(pin==0){num = EXTI0_IRQn;}
+	else if(pin==1){num = EXTI1_IRQn;}
+	else if(pin==2){num = EXTI2_IRQn;}
+	else if(pin==3){num = EXTI3_IRQn;}
+	else if(pin==4){num = EXTI4_IRQn;}
+	else if(pin<10){num = EXTI9_5_IRQn;}
+	else if(pin<16){num = EXTI15_10_IRQn;}
+
+	NVIC_EnableIRQ(num);
+	NVIC_SetPriority(num, priority);
+}
+

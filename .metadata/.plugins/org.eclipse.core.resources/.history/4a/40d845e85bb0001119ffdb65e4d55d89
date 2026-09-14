@@ -1,0 +1,34 @@
+#include "mhal_tim.h"
+#include "stm32f401xe.h"
+
+/*
+ * 1. TIMER CLOCK ARRIVES FROM RCC
+ * 2. PSC DIVIDES CLOCK TO OBTAIN COUNT CLOCK
+ * 3. THE COUNT REGISTER COUNTS ACCORDING TO THE COUNT CLOCK
+ * 4. WHEN 0 OR ARR REACHED, COUNTER RESETS
+ * 5. AN UPDATE EVENT FIRES WHEN COUNTER OVERFLOWS OR UNDERFLOWS
+ *
+ * a. A counter can be in only ONE COUNTING MODE at a time, but
+ * 	  its channels (CCRx) can independently do different things.
+ *
+ * 	  Counting Modes (TIMx->CR1.CMS):
+ * 	  	* Edge-aligned up: 0 -> ARR ->RESTART
+ * 	  	* Edge-aligned down: ARR -> 0 ->RESTART
+ * 	  	* Center-aligned 1: up, then down. alternating. UE on underflow only
+ * 	  	* Center-aligned 2: up, then down. alternating. UE on overflow only
+ *
+ * 	  Channel Modes :
+ *
+ */
+void mhal_tim_base_init(TIM_TypeDef *tim, const mhal_tim_base_config_t *config){
+
+	//Enable timer peripheral's clock
+	if(tim==TIM1){RCC->APB2ENR |= RCC_APB2ENR_TIM1EN;}
+	if(tim==TIM9){RCC->APB2ENR |= RCC_APB2ENR_TIM9EN;}
+	if(tim==TIM10){RCC->APB2ENR |= RCC_APB2ENR_TIM10EN;}
+	if(tim==TIM11){RCC->APB2ENR |= RCC_APB2ENR_TIM11EN;}
+	if(tim==TIM2){RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;}
+	if(tim==TIM3){RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;}
+	if(tim==TIM4){RCC->APB1ENR |= RCC_APB1ENR_TIM4EN;}
+	if(tim==TIM5){RCC->APB1ENR |= RCC_APB1ENR_TIM5EN;}
+}

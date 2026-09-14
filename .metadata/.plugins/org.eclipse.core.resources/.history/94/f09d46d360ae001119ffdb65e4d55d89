@@ -1,0 +1,90 @@
+#include "mhal_gpio.h"
+#include "stm32f4xx.h"
+
+mhal_status_t mhal_gpio_enable_clock(GPIO_TypeDef *port){
+	switch (port){
+	case GPIOA:
+		RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+		break;
+	case GPIOB:
+		RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN;
+		break;
+	case GPIOC:
+		RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN;
+		break;
+	case GPIOD:
+		RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN;
+		break;
+	case GPIOE:
+		RCC->AHB1ENR |= RCC_AHB1ENR_GPIOEEN;
+		break;
+	case GPIOH:
+		RCC->AHB1ENR |= RCC_AHB1ENR_GPIOHEN;
+		break;
+	}
+}
+
+
+
+
+mhal_status_t mhal_gpio_init(GPIO_TypeDef *port, uint16_t pin, const mhal_gpio_config_t *config){
+
+}
+
+
+
+
+
+
+
+mhal_status_t mhal_gpio_set_af(GPIO_TypeDef *port, uint16_t pin, uint32_t af){
+
+}
+
+
+
+
+
+
+
+mhal_status_t mhal_gpio_write(GPIO_TypeDef *port, uint16_t pin, uint8_t value){
+
+}
+
+
+
+
+
+
+
+uint8_t mhal_gpio_read(GPIO_TypeDef *port, uint16_t pin){
+
+}
+
+
+
+
+
+
+
+mhal_status_t mhal_gpio_on(const char *pin){
+
+}
+
+
+
+
+
+
+mhal_status_t mhal_gpio_off(const char *pin){
+
+}
+
+
+
+
+
+
+mhal_status_t mhal_gpio_toggle(const char *pin){
+
+}

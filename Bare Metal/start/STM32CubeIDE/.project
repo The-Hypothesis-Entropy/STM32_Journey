@@ -31,6 +31,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>src</name>
+			<type>2</type>
+			<location>C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src</location>
+		</link>
+		<link>
 			<name>start.ioc</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/start.ioc</locationURI>

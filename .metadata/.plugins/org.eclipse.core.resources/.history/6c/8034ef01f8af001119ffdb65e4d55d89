@@ -1,0 +1,46 @@
+#include "stm32f401xe.h"
+#include "mhal_exti.h"
+#include "mhal_gpio.h"
+
+
+/*
+ * ACTIVITY ON GPIO -> SYSCFG (ROUTING) -> EXTI (EDGE DETECTION) -> NVIC (PRIORITY) -> CPU CORE (ISR)
+ * SYSCFG: Which port is EXTI line x watching? (PAx, PBx, PCx, PDx, PEx, PHx?)
+ * EXTI: What are we watching for (rise or fall) and has it happened?
+ * NVIC: Should cpu care about this? and if so, how urgently?
+ */
+
+// Enable SYSCFG
+void mhal_syscfg_enable(){
+	RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;
+}
+
+// Route GPIO Port to SYSCFG
+void mhal_syscfg_route(const char *pin){
+	uint8_t port_ref = pin[1] - 'A';
+	uint8_t pin_ref = pin[2] - '0';
+	GPIO_TypeDef *port = {};
+
+	uint32_t mask = ;
+	uint32_t port_config;
+	switch(port_ref){
+		case 0:
+			mask = SYSCFG_EXTICR1_EXTI0_Msk;
+			break;
+		case 1:
+			mask = SYSCFG_EXTICR1_EXTI0_;
+			break;
+		case 2:
+			port = GPIOC;
+			break;
+		case 3:
+			port = GPIOD;
+			break;
+		case 4:
+			port = GPIOE;
+			break;
+		case 5:
+			port = GPIOH;
+			break;
+			}
+}

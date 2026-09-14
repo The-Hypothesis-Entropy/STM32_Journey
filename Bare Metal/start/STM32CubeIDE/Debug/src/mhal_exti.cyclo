@@ -1,0 +1,16 @@
+../../Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	2
+../../Drivers/CMSIS/Include/core_cm4.h:1722:22:__NVIC_DisableIRQ	2
+../../Drivers/CMSIS/Include/core_cm4.h:1814:22:__NVIC_SetPriority	2
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:16:6:mhal_syscfg_enable	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:24:6:mhal_syscfg_route	10
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:58:6:mhal_exti_unmask	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:65:6:mhal_exti_mask	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:72:6:mhal_exti_rise_enable	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:79:6:mhal_exti_rise_disable	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:86:6:mhal_exti_fall_enable	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:93:6:mhal_exti_fall_disable	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:100:6:mhal_exti_clear_pr	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:116:6:mhal_irq_enable	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:120:6:mhal_irq_disable	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:124:6:mhal_irq_priority	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:128:6:mhal_interrupt	11

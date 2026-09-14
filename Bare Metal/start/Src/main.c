@@ -1,5 +1,8 @@
 #include "stm32f401xe.h"
+#include "mhal.h"
+#include "mhal_exti.h"
 
+/*
 int main_one(){
 	//Enable the power to GPIOA
 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
@@ -73,7 +76,7 @@ int main_interrupt_one(){
 	}
 }
 
-int main(){
+int main_hold(){
 	//Power and Configure PA5
 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
 	GPIOA->MODER &= ~(0x03<<10);
@@ -107,10 +110,31 @@ int main(){
 	//					DONE: CAKE ICING ON THE HANDLER
 	while(1);
 }
+*/
 
-void EXTI0_IRQHandler(void){
-	//no need to check for the pending register condition, but must SET the PR bit
-	EXTI->PR |= 0b01<<0;
+int main(){
+	//mhal_gpio_init(GPIOC, 13, &MHAL_GPIO_CFG_INPUT_PULLUP);
+	mhal_gpio_init(GPIOA, 5, &MHAL_GPIO_CFG_OUTPUT);
+	mhal_interrupt(GPIOC, 13, GPIO_FALLING_EDGE, 1);
+	while(1){
+		volatile uint8_t x;
+		x++;
 
-	GPIOA->BSRR = (GPIOA->ODR & 0x01<<5) ? (0x01<<(5+16)) : (0x01<<5);
+
+	//}
 }
+	return 0;
+}
+
+
+void EXTI15_10_IRQHandler(void){
+	//no need to check for the pending register condition, but must "CLEAR" the PR bit
+	//if (EXTI->PR & ((uint32_t)1U<<13U)){
+		mhal_exti_clear_pr(13);
+		mhal_gpio_toggle(PA5);
+
+
+	//GPIO_MODER_MODER;
+	//EXTI_IMR_IM13;
+}
+

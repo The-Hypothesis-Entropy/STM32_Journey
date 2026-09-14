@@ -1,6 +1,0 @@
-#include "stm32f401xe.h"
-
-int main(void){
-	// Enable clock to GPIOA
-	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
-}

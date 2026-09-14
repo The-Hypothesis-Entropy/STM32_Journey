@@ -1,0 +1,145 @@
+#include "mhal_gpio.h"
+#include "stm32f4xx.h"
+
+mhal_status_t mhal_gpio_enable_clock(GPIO_TypeDef *port){
+	if (port==GPIOA)
+		{RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+		return MHAL_OK;}
+	else if (port==GPIOB)
+		{RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN;
+		return MHAL_OK;}
+	else if (port==GPIOC)
+		{RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN;
+		return MHAL_OK;}
+	else if (port==GPIOD)
+		{RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN;
+		return MHAL_OK;}
+	else if (port==GPIOE)
+		{RCC->AHB1ENR |= RCC_AHB1ENR_GPIOEEN;
+		return MHAL_OK;}
+	else if (port==GPIOH)
+		{RCC->AHB1ENR |= RCC_AHB1ENR_GPIOHEN;
+		return MHAL_OK;}
+	else{
+		return MHAL_ERROR;
+	}
+}
+
+void mhal_gpio_init(GPIO_TypeDef *port, uint16_t pin, const mhal_gpio_config_t *config){
+	//MODER
+	mhal_gpio_enable_clock(port);
+	port->MODER &= ~(0x03UL<<(pin*2));
+	port->MODER |= ((config->mode)<<(pin*2));
+
+	//OTYPER
+	port->OTYPER &= ~(0x01UL<<pin);
+	port->OTYPER |= config->type;
+
+	//OSPEEDR
+	port->OSPEEDR &= ~(0x03UL<<(pin*2));
+	port->OSPEEDR |= ((config->speed)<<(pin*2));
+
+	//PUPDR
+	port->PUPDR &= ~(0x03UL<<(pin*2));
+	port->PUPDR |= ((config->pull)<<(pin*2));
+}
+
+void mhal_gpio_write(GPIO_TypeDef *port, uint16_t pin, uint8_t value){
+	port->BSRR = value ? (0x01UL<<pin) : ((0x01UL)<<(pin+16));
+}
+
+mhal_gpio_value_t mhal_gpio_read(GPIO_TypeDef *port, uint16_t pin){
+	mhal_gpio_value_t value;
+	value = (port->IDR & (0x01UL<<pin)) ? MHAL_GPIO_HIGH : MHAL_GPIO_LOW;
+	return value;
+}
+
+void mhal_gpio_on(const char *pin){
+	uint8_t port_ref = pin[1] - 'A';
+	uint8_t pin_ref = pin[2] - '0';
+	GPIO_TypeDef *port = {};
+
+	switch(port_ref){
+		case 0:
+			port = GPIOA;
+			break;
+		case 1:
+			port = GPIOB;
+			break;
+		case 2:
+			port = GPIOC;
+			break;
+		case 3:
+			port = GPIOD;
+			break;
+		case 4:
+			port = GPIOE;
+			break;
+		case 5:
+			port = GPIOH;
+			break;
+	}
+	mhal_gpio_init(port, pin_ref, &MHAL_GPIO_CFG_OUTPUT);
+	mhal_gpio_write(port, pin_ref, MHAL_GPIO_HIGH);
+}
+
+void mhal_gpio_off(const char *pin){
+	uint8_t port_ref = pin[1] - 'A';
+	uint8_t pin_ref = pin[2] - '0';
+	GPIO_TypeDef *port = {};
+
+	switch(port_ref){
+		case 0:
+			port = GPIOA;
+			break;
+		case 1:
+			port = GPIOB;
+			break;
+		case 2:
+			port = GPIOC;
+			break;
+		case 3:
+			port = GPIOD;
+			break;
+		case 4:
+			port = GPIOE;
+			break;
+		case 5:
+			port = GPIOH;
+			break;
+	}
+	mhal_gpio_init(port, pin_ref, &MHAL_GPIO_CFG_OUTPUT);
+	mhal_gpio_write(port, pin_ref, MHAL_GPIO_LOW);
+}
+
+void mhal_gpio_toggle(const char *pin){
+	uint8_t port_ref = pin[1] - 'A';
+	uint8_t pin_ref = pin[2] - '0';
+	GPIO_TypeDef *port = {};
+
+	switch(port_ref){
+		case 0:
+			port = GPIOA;
+			break;
+		case 1:
+			port = GPIOB;
+			break;
+		case 2:
+			port = GPIOC;
+			break;
+		case 3:
+			port = GPIOD;
+			break;
+		case 4:
+			port = GPIOE;
+			break;
+		case 5:
+			port = GPIOH;
+			break;
+		}
+	port->BSRR = mhal_gpio_read(port, pin_ref) ? 0x01<<(pin_ref+16) : 0x01<<pin_ref;
+}
+
+void mhal_gpio_set_af(GPIO_TypeDef *port, uint16_t pin, uint32_t af){
+
+}

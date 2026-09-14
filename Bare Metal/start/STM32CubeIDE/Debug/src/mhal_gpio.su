@@ -1,0 +1,11 @@
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:3:15:mhal_gpio_enable_clock	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:30:6:mhal_gpio_init	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:53:6:mhal_gpio_write	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:61:19:mhal_gpio_read	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:71:6:mhal_gpio_on	32	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:82:6:mhal_gpio_off	32	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:93:6:mhal_gpio_toggle	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:103:15:mhal_dename_port	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:133:9:mhal_dename_pin	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:141:6:mhal_delay	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:148:6:mhal_gpio_set_af	24	static

@@ -1,0 +1,13 @@
+#include "mhal_exti.h"
+#include "stm32f401xe.h"
+RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;
+
+/*
+ * ACTIVITY ON GPIO -> SYSCFG (ROUTING) -> EXTI (EDGE DETECTION) -> NVIC (PRIORITY) -> CPU CORE (ISR)
+ * SYSCFG: Which port is EXTI line x watching? (PAx, PBx, PCx, PDx, PEx, PHx?)
+ * EXTI: What are we watching for (rise or fall) and has it happened?
+ * NVIC: Should cpu care about this? and if so, how urgently?
+ */
+
+// Enable SYSCFG
+//RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;
