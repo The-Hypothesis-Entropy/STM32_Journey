@@ -15,16 +15,6 @@ typedef enum{ //Channel Identifier
 	MHAL_TIM_CH4 = 3U
 }mhal_tim_channel_t;
 
-typedef enum{ //Should pin be "active" if CNT < CCRx or >=CCRx?
-	MHAL_TIM_PWM_MODE_1 = 0U,
-	MHAL_TIM_PWM_MODE_2 = 1U
-}mhal_tim_pwm_mode_t;
-
-typedef enum{ //Should pin be active-high or active low?
-	MHAL_TIM_POLARITY_HIGH = 0U,
-	MHAL_TIM_POLARITY_LOW = 1U
-}mhal_tim_polarity_t;
-
 typedef enum{
 	MHAL_TIM_IC_RISING = 0U,
 	MHAL_TIM_IC_FALLING = 1U,
@@ -45,7 +35,7 @@ typedef struct{
 	uint32_t frequency_hz;
 }mhal_tim_base_config_t;
 
-//#define MHAL_TIM_BASE_CONFIG_DEFAULT ((mhal_tim_base_config_t){.frequency_hz = 1000U;})
+#define MHAL_TIM_BASE_CONFIG_DEFAULT ((mhal_tim_base_config_t){.frequency_hz = 1U})
 
 typedef struct{
 	uint32_t arr;
@@ -53,7 +43,7 @@ typedef struct{
 	mhal_tim_count_dir_t dir;
 }mhal_tim_base_cfg_t;
 
-#define MHAL_TIM_BASE_CFG_DEFAULT ((mhal_tim_base_cfg_t){.arr = 0x00F42400, .psc=0x00, .dir = MHAL_TIM_COUNT_UP})
+//#define MHAL_TIM_BASE_CFG_DEFAULT ((mhal_tim_base_cfg_t){.arr = 0x00F42400, .psc=0x00, .dir = MHAL_TIM_COUNT_UP})
 
 //PWM/OUTPUT: via a channel produce a pwm signal
 //            duty is high duration,
@@ -61,38 +51,38 @@ typedef struct{
 typedef struct{
 	uint32_t frequency_hz;
 	mhal_tim_channel_t channel;
-	mhal_tim_pwm_mode_t mode;
-	mhal_tim_polarity_t polarity;
 	uint32_t duty;
-}mhal_tim_pwm_cfg_t;
+}mhal_tim_pwm_config_t;
 
-#define MHAL_TIM_PWM_CONFIG_DEFAULT ((mhal_tim_pwm_config_t){.frequency = 1000U; .channel = MHAL_TIM_CH1; .mode = HAL_TIM_PWM_MODE_1; .polarity = HAL_TIM_POLARITY_HIGH; .duty = 5000U;})
+#define MHAL_TIM_PWM_CONFIG_DEFAULT ((mhal_tim_pwm_config_t){.frequency_hz = 2000U, .channel = MHAL_TIM_CH1, .duty = 123U})
 
 //INPUT CAPTURE: when event/edge occurs on channel, save the current count.
 typedef struct{
 	uint32_t prescaler;
 	mhal_tim_channel_t channel;
 	mhal_tim_ic_edge_t edge;
-}mhal_tim_ic_cfg_t;
+}mhal_tim_ic_config_t;
 
 #define MHAL_TIM_IC_CONFIG_DEFAULT ((mhal_tim_ic_config_t){.prescaler = 83U; .channel = MHAL_TIM_CH1; .edge = HAL_TIM_IC_RISING;})
 
-//void hello(){
 
-//}
+//--------------------------------------------------------------------------------
+// LEMMA FUNCTIONS
+//--------------------------------------------------------------------------------
+void mhal_tim_enable_clock(TIM_TypeDef *tim);
 
 static uint32_t mhal_tim_get_clock(TIM_TypeDef *tim);
+
+void mhal_tim_arr_psc_resolution(TIM_TypeDef *tim, uint32_t tim_clk, uint32_t freq);
+
+
 
 /*------------------------------------------------------------------------------
  * TIMEBASE API
  -----------------------------------------------------------------------------*/
-void mhal_tim_base_init_via_freq(TIM_TypeDef *tim, const mhal_tim_base_config_t *config);
+void mhal_tim_base_init(TIM_TypeDef *tim, const mhal_tim_base_config_t *config);
 
-void mhal_tim_base_init(TIM_TypeDef *tim, mhal_tim_base_cfg_t *config);
-
-void mhal_tim_base_start(TIM_TypeDef *tim);
-
-void mhal_tim_base_stop(TIM_TypeDef *tim);
+void mhal_tim_base_init_basic(TIM_TypeDef *tim, mhal_tim_base_cfg_t *config);
 
 void mhal_tim_enable_update_irq(TIM_TypeDef *tim, uint8_t priority);
 
@@ -102,14 +92,42 @@ void mhal_tim_clear_update_flag(TIM_TypeDef *tim);
 
 uint32_t mhal_tim_get_counter(TIM_TypeDef *tim);
 
-void mhal_tim_set_counter(TIM_TypeDef *tim);
+//------------------------------FOR THE USER---------------------------------------
+
+void mhal_tim_base_on(TIM_TypeDef *tim, uint32_t freq, uint8_t priority);
+
+void mhal_tim_base_start(TIM_TypeDef *tim);
+
+void mhal_tim_base_stop(TIM_TypeDef *tim);
+
+/*
+ * void TIMx_IRQHandler(void){mhal_tim_clear_update_flag(TIMx);}
+ */
+//---------------------------------------------------------------------------------
+
 
 
 /*------------------------------------------------------------------------------
  * PWM API
  -----------------------------------------------------------------------------*/
+void mhal_tim_pwm_chn_prld_mode_cfg(TIM_TypeDef *tim, mhal_tim_channel_t channel);
 
+void mhal_tim_pwm_channel_output_enable(TIM_TypeDef *tim, mhal_tim_channel_t channel);
 
+void mhal_tim_pwm_update_event(TIM_TypeDef *tim);
+
+void mhal_tim_pwm_init(TIM_TypeDef *tim, const mhal_tim_pwm_config_t *config);
+
+//------------------------------FOR THE USER---------------------------------------
+void mhal_tim_pwm_cfg(TIM_TypeDef *tim, const char *pin, mhal_tim_channel_t channel, mhal_gpio_alt_fn_t af, uint32_t frequency, uint32_t duty);
+
+void mhal_tim_pwm_start(TIM_TypeDef *tim);
+
+void mhal_tim_pwm_stop(TIM_TypeDef *tim);
+
+void mhal_tim_pwm_set_duty(TIM_TypeDef *tim, mhal_tim_channel_t channel, uint32_t duty);
+
+void mhal_tim_pwm_set_freq(TIM_TypeDef *tim, uint32_t frequency);
 
 
 

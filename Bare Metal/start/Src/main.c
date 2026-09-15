@@ -112,19 +112,28 @@ int main_hold(){
 }
 */
 
+static uint32_t x = 0U;
+uint8_t beep = 0U;
 int main(){
 	//mhal_gpio_init(GPIOC, 13, &MHAL_GPIO_CFG_INPUT_PULLUP);
 	mhal_gpio_init(GPIOA, 5, &MHAL_GPIO_CFG_OUTPUT);
 	mhal_interrupt(GPIOC, 13, GPIO_FALLING_EDGE, 1);
 
-
-	mhal_tim_base_init(TIM2, &MHAL_TIM_BASE_CFG_DEFAULT);
-	mhal_tim_enable_update_irq(TIM2, 0);
-	mhal_tim_base_start(TIM2);
+	mhal_tim_pwm_cfg(TIM2, PA0, MHAL_TIM_CH1, AF1, 5000U, 100);
+	//mhal_tim_base_on(TIM2, 100, 0);
+	//mhal_tim_pwm_stop(TIM2);
 	while(1){
-		volatile uint8_t x;
-		x++;
-
+		if (beep==1){
+		mhal_tim_pwm_start(TIM2);
+		mhal_delay(300);
+		mhal_tim_pwm_stop(TIM2);
+		mhal_delay(300);
+		mhal_tim_pwm_start(TIM2);
+		mhal_delay(300);
+		mhal_tim_pwm_stop(TIM2);
+		mhal_delay(300);
+		beep = 0;
+		}
 
 	//}
 }
@@ -137,6 +146,12 @@ void EXTI15_10_IRQHandler(void){
 	//if (EXTI->PR & ((uint32_t)1U<<13U)){
 		mhal_exti_clear_pr(13);
 		mhal_gpio_toggle(PA5);
+		x++;
+		beep = 1U;
+		if(x==5){
+			mhal_tim_pwm_set_duty(TIM2, MHAL_TIM_CH1, 1U);
+
+		}
 
 
 	//GPIO_MODER_MODER;
@@ -145,6 +160,8 @@ void EXTI15_10_IRQHandler(void){
 
 void TIM2_IRQHandler(void){
 	mhal_tim_clear_update_flag(TIM2);
-	mhal_gpio_toggle(PA5);
+	x++;
+		if(x>0x1F){mhal_gpio_toggle(PA5);x=0;}
+
 }
 

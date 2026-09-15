@@ -13,6 +13,7 @@
  * DEFINITIONS
  *
  *------------------------------------------------------------------*/
+//PIN NAMES
 #define PA0 "PA0"
 #define PA1 "PA1"
 #define PA2 "PA2"
@@ -155,9 +156,30 @@ typedef enum {
 	MHAL_GPIO_HIGH = 1
 } mhal_gpio_value_t;
 
+typedef enum {
+	AF0 = 0U,
+	AF1 = 1U,
+	AF2 = 2U,
+	AF3 = 3U,
+	AF4 = 4U,
+	AF5 = 5U,
+	AF6 = 6U,
+	AF7 = 7U,
+	AF8 = 8U,
+	AF9 = 9U,
+	AF10 = 10U,
+	AF11 = 11U,
+	AF12 = 12U,
+	AF13 = 13U,
+	AF14 = 14U,
+	AF15 = 15U
+} mhal_gpio_alt_fn_t;
+
 // DEFAULT PIN CONFIG CONSTANTS
 
-#define MHAL_GPIO_CFG_OUTPUT ((mhal_gpio_config_t){ .mode = MHAL_GPIO_MODE_OUTPUT, .type = MHAL_GPIO_OT_PP, .speed = MHAL_GPIO_OSPEED_LOW, .pull = MHAL_GPIO_PUPD_NONE, .af = 0})
+#define MHAL_GPIO_CFG_OUTPUT ((mhal_gpio_config_t){ .mode = MHAL_GPIO_MODE_OUTPUT, .type = MHAL_GPIO_OT_PP, .speed = MHAL_GPIO_OSPEED_LOW, .pull = MHAL_GPIO_PUPD_NONE, .af = 20})
+
+#define MHAL_GPIO_CFG_AF ((mhal_gpio_config_t){ .mode = MHAL_GPIO_MODE_AF, .type = MHAL_GPIO_OT_PP, .speed = MHAL_GPIO_OSPEED_HIGH, .pull = MHAL_GPIO_PUPD_NONE, .af = 0})
 
 #define MHAL_GPIO_CFG_INPUT_PULLUP \
 	((mhal_gpio_config_t){ \
@@ -165,7 +187,7 @@ typedef enum {
 		.type = MHAL_GPIO_OT_PP, \
 		.speed = MHAL_GPIO_OSPEED_LOW, \
 		.pull = MHAL_GPIO_PUPD_PU, \
-		.af = 0 \
+		.af = 20 \
 	})
 
 #define MHAL_GPIO_CFG_INPUT_PULLDOWN \
@@ -174,7 +196,7 @@ typedef enum {
 		.type = MHAL_GPIO_OT_PP, \
 		.speed = MHAL_GPIO_OSPEED_LOW, \
 		.pull = MHAL_GPIO_PUPD_PD, \
-		.af = 0 \
+		.af = 20 \
 	})
 
 /*-------------------------------------------------------------------
@@ -189,7 +211,7 @@ typedef struct {
 	mhal_gpio_otype_t type;
 	mhal_gpio_ospeed_t speed;
 	mhal_gpio_pupd_t pull;
-	uint8_t af; //only used when mode == MHAL_GPIO_MODE_AF
+	mhal_gpio_alt_fn_t af; //only used when mode == MHAL_GPIO_MODE_AF
 }mhal_gpio_config_t;
 
 
@@ -197,7 +219,7 @@ typedef struct {
  * API
  *-----------------------------------------------------------------*/
 void mhal_gpio_init(GPIO_TypeDef *port, uint16_t pin, const mhal_gpio_config_t *config);
-void mhal_gpio_set_af(GPIO_TypeDef *port, uint16_t pin, uint32_t af);
+void mhal_gpio_set_af(GPIO_TypeDef *port, uint16_t pin, mhal_gpio_alt_fn_t af);
 void mhal_gpio_write(GPIO_TypeDef *port, uint16_t pin, uint8_t value);
 mhal_gpio_value_t mhal_gpio_read(GPIO_TypeDef *port, uint16_t pin);
 mhal_status_t mhal_gpio_enable_clock(GPIO_TypeDef *port);
@@ -208,6 +230,10 @@ void mhal_delay(uint32_t delay);
 GPIO_TypeDef *mhal_dename_port(const char* pin);
 uint8_t mhal_dename_pin(const char* pin);
 void mhal_delay(uint32_t delay);
+
+/*
+ * void EXTIx_IRQHandler(void){check pending bit to confirm line. clear pending bit}
+ */
 
 #endif
 

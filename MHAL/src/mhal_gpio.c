@@ -27,6 +27,14 @@ mhal_status_t mhal_gpio_enable_clock(GPIO_TypeDef *port){
 	}
 }
 
+void mhal_gpio_set_af(GPIO_TypeDef *port, uint16_t pin, mhal_gpio_alt_fn_t af){
+	uint16_t hl_idx = (pin<8U) ? 0U : 1U ;
+	uint16_t pos_idx = pin & 7U; // pin % 8
+	port->AFR[hl_idx] &= ~(0xFU<<(pos_idx*4U));
+	port->AFR[hl_idx] |= ((uint32_t)af)<<(pos_idx*4U);
+}
+
+
 void mhal_gpio_init(GPIO_TypeDef *port, uint16_t pin, const mhal_gpio_config_t *config){
 	/*
 	 * CONFIGURES MODER, OTYPER, OSPEEDR AND PUPDR
@@ -48,6 +56,10 @@ void mhal_gpio_init(GPIO_TypeDef *port, uint16_t pin, const mhal_gpio_config_t *
 	//PUPDR
 	port->PUPDR &= ~(0x03UL<<(pin*2));
 	port->PUPDR |= ((config->pull)<<(pin*2));
+
+	if((config->af)<16U){
+		mhal_gpio_set_af(port, pin, config->af);
+	}
 }
 
 void mhal_gpio_write(GPIO_TypeDef *port, uint16_t pin, uint8_t value){
@@ -143,8 +155,4 @@ void mhal_delay(uint32_t delay){
 		uint8_t x = 0;
 		x++;
 	}
-}
-
-void mhal_gpio_set_af(GPIO_TypeDef *port, uint16_t pin, uint32_t af){
-
 }

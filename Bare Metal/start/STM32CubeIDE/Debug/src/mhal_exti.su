@@ -13,4 +13,4 @@ C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:100:6
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:116:6:mhal_irq_enable	16	static
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:120:6:mhal_irq_disable	16	static
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:124:6:mhal_irq_priority	16	static
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:128:6:mhal_interrupt	32	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c:128:6:mhal_interrupt	40	static

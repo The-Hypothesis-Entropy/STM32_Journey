@@ -1,12 +1,22 @@
 ../../Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	16	static,ignoring_inline_asm
 ../../Drivers/CMSIS/Include/core_cm4.h:1814:22:__NVIC_SetPriority	16	static
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:33:17:mhal_tim_get_clock	32	static
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:87:6:mhal_tim_base_init_via_freq	40	static
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:155:6:mhal_tim_base_init	16	static
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:192:6:mhal_tim_base_start	16	static
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:196:6:mhal_tim_base_stop	16	static
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:200:6:mhal_tim_enable_update_irq	24	static
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:240:6:mhal_tim_disable_update_irq	16	static
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:244:6:mhal_tim_clear_update_flag	16	static
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:248:10:mhal_tim_get_counter	16	static
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:252:6:mhal_tim_set_counter	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:40:6:mhal_tim_enable_clock	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:67:17:mhal_tim_get_clock	32	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:121:6:mhal_tim_arr_psc_resolution	80	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:158:6:mhal_tim_base_init	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:173:6:mhal_tim_base_init_basic	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:210:6:mhal_tim_base_start	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:214:6:mhal_tim_base_stop	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:218:6:mhal_tim_enable_update_irq	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:258:6:mhal_tim_disable_update_irq	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:262:6:mhal_tim_clear_update_flag	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:266:10:mhal_tim_get_counter	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:270:6:mhal_tim_base_on	32	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:287:6:mhal_tim_pwm_chn_prld_mode_cfg	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:318:6:mhal_tim_pwm_set_duty	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:342:6:mhal_tim_pwm_channel_output_enable	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:360:6:mhal_tim_pwm_set_freq	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:366:6:mhal_tim_pwm_init	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:405:6:mhal_tim_pwm_start	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:409:6:mhal_tim_pwm_stop	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:413:6:mhal_tim_pwm_cfg	64	static
