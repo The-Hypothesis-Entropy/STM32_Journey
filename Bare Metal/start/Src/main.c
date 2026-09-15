@@ -116,6 +116,11 @@ int main(){
 	//mhal_gpio_init(GPIOC, 13, &MHAL_GPIO_CFG_INPUT_PULLUP);
 	mhal_gpio_init(GPIOA, 5, &MHAL_GPIO_CFG_OUTPUT);
 	mhal_interrupt(GPIOC, 13, GPIO_FALLING_EDGE, 1);
+
+
+	mhal_tim_base_init(TIM2, &MHAL_TIM_BASE_CFG_DEFAULT);
+	mhal_tim_enable_update_irq(TIM2, 0);
+	mhal_tim_base_start(TIM2);
 	while(1){
 		volatile uint8_t x;
 		x++;
@@ -136,5 +141,10 @@ void EXTI15_10_IRQHandler(void){
 
 	//GPIO_MODER_MODER;
 	//EXTI_IMR_IM13;
+}
+
+void TIM2_IRQHandler(void){
+	mhal_tim_clear_update_flag(TIM2);
+	mhal_gpio_toggle(PA5);
 }
 
