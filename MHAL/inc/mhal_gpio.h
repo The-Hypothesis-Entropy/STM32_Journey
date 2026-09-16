@@ -175,6 +175,11 @@ typedef enum {
 	AF15 = 15U
 } mhal_gpio_alt_fn_t;
 
+typedef enum{
+	MHAL_FALSE = 0U,
+	MHAL_TRUE = 1U
+} mhal_bool_t;
+
 // DEFAULT PIN CONFIG CONSTANTS
 
 #define MHAL_GPIO_CFG_OUTPUT ((mhal_gpio_config_t){ .mode = MHAL_GPIO_MODE_OUTPUT, .type = MHAL_GPIO_OT_PP, .speed = MHAL_GPIO_OSPEED_LOW, .pull = MHAL_GPIO_PUPD_NONE, .af = 20})

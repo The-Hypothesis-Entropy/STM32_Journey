@@ -1,0 +1,45 @@
+#include "mhal_fsm.h"
+
+mhal_fsm_t current_state = low;
+uint8_t jitter_count = 0;
+
+void mhal_fsm_start(const char *pin){
+	GPIO_TypeDef *port = mhal_dename_port(pin);
+	uint32_t pin_num = mhal_dename_pin(pin);
+	mhal_gpio_init(port, pin_num, &MHAL_GPIO_CFG_INPUT_PULLUP); //falling edge is observed on first transition easily
+
+	mhal_tim_base_on(TIM3, 100, 0);
+}
+
+void mhal_fsm_tick(void){
+	switch(current_state){
+	case low:
+		if(mhal_gpio_read(GPIOC, 13)){
+			current_state=low_high;
+		}
+		break;
+	case low_high:
+		if(mhal_gpio_read(GPIOC, 13)){
+			if(++jitter_count>10U){
+				current_state = high;
+				jitter_count = 0U;
+			}
+		}
+		else{current_state=low; jitter_count=0U;}
+		break;
+	case high:
+		if(!mhal_gpio_read(GPIOC, 13)){
+			current_state=high_low;
+		}
+		break;
+	case high_low:
+		if(!mhal_gpio_read(GPIOC, 13)){
+			if(++jitter_count>10U){
+				current_state = low;
+				jitter_count = 0U;
+			}
+		}
+		else{current_state=high; jitter_count=0U;}
+		break;
+	}
+}

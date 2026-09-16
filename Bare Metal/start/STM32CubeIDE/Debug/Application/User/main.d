@@ -17,7 +17,8 @@ Application/User/main.o: \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_uart.h \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_spi.h \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_i2c.h \
- C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_exti.h
+ C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_exti.h \
+ C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_fsm.h
 ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h:
 ../../Drivers/CMSIS/Include/core_cm4.h:
 ../../Drivers/CMSIS/Include/cmsis_version.h:
@@ -36,3 +37,4 @@ C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_uart.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_spi.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_i2c.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_exti.h:
+C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_fsm.h:

@@ -27,6 +27,7 @@ typedef enum{
 }mhal_tim_count_dir_t;
 
 
+
 /*------------------------------------------------------------------------------
  * STRUCTS
  -----------------------------------------------------------------------------*/
@@ -90,9 +91,11 @@ void mhal_tim_disable_update_irq(TIM_TypeDef *tim);
 
 void mhal_tim_clear_update_flag(TIM_TypeDef *tim);
 
+mhal_bool_t mhal_tim_check_timebase_flag(TIM_TypeDef *tim);
+
 uint32_t mhal_tim_get_counter(TIM_TypeDef *tim);
 
-//------------------------------FOR THE USER---------------------------------------
+//---------------------------------ESSENTIAL---------------------------------------
 
 void mhal_tim_base_on(TIM_TypeDef *tim, uint32_t freq, uint8_t priority);
 
@@ -118,7 +121,7 @@ void mhal_tim_pwm_update_event(TIM_TypeDef *tim);
 
 void mhal_tim_pwm_init(TIM_TypeDef *tim, const mhal_tim_pwm_config_t *config);
 
-//------------------------------FOR THE USER---------------------------------------
+//---------------------------------ESSENTIAL---------------------------------------
 void mhal_tim_pwm_cfg(TIM_TypeDef *tim, const char *pin, mhal_tim_channel_t channel, mhal_gpio_alt_fn_t af, uint32_t frequency, uint32_t duty);
 
 void mhal_tim_pwm_start(TIM_TypeDef *tim);
@@ -135,8 +138,24 @@ void mhal_tim_pwm_set_freq(TIM_TypeDef *tim, uint32_t frequency);
  * INPUT CAPTURE API
  -----------------------------------------------------------------------------*/
 
+void mhal_tim_ic_interrupt_enable(TIM_TypeDef *tim, mhal_tim_channel_t channel);
 
+void mhal_tim_ic_init(TIM_TypeDef *tim, mhal_tim_channel_t channel, mhal_tim_ic_edge_t edge);
 
+uint32_t mhal_tim_ic_read_capture(TIM_TypeDef *tim, mhal_tim_channel_t channel);
 
+void mhal_tim_ic_force_capture(TIM_TypeDef *tim, mhal_tim_channel_t channel);
+
+mhal_bool_t mhal_tim_ic_check_flag(TIM_TypeDef *tim, mhal_tim_channel_t channel);
+
+void mhal_tim_ic_clear_status(TIM_TypeDef *tim, mhal_tim_channel_t channel);
+
+//---------------------------------ESSENTIAL---------------------------------------
+
+void mhal_tim_ic_cfg(TIM_TypeDef *tim, const char *pin, mhal_tim_channel_t channel, mhal_gpio_alt_fn_t af, mhal_tim_ic_edge_t edge);
+
+void mhal_tim_ic_start(TIM_TypeDef *tim, mhal_tim_channel_t channel);
+
+void mhal_tim_ic_stop(TIM_TypeDef *tim, mhal_tim_channel_t channel);
 
 #endif

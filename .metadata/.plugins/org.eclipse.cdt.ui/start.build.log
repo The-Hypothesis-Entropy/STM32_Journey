@@ -1,22 +1,10 @@
-17:34:35 **** Incremental Build of configuration Debug for project start ****
+08:16:45 **** Incremental Build of configuration Debug for project start ****
 make -j16 all 
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_FULL_LL_DRIVER -DHSE_VALUE=8000000 -DHSE_STARTUP_TIMEOUT=100 -DLSE_STARTUP_TIMEOUT=5000 -DLSE_VALUE=32768 -DEXTERNAL_CLOCK_VALUE=12288000 -DHSI_VALUE=16000000 -DLSI_VALUE=32000 -DVDD_VALUE=3300 -DPREFETCH_ENABLE=1 -DINSTRUCTION_CACHE_ENABLE=1 -DDATA_CACHE_ENABLE=1 -DSTM32F401xE -c -I../../Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/main.d" -MT"Application/User/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/main.o"
-In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal.h:6,
-                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:2:
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:74:17: warning: 'mhal_tim_get_clock' declared 'static' but never defined [-Wunused-function]
-   74 | static uint32_t mhal_tim_get_clock(TIM_TypeDef *tim);
-      |                 ^~~~~~~~~~~~~~~~~~
-arm-none-eabi-gcc -o "start.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Bare Metal\start\STM32CubeIDE\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="start.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: start.elf
- 
 arm-none-eabi-size  start.elf 
-arm-none-eabi-objdump -h -S start.elf  > "start.list"
    text	   data	    bss	    dec	    hex	filename
-   5136	      4	   1572	   6712	   1a38	start.elf
+   5212	      4	   1572	   6788	   1a84	start.elf
 Finished building: default.size.stdout
  
-Finished building: start.list
- 
 
-17:34:36 Build Finished. 0 errors, 1 warnings. (took 527ms)
+08:16:45 Build Finished. 0 errors, 0 warnings. (took 238ms)
 

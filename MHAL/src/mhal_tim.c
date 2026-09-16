@@ -263,6 +263,10 @@ void mhal_tim_clear_update_flag(TIM_TypeDef *tim){
 	tim->SR &= ~TIM_SR_UIF;
 }
 
+mhal_bool_t mhal_tim_check_timebase_flag(TIM_TypeDef *tim){
+	return tim->SR &= TIM_SR_UIF;
+}
+
 uint32_t mhal_tim_get_counter(TIM_TypeDef *tim){
 	return tim->CNT;
 }
@@ -419,7 +423,6 @@ void mhal_tim_pwm_cfg(TIM_TypeDef *tim, const char *pin, mhal_tim_channel_t chan
 	//Pin configuration
 	GPIO_TypeDef *port;
 	uint16_t pin_num;
-	const mhal_gpio_config_t config;
 
 	port = mhal_dename_port(pin);
 	pin_num = mhal_dename_pin(pin);
@@ -431,4 +434,158 @@ void mhal_tim_pwm_cfg(TIM_TypeDef *tim, const char *pin, mhal_tim_channel_t chan
 	mhal_tim_pwm_config_t pwm_cfg = {.frequency_hz = frequency, .channel = channel, .duty = duty};
 	mhal_tim_pwm_init(tim, &pwm_cfg);
 
+}
+
+
+
+//------------------------------------------------------------------------
+//IC API
+//------------------------------------------------------------------------
+/*------------------------------------------
+ * IC LEMMA FUNCTIONS
+ ------------------------------------------*/
+
+void mhal_tim_ic_interrupt_enable(TIM_TypeDef *tim, mhal_tim_channel_t channel){
+	//Allow CCxIF to raise request to NVIC (CCxIF could be high due to hardware or even software-forced)
+	tim->DIER |= TIM_DIER_CC1IE<<(channel); //preferred to 4 lines of switch code using cmsis
+
+	//handle in TIMx_IRQHandler. be sure to check for ic behavior, clear flag.
+
+}
+
+void mhal_tim_ic_init(TIM_TypeDef *tim, mhal_tim_channel_t channel, mhal_tim_ic_edge_t edge){
+/*
+ *
+ */
+
+	//Enable the timer's clock
+		mhal_tim_enable_clock(tim);
+
+		//Read timer's input clock frequency
+		uint32_t tim_clk = mhal_tim_get_clock(tim);
+
+		//Stop the timer
+		tim->CR1 &= ~TIM_CR1_CEN;
+
+	//Configure channel mode(CCMRi.CCxs) as input-0x01U
+	//uint8_t reg_idx = (channel<2U) ? 0U : 1U;
+	uint8_t field_idx = (channel&1U)*8U;
+	if(channel<2U){
+		tim->CCMR1 &= ~(TIM_CCMR1_CC1S_Msk<<field_idx);
+		tim->CCMR1 |= TIM_CCMR1_CC1S_0<<field_idx;
+	}
+	else{
+		tim->CCMR2 &= ~(TIM_CCMR1_CC1S_Msk<<field_idx);
+		tim->CCMR2 |= TIM_CCMR1_CC1S_0<<field_idx;
+	}
+
+	// Allow capture of counter value to be put into TIMx_CCRi
+	// Determine edge for capture (polarity)
+	uint32_t cnfg;
+	cnfg = (edge == MHAL_TIM_IC_RISING) ? 1U : 3U;
+	tim->CCER &= ~(0xFU<<(channel*4U));
+	tim->CCER |= cnfg<<(channel*4U);
+
+	//Configure tickrate(psc) and arr (both fixed here)
+
+	tim->PSC = (mhal_tim_get_clock(tim)/1000000UL) - 1U;
+	tim->ARR = ((tim==TIM2)||(tim==TIM5)) ? 0xFFFFFFFF : 0xFFFF;
+	//Force update (arr and psc are buffered)
+	tim->EGR = TIM_EGR_UG; //safe because EGR is a trigger register
+	//Clear UIF set by previous step
+	tim->SR = ~(TIM_SR_UIF_Msk);
+	//Calculate and assign arr, psc
+	//mhal_tim_arr_psc_resolution(tim, tim_clk, 1000000UL); //to measure even microseconds
+
+	//Activate interrupt
+	mhal_tim_ic_interrupt_enable(tim, channel);
+}
+
+//---------------------------------------------------------------------------
+void mhal_tim_ic_cfg(TIM_TypeDef *tim, const char *pin, mhal_tim_channel_t channel, mhal_gpio_alt_fn_t af, mhal_tim_ic_edge_t edge){
+	/*
+	 * After this, you are free to start and stop the timer (the count pauses)
+	 * and to use the handler (the interrupts will fire for edge even if counter is paused)
+	 */
+
+	GPIO_TypeDef *port = mhal_dename_port(pin);
+	uint32_t pin_num = mhal_dename_pin(pin);
+	mhal_gpio_config_t my_config = MHAL_GPIO_CFG_AF;
+	my_config.af = af;
+	my_config.pull = (edge==MHAL_TIM_IC_RISING) ? MHAL_GPIO_PUPD_PD : MHAL_GPIO_PUPD_PU;
+	mhal_gpio_init(port, pin_num, &my_config);
+
+	//IC configuration(alternative style from pwm...less structs used
+	mhal_tim_ic_init(tim, channel, edge);
+
+	//NVIC Settings
+	//IRQn_Type irqnum = (tim==TIM1) ? TIM1_CC_IRQn : (tim==TIM2) ? TIM2_IRQn : (tim==TIM3) ? TIM3_IRQn : (tim==TIM4) ? TIM4_IRQn : (tim==TIM5) ? TIM5_IRQn : (tim==TIM9) ? TIM1_BRK_TIM9_IRQn : (tim==TIM10) ? TIM1_UP_TIM10_IRQn
+	IRQn_Type irqnum;
+	if (tim==TIM1)irqnum = TIM1_CC_IRQn;
+#ifdef TIM2
+	else if (tim==TIM2)irqnum = TIM2_IRQn;
+#endif
+#ifdef TIM3
+	else if (tim==TIM1)irqnum = TIM3_IRQn;
+#endif
+#ifdef TIM4
+	else if (tim==TIM1)irqnum = TIM4_IRQn;
+#endif
+#ifdef TIM5
+	else if (tim==TIM1)irqnum = TIM5_IRQn;
+#endif
+#ifdef TIM9
+	else if (tim==TIM1)irqnum = TIM1_BRK_TIM9_IRQn;
+#endif
+#ifdef TIM10
+	else if (tim==TIM1)irqnum = TIM1_UP_TIM10_IRQn;
+#endif
+#ifdef TIM11
+	else if (tim==TIM1)irqnum = TIM1_TRG_COM_TIM11_IRQn;
+#endif
+	NVIC_SetPriority(irqnum, 0);
+	NVIC_EnableIRQ(irqnum);
+}
+
+void mhal_tim_ic_start(TIM_TypeDef *tim, mhal_tim_channel_t channel){
+	//Note that the interrupt doesnt depend on this. it can still fire for edge
+	//but without this, CNT wont budge
+	tim->CR1 |= TIM_CR1_CEN;
+}
+
+void mhal_tim_ic_stop(TIM_TypeDef *tim, mhal_tim_channel_t channel){
+	tim->CR1 &= ~TIM_CR1_CEN;
+}
+
+uint32_t mhal_tim_ic_read_capture(TIM_TypeDef *tim, mhal_tim_channel_t channel){
+	//Read captured value
+	//Reading CCRx automatically clears the corresponding status flag
+	switch(channel){
+		case MHAL_TIM_CH1:
+			return tim->CCR1;
+			break; //good habit
+		case MHAL_TIM_CH2:
+			return tim->CCR2;
+			break;
+		case MHAL_TIM_CH3:
+			return tim->CCR3;
+			break;
+		case MHAL_TIM_CH4:
+			return tim->CCR4;
+			break;
+	}
+	return 0;
+}
+
+void mhal_tim_ic_force_capture(TIM_TypeDef *tim, mhal_tim_channel_t channel){
+	//will capture the CNT, set the CCxIF, and thus corresponding interrupt/dma request will be sent
+	tim->EGR |= TIM_EGR_CC1G<<channel;
+}
+
+mhal_bool_t mhal_tim_ic_check_flag(TIM_TypeDef *tim, mhal_tim_channel_t channel){
+	return tim->SR &= (TIM_SR_CC1IF<<channel);
+}
+
+void mhal_tim_ic_clear_status(TIM_TypeDef *tim, mhal_tim_channel_t channel){
+	tim->SR = ~(TIM_SR_CC1IF<<channel);
 }

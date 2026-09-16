@@ -1,0 +1,25 @@
+#include "mhal_fsm.h"
+
+mhal_fsm_t current_state = low;
+
+void mhal_fsm_start(const char *pin){
+	GPIO_TypeDef *port = mhal_dename_port(pin);
+	uint32_t pin_num = mhal_dename_pin(pin);
+	mhal_gpio_init(port, pin_num, &MHAL_GPIO_CFG_INPUT_PULLUP); //falling edge is observed on first transition easily
+
+	mhal_tim_base_on(TIM3, 1, 0);
+}
+
+void mhal_fsm_tick(void){
+	switch(current_state){
+	case low:
+		//if()
+		break;
+	case low_high:
+		break;
+	case high:
+		break;
+	case high_low:
+		break;
+	}
+}

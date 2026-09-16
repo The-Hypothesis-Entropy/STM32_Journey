@@ -1,6 +1,7 @@
 #include "stm32f401xe.h"
 #include "mhal.h"
 #include "mhal_exti.h"
+#include "mhal_fsm.h"
 
 /*
 int main_one(){
@@ -112,18 +113,25 @@ int main_hold(){
 }
 */
 
-static uint32_t x = 0U;
 uint8_t beep = 0U;
 int main(){
 	//mhal_gpio_init(GPIOC, 13, &MHAL_GPIO_CFG_INPUT_PULLUP);
 	mhal_gpio_init(GPIOA, 5, &MHAL_GPIO_CFG_OUTPUT);
 	mhal_interrupt(GPIOC, 13, GPIO_FALLING_EDGE, 1);
 
-	mhal_tim_pwm_cfg(TIM2, PA0, MHAL_TIM_CH1, AF1, 5000U, 100);
+	//mhal_tim_pwm_cfg(TIM2, PA0, MHAL_TIM_CH1, AF1, 5000U, 100);
 	//mhal_tim_base_on(TIM2, 100, 0);
 	//mhal_tim_pwm_stop(TIM2);
+
+	//mhal_tim_ic_cfg(TIM2, PA0, MHAL_TIM_CH1, AF1, MHAL_TIM_IC_RISING);
+	//mhal_tim_ic_start(TIM2, MHAL_TIM_CH1);
+
+	mhal_fsm_start(PC13);
 	while(1){
-		if (beep==1){
+
+		mhal_delay(100);
+
+		/*if (beep==1){
 		mhal_tim_pwm_start(TIM2);
 		mhal_delay(300);
 		mhal_tim_pwm_stop(TIM2);
@@ -134,7 +142,7 @@ int main(){
 		mhal_delay(300);
 		beep = 0;
 		}
-
+*/
 	//}
 }
 	return 0;
@@ -144,14 +152,16 @@ int main(){
 void EXTI15_10_IRQHandler(void){
 	//no need to check for the pending register condition, but must "CLEAR" the PR bit
 	//if (EXTI->PR & ((uint32_t)1U<<13U)){
-		mhal_exti_clear_pr(13);
-		mhal_gpio_toggle(PA5);
-		x++;
-		beep = 1U;
-		if(x==5){
-			mhal_tim_pwm_set_duty(TIM2, MHAL_TIM_CH1, 1U);
+		//mhal_exti_clear_pr(13);
+		//mhal_gpio_toggle(PA5);
+	//mhal_tim_clear_update_flag(TIM2);
+	//mhal_exti_clear_pr(13);
+	//mhal_gpio_toggle(PA5);x=0;
+		//beep = 1U;
+		//if(x==5){
+			//mhal_tim_pwm_set_duty(TIM2, MHAL_TIM_CH1, 1U);
 
-		}
+		//}
 
 
 	//GPIO_MODER_MODER;
@@ -159,9 +169,20 @@ void EXTI15_10_IRQHandler(void){
 }
 
 void TIM2_IRQHandler(void){
-	mhal_tim_clear_update_flag(TIM2);
-	x++;
-		if(x>0x1F){mhal_gpio_toggle(PA5);x=0;}
+	if(mhal_tim_ic_check_flag(TIM2, MHAL_TIM_CH1)){
+	mhal_tim_ic_clear_status(TIM2, MHAL_TIM_CH1);
+	mhal_gpio_toggle(PA5);
+
+	//x = mhal_tim_ic_read_capture(TIM2, MHAL_TIM_CH1);
+	}
+
+}
+
+void TIM3_IRQHandler(void){
+	mhal_tim_clear_update_flag(TIM3);
+	mhal_fsm_tick();
+	fsm_gpio_pin = (current_state==low || current_state==high) ? current_state : fsm_gpio_pin; //debounced result
+	//fsmgpiopin is externed, use it freely in main code
 
 }
 

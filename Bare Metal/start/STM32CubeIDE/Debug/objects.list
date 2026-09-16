@@ -10,6 +10,7 @@
 "./Drivers/STM32F4xx_HAL_Driver/stm32f4xx_ll_utils.o"
 "./src/mhal_adc.o"
 "./src/mhal_exti.o"
+"./src/mhal_fsm.o"
 "./src/mhal_gpio.o"
 "./src/mhal_i2c.o"
 "./src/mhal_spi.o"
