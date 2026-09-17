@@ -1,0 +1,10 @@
+../../Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	16	static,ignoring_inline_asm
+../../Drivers/CMSIS/Include/core_cm4.h:1814:22:__NVIC_SetPriority	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:6:6:mhal_uart_set_baud	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:31:6:mhal_uart_init	80	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:125:6:mhal_uart_write_byte	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:135:9:mhal_uart_read_byte	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:142:6:mhal_uart_receive	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:168:6:mhal_uart_transmit	32	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:201:9:mhal_uart_tx_busy	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:205:9:mhal_uart_rx_ready	16	static

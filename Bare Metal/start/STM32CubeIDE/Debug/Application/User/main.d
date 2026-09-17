@@ -15,6 +15,7 @@ Application/User/main.o: \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_adc.h \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_uart.h \
+ C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_globals.h \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_spi.h \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_i2c.h \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_exti.h \
@@ -34,6 +35,7 @@ C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_exti.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_adc.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_uart.h:
+C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_globals.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_spi.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_i2c.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_exti.h:

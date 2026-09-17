@@ -1,0 +1,5 @@
+#include "mhal_globals.h"
+
+uint8_t *mhal_uart_tx_msg = (void *)0;
+uint8_t mhal_uart_tx_len = 0U;
+uint8_t mhal_uart_tx_idx = 0U;

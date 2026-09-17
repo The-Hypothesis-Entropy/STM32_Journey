@@ -1,10 +1,47 @@
-08:16:45 **** Incremental Build of configuration Debug for project start ****
+21:08:15 **** Incremental Build of configuration Debug for project start ****
 make -j16 all 
+arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_FULL_LL_DRIVER -DHSE_VALUE=8000000 -DHSE_STARTUP_TIMEOUT=100 -DLSE_STARTUP_TIMEOUT=5000 -DLSE_VALUE=32768 -DEXTERNAL_CLOCK_VALUE=12288000 -DHSI_VALUE=16000000 -DLSI_VALUE=32000 -DVDD_VALUE=3300 -DPREFETCH_ENABLE=1 -DINSTRUCTION_CACHE_ENABLE=1 -DDATA_CACHE_ENABLE=1 -DSTM32F401xE -c -I../../Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"src/mhal_uart.d" -MT"src/mhal_uart.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "src/mhal_uart.o"
+arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_FULL_LL_DRIVER -DHSE_VALUE=8000000 -DHSE_STARTUP_TIMEOUT=100 -DLSE_STARTUP_TIMEOUT=5000 -DLSE_VALUE=32768 -DEXTERNAL_CLOCK_VALUE=12288000 -DHSI_VALUE=16000000 -DLSI_VALUE=32000 -DVDD_VALUE=3300 -DPREFETCH_ENABLE=1 -DINSTRUCTION_CACHE_ENABLE=1 -DDATA_CACHE_ENABLE=1 -DSTM32F401xE -c -I../../Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/main.d" -MT"Application/User/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/main.o"
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:3:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:75:17: warning: 'mhal_tim_get_clock' declared 'static' but never defined [-Wunused-function]
+   75 | static uint32_t mhal_tim_get_clock(TIM_TypeDef *tim);
+      |                 ^~~~~~~~~~~~~~~~~~
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c: In function 'mhal_uart_read_byte':
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:140:1: warning: control reaches end of non-void function [-Wreturn-type]
+  140 | }
+      | ^
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:119:20: warning: pointer targets in initialization of 'uint8_t *' {aka 'unsigned char *'} from 'char *' differ in signedness [-Wpointer-sign]
+  119 | uint8_t *message = "JESUS CHRIST!\r\n";
+      |                    ^~~~~~~~~~~~~~~~~~~
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c: In function 'USART2_IRQHandler':
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:224:41: warning: statement with no effect [-Wunused-value]
+  224 |                         mhal_uart_rx_len==1U;
+      |                         ~~~~~~~~~~~~~~~~^~~~
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c: In function 'USART1_IRQHandler':
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:269:41: warning: statement with no effect [-Wunused-value]
+  269 |                         mhal_uart_rx_len==1U;
+      |                         ~~~~~~~~~~~~~~~~^~~~
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c: In function 'USART6_IRQHandler':
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:314:41: warning: statement with no effect [-Wunused-value]
+  314 |                         mhal_uart_rx_len==1U;
+      |                         ~~~~~~~~~~~~~~~~^~~~
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal.h:6,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:2:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h: At top level:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:75:17: warning: 'mhal_tim_get_clock' declared 'static' but never defined [-Wunused-function]
+   75 | static uint32_t mhal_tim_get_clock(TIM_TypeDef *tim);
+      |                 ^~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "start.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Bare Metal\start\STM32CubeIDE\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="start.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: start.elf
+ 
 arm-none-eabi-size  start.elf 
+arm-none-eabi-objdump -h -S start.elf  > "start.list"
    text	   data	    bss	    dec	    hex	filename
-   5212	      4	   1572	   6788	   1a84	start.elf
+   5552	     12	   1708	   7272	   1c68	start.elf
 Finished building: default.size.stdout
  
+Finished building: start.list
+ 
 
-08:16:45 Build Finished. 0 errors, 0 warnings. (took 238ms)
+21:08:16 Build Finished. 0 errors, 7 warnings. (took 560ms)
 

@@ -11,6 +11,7 @@
 "./src/mhal_adc.o"
 "./src/mhal_exti.o"
 "./src/mhal_fsm.o"
+"./src/mhal_globals.o"
 "./src/mhal_gpio.o"
 "./src/mhal_i2c.o"
 "./src/mhal_spi.o"

@@ -1,4 +1,0 @@
-#include "mhal_exti.h"
-#include "stm32f4xx.h"
-
-RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;

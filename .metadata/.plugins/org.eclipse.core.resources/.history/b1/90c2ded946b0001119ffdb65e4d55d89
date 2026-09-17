@@ -1,3 +1,0 @@
-#include "stm32f401xe.h"
-#include "mhal_exti.h"
-#include "mhal_gpio.h"
