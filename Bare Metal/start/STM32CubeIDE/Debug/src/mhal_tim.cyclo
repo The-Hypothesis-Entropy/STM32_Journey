@@ -30,4 +30,4 @@ C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:560:10
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:580:6:mhal_tim_ic_force_capture	1
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:585:13:mhal_tim_ic_check_flag	1
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:589:6:mhal_tim_ic_clear_status	1
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:626:10:mhal_rcc_get_periph_freq	19
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:626:10:mhal_rcc_get_periph_freq	24

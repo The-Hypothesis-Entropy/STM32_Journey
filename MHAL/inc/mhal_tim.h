@@ -191,7 +191,11 @@ void mhal_tim_ic_stop(TIM_TypeDef *tim, mhal_tim_channel_t channel);
 typedef enum {
 	MHAL_USART1_PERIPHERAL = 0U,
 	MHAL_USART2_PERIPHERAL = 1U,
-	MHAL_USART6_PERIPHERAL = 2U
+	MHAL_USART6_PERIPHERAL = 2U,
+	MHAL_SPI1_PERIPHERAL = 3U,
+	MHAL_SPI2_PERIPHERAL = 4U,
+	MHAL_SPI3_PERIPHERAL = 5U,
+	MHAL_SPI4_PERIPHERAL = 6U
 }mhal_peripheral_t;
 
 uint32_t mhal_rcc_get_periph_freq(mhal_peripheral_t periph);

@@ -6,6 +6,16 @@
 #include "mhal_globals.h"
 
 /*
+ * HOW TO USE THIS DRIVER LIBRARY:
+ * -> There are two ALL-IN-ONEs. The transmit and the receive.
+ * 	       Transmit sends your data
+ * 	       Receive stores the data in the mhal_uart_rx_msg global variable (see mhal_globals.h)
+ * Also, you could just run the init by yourself. Receiving will happen automatically to the globals
+ * If already init, you can use write_byte to send data. integrate it to your application.
+ */
+//-------------------------------------------------------------------------------------------------------------
+
+/*
  * UART PERIPHERAL TRANSMITS FRAMES
  * -> Idle: Line high
  * -> Start: One bit time at logic 0
@@ -88,15 +98,28 @@ typedef struct {
 	uint8_t tx_len;
 }mhal_uart_t;
 
+void mhal_uart_enable_rx_irq(USART_TypeDef *uart);
+uint8_t mhal_uart_tx_busy(USART_TypeDef *uart);
+uint8_t mhal_uart_rx_ready(USART_TypeDef *uart);
+//void mhal_uart_disable(USART_TypeDef *uart);
+//void mhal_uart_enable(USART_TypeDef *uart);
+
+//---------------------------FOR THE USER-----------------------------------------
+
 void mhal_uart_init(USART_TypeDef *uart, const char* tx, mhal_gpio_alt_fn_t tx_af, const char* rx, mhal_gpio_alt_fn_t rx_af);
 void mhal_uart_set_baud(USART_TypeDef *uart, uint32_t baud_rate);
 void mhal_uart_write_byte(USART_TypeDef *uart, uint8_t byte);
 uint8_t mhal_uart_read_byte(USART_TypeDef *uart);
-void mhal_uart_enable_rx_irq(USART_TypeDef *uart);
-uint8_t mhal_uart_tx_busy(USART_TypeDef *uart);
-uint8_t mhal_uart_rx_ready(USART_TypeDef *uart);
-
 
 void mhal_uart_transmit(USART_TypeDef *uart, uint8_t *msg, uint8_t len);
 void mhal_uart_receive(USART_TypeDef *uart, uint8_t *buf);
+
+
+
+//------------------------------INTERRUPT HANDLER NESTED FUNCTIONS--------------------------------
+void mhal_uart1_handler(void);
+void mhal_uart2_handler(void);
+void mhal_uart6_handler(void);
+
 #endif
+

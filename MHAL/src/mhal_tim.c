@@ -699,10 +699,17 @@ uint32_t mhal_rcc_get_periph_freq(mhal_peripheral_t periph){
 //-----------------------------------------------------
 	//ADD YOUR PERIPHERAL TO THE PERIPHERAL ENUM, AND THEN
 	//  RETURN THE CORRESPONDING CLOCK
-	if(periph == MHAL_USART1_PERIPHERAL | periph == MHAL_USART6_PERIPHERAL){
+	if(periph == MHAL_USART1_PERIPHERAL || periph == MHAL_USART6_PERIPHERAL){
 		return (sysclk / (AHB_Pre*APB2_Pre));
 	}
 	if(periph == MHAL_USART2_PERIPHERAL){
 		return (sysclk / (AHB_Pre*APB1_Pre));
 	}
+	if(periph == MHAL_SPI1_PERIPHERAL || periph == MHAL_SPI4_PERIPHERAL){
+		return (sysclk / (AHB_Pre*APB2_Pre));
+	}
+	if(periph == MHAL_SPI2_PERIPHERAL || periph == MHAL_SPI3_PERIPHERAL){
+			return (sysclk / (AHB_Pre*APB1_Pre));
+		}
+
 }

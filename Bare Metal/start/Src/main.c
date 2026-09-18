@@ -116,7 +116,7 @@ int main_hold(){
 uint8_t beep = 0U;
 uint32_t idx = 0;
 uint32_t usart2clock = 0;
-uint8_t *message = "JESUS CHRIST!\r\n";
+uint8_t *message = "Here is a message!\r\n";
 int main(){
 	//mhal_gpio_init(GPIOC, 13, &MHAL_GPIO_CFG_INPUT_PULLUP);
 	mhal_gpio_init(GPIOA, 5, &MHAL_GPIO_CFG_OUTPUT);
@@ -134,8 +134,11 @@ int main(){
 	//mhal_uart_init(USART2, PA2, 7, PA3, 7);
 
 	//mhal_uart_transmit(USART2, "JESUS");
+	//mhal_uart_disable(USART2);
+	//mhal_uart_init(USART2, PA2, AF7, PA3, AF7);
 
-	mhal_uart_init(USART2, PA2, AF7, PA3, AF7);
+	//mhal_uart_disable(USART2);
+
 	while(1){
 		//mhal_uart_transmit(USART2, message);
 		//mhal_delay(100);
@@ -159,10 +162,10 @@ int main(){
 		}
 */
 	//}
-
-		mhal_uart_transmit(USART2, message, 15);
-		//mhal_uart_read_byte(USART2);
 		mhal_delay(1000);
+		mhal_uart_transmit(USART2, message, 20);
+		//mhal_uart_read_byte(USART2);
+
 }
 	return 0;
 }
@@ -206,136 +209,13 @@ void TIM3_IRQHandler(void){
 }
 
 void USART2_IRQHandler(void){
-	if((USART2->SR & USART_SR_TXE) && (USART2->CR1 & USART_CR1_TXEIE)){ //meaning we are coming from mhal_uart_transmit call
-		if(mhal_uart_tx_idx < mhal_uart_tx_len){ //is there more to be sent?
-			mhal_uart_write_byte(USART2, mhal_uart_tx_msg[mhal_uart_tx_idx++]); //send current byte
-		}
-		else{ //all bytes sent
-			mhal_uart_tx_msg = (void *)0;
-			mhal_uart_tx_len = 0U;
-			mhal_uart_tx_idx = 0U;
-			USART2->CR1 &= ~USART_CR1_TXEIE;
-		}
-
-	}
-
-	if (USART2->SR & USART_SR_RXNE){
-		if(mhal_uart_rx_len==0U){
-			mhal_uart_rx_len==1U;
-			mhal_uart_rx_byte = USART2->DR;
-			mhal_uart_rx_msg[mhal_uart_rx_idx] = mhal_uart_rx_byte;
-			USART2->CR1 &= ~USART_CR1_RXNEIE;
-			}
-		else{ //called from general receive
-			mhal_uart_rx_byte = USART2->DR;
-			if(mhal_uart_rx_idx<MHAL_UART_RX_MAX_BUF_SIZE){//buffer not full
-				if(mhal_uart_rx_byte=='\r' || mhal_uart_rx_byte=='\0' || mhal_uart_rx_byte=='\n' ){//message ended
-					mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
-					USART2->CR1 &= ~USART_CR1_RXNEIE;
-					mhal_uart_rx_len = mhal_uart_rx_idx;
-					}
-				else{ //message not ended
-					mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
-					//no need to increase length var, it'll be updated eventually on enter or buffer full??
-					//ofcourse you should increase it, to show you how much has come in
-					//VITALLY, IF LEN > MAX_BUF_SIZE (check in application), there has been overflow
-					mhal_uart_rx_len++;
-					}
-				}
-			else{
-				mhal_uart_rx_idx = 0U; //loop around
-				//USART2->CR1 &= ~USART_CR1_RXNEIE; //buffer full, stop receiving. you can change this if you prefer to override.
-			}
-			}
-		}
+	mhal_uart2_handler();
 }
 
 void USART1_IRQHandler(void){
-	if((USART1->SR & USART_SR_TXE) && (USART1->CR1 & USART_CR1_TXEIE)){ //meaning we are coming from mhal_uart_transmit call
-		if(mhal_uart_tx_idx < mhal_uart_tx_len){ //is there more to be sent?
-			mhal_uart_write_byte(USART1, mhal_uart_tx_msg[mhal_uart_tx_idx++]); //send current byte
-		}
-		else{ //all bytes sent
-			mhal_uart_tx_msg = (void *)0;
-			mhal_uart_tx_len = 0U;
-			mhal_uart_tx_idx = 0U;
-			USART1->CR1 &= ~USART_CR1_TXEIE;
-		}
-
-	}
-
-	if (USART1->SR & USART_SR_RXNE){
-		if(mhal_uart_rx_len==0U){
-			mhal_uart_rx_len==1U;
-			mhal_uart_rx_byte = USART1->DR;
-			mhal_uart_rx_msg[mhal_uart_rx_idx] = mhal_uart_rx_byte;
-			USART1->CR1 &= ~USART_CR1_RXNEIE;
-			}
-		else{ //called from general receive
-			mhal_uart_rx_byte = USART1->DR;
-			if(mhal_uart_rx_idx<MHAL_UART_RX_MAX_BUF_SIZE){//buffer not full
-				if(mhal_uart_rx_byte=='\r' || mhal_uart_rx_byte=='\0' || mhal_uart_rx_byte=='\n' ){//message ended
-					mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
-					USART1->CR1 &= ~USART_CR1_RXNEIE;
-					mhal_uart_rx_len = mhal_uart_rx_idx;
-					}
-				else{ //message not ended
-					mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
-					//no need to increase length var, it'll be updated eventually on enter or buffer full??
-					//ofcourse you should increase it, to show you how much has come in
-					//VITALLY, IF LEN > MAX_BUF_SIZE (check in application), there has been overflow
-					mhal_uart_rx_len++;
-					}
-				}
-			else{
-				mhal_uart_rx_idx = 0U; //loop around
-				//USART1->CR1 &= ~USART_CR1_RXNEIE; //buffer full, stop receiving. you can change this if you prefer to override.
-			}
-			}
-		}
+	mhal_uart1_handler();
 }
 
 void USART6_IRQHandler(void){
-	if((USART6->SR & USART_SR_TXE) && (USART6->CR1 & USART_CR1_TXEIE)){ //meaning we are coming from mhal_uart_transmit call
-		if(mhal_uart_tx_idx < mhal_uart_tx_len){ //is there more to be sent?
-			mhal_uart_write_byte(USART6, mhal_uart_tx_msg[mhal_uart_tx_idx++]); //send current byte
-		}
-		else{ //all bytes sent
-			mhal_uart_tx_msg = (void *)0;
-			mhal_uart_tx_len = 0U;
-			mhal_uart_tx_idx = 0U;
-			USART6->CR1 &= ~USART_CR1_TXEIE;
-		}
-
-	}
-
-	if (USART6->SR & USART_SR_RXNE){
-		if(mhal_uart_rx_len==0U){
-			mhal_uart_rx_len==1U;
-			mhal_uart_rx_byte = USART6->DR;
-			mhal_uart_rx_msg[mhal_uart_rx_idx] = mhal_uart_rx_byte;
-			USART6->CR1 &= ~USART_CR1_RXNEIE;
-			}
-		else{ //called from general receive
-			mhal_uart_rx_byte = USART6->DR;
-			if(mhal_uart_rx_idx<MHAL_UART_RX_MAX_BUF_SIZE){//buffer not full
-				if(mhal_uart_rx_byte=='\r' || mhal_uart_rx_byte=='\0' || mhal_uart_rx_byte=='\n' ){//message ended
-					mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
-					USART6->CR1 &= ~USART_CR1_RXNEIE;
-					mhal_uart_rx_len = mhal_uart_rx_idx;
-					}
-				else{ //message not ended
-					mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
-					//no need to increase length var, it'll be updated eventually on enter or buffer full??
-					//ofcourse you should increase it, to show you how much has come in
-					//VITALLY, IF LEN > MAX_BUF_SIZE (check in application), there has been overflow
-					mhal_uart_rx_len++;
-					}
-				}
-			else{
-				mhal_uart_rx_idx = 0U; //loop around
-				//USART6->CR1 &= ~USART_CR1_RXNEIE; //buffer full, stop receiving. you can change this if you prefer to override.
-			}
-			}
-		}
+	mhal_uart6_handler();
 }

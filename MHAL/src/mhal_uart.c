@@ -44,8 +44,8 @@ void mhal_uart_init(USART_TypeDef *uart, const char* tx, mhal_gpio_alt_fn_t tx_a
 	 * -> CPU busy with other tasks...then if a byte is received, it goes to isr to read/transfer it to memory.
 	 */
 
-
-
+	//if(uart->CR1 & USART_CR1_UE){}
+	//else{
 	//------------------------------Configure PINS---------------------------------
 		GPIO_TypeDef *tx_port = mhal_dename_port(tx);
 		uint32_t tx_pin = mhal_dename_pin(tx);
@@ -116,6 +116,8 @@ void mhal_uart_init(USART_TypeDef *uart, const char* tx, mhal_gpio_alt_fn_t tx_a
 
 	NVIC_SetPriority(irq_num, 0);
 	NVIC_EnableIRQ(irq_num);
+
+//}
 
 	//----------------------------------------------------------------------------------------------------------------
 
@@ -206,3 +208,150 @@ uint8_t mhal_uart_rx_ready(USART_TypeDef *uart){
 	return uart->SR & USART_SR_RXNE;
 }
 
+
+//void mhal_uart_disable(USART_TypeDef *uart){//turn it off, save power.
+//	uart->CR1 &= USART_CR1_UE;
+//}
+
+//void mhal_uart_enable(USART_TypeDef *uart){
+//	uart->CR1 |= USART_CR1_UE;
+//}
+
+/*
+ * INTERRUPT HANDLER NESTED FUNCTIONS: PASTE THESE INTO THE CORRESPONDING INTERRUPT HANDLERS
+ */
+
+void mhal_uart1_handler(void){
+	if((USART1->SR & USART_SR_TXE) && (USART1->CR1 & USART_CR1_TXEIE)){ //meaning we are coming from mhal_uart_transmit call
+			if(mhal_uart_tx_idx < mhal_uart_tx_len){ //is there more to be sent?
+				mhal_uart_write_byte(USART1, mhal_uart_tx_msg[mhal_uart_tx_idx++]); //send current byte
+			}
+			else{ //all bytes sent
+				mhal_uart_tx_msg = (void *)0;
+				mhal_uart_tx_len = 0U;
+				mhal_uart_tx_idx = 0U;
+				USART1->CR1 &= ~USART_CR1_TXEIE;
+			}
+
+		}
+
+		if (USART1->SR & USART_SR_RXNE){
+			if(mhal_uart_rx_len==0U){
+				mhal_uart_rx_len==1U;
+				mhal_uart_rx_byte = USART1->DR;
+				mhal_uart_rx_msg[mhal_uart_rx_idx] = mhal_uart_rx_byte;
+				USART1->CR1 &= ~USART_CR1_RXNEIE;
+				}
+			else{ //called from general receive
+				mhal_uart_rx_byte = USART1->DR;
+				if(mhal_uart_rx_idx<MHAL_UART_RX_MAX_BUF_SIZE){//buffer not full
+					if(mhal_uart_rx_byte=='\r' || mhal_uart_rx_byte=='\0' || mhal_uart_rx_byte=='\n' ){//message ended
+						mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
+						USART1->CR1 &= ~USART_CR1_RXNEIE;
+						mhal_uart_rx_len = mhal_uart_rx_idx;
+						}
+					else{ //message not ended
+						mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
+						//no need to increase length var, it'll be updated eventually on enter or buffer full??
+						//ofcourse you should increase it, to show you how much has come in
+						//VITALLY, IF LEN > MAX_BUF_SIZE (check in application), there has been overflow
+						mhal_uart_rx_len++;
+						}
+					}
+				else{
+					mhal_uart_rx_idx = 0U; //loop around
+					//USART1->CR1 &= ~USART_CR1_RXNEIE; //buffer full, stop receiving. you can change this if you prefer to override.
+				}
+				}
+			}
+}
+
+void mhal_uart2_handler(void){
+	if((USART2->SR & USART_SR_TXE) && (USART2->CR1 & USART_CR1_TXEIE)){ //meaning we are coming from mhal_uart_transmit call
+			if(mhal_uart_tx_idx < mhal_uart_tx_len){ //is there more to be sent?
+				mhal_uart_write_byte(USART2, mhal_uart_tx_msg[mhal_uart_tx_idx++]); //send current byte
+			}
+			else{ //all bytes sent
+				mhal_uart_tx_msg = (void *)0;
+				mhal_uart_tx_len = 0U;
+				mhal_uart_tx_idx = 0U;
+				USART2->CR1 &= ~USART_CR1_TXEIE;
+			}
+
+		}
+
+		if (USART2->SR & USART_SR_RXNE){
+			if(mhal_uart_rx_len==0U){
+				mhal_uart_rx_len==1U;
+				mhal_uart_rx_byte = USART2->DR;
+				mhal_uart_rx_msg[mhal_uart_rx_idx] = mhal_uart_rx_byte;
+				USART2->CR1 &= ~USART_CR1_RXNEIE;
+				}
+			else{ //called from general receive
+				mhal_uart_rx_byte = USART2->DR;
+				if(mhal_uart_rx_idx<MHAL_UART_RX_MAX_BUF_SIZE){//buffer not full
+					if(mhal_uart_rx_byte=='\r' || mhal_uart_rx_byte=='\0' || mhal_uart_rx_byte=='\n' ){//message ended
+						mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
+						USART2->CR1 &= ~USART_CR1_RXNEIE;
+						mhal_uart_rx_len = mhal_uart_rx_idx;
+						}
+					else{ //message not ended
+						mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
+						//no need to increase length var, it'll be updated eventually on enter or buffer full??
+						//ofcourse you should increase it, to show you how much has come in
+						//VITALLY, IF LEN > MAX_BUF_SIZE (check in application), there has been overflow
+						mhal_uart_rx_len++;
+						}
+					}
+				else{
+					mhal_uart_rx_idx = 0U; //loop around
+					//USART2->CR1 &= ~USART_CR1_RXNEIE; //buffer full, stop receiving. you can change this if you prefer to override.
+				}
+				}
+			}
+}
+
+void mhal_uart6_handler(void){
+	if((USART6->SR & USART_SR_TXE) && (USART6->CR1 & USART_CR1_TXEIE)){ //meaning we are coming from mhal_uart_transmit call
+			if(mhal_uart_tx_idx < mhal_uart_tx_len){ //is there more to be sent?
+				mhal_uart_write_byte(USART6, mhal_uart_tx_msg[mhal_uart_tx_idx++]); //send current byte
+			}
+			else{ //all bytes sent
+				mhal_uart_tx_msg = (void *)0;
+				mhal_uart_tx_len = 0U;
+				mhal_uart_tx_idx = 0U;
+				USART6->CR1 &= ~USART_CR1_TXEIE;
+			}
+
+		}
+
+		if (USART6->SR & USART_SR_RXNE){
+			if(mhal_uart_rx_len==0U){
+				mhal_uart_rx_len==1U;
+				mhal_uart_rx_byte = USART6->DR;
+				mhal_uart_rx_msg[mhal_uart_rx_idx] = mhal_uart_rx_byte;
+				USART6->CR1 &= ~USART_CR1_RXNEIE;
+				}
+			else{ //called from general receive
+				mhal_uart_rx_byte = USART6->DR;
+				if(mhal_uart_rx_idx<MHAL_UART_RX_MAX_BUF_SIZE){//buffer not full
+					if(mhal_uart_rx_byte=='\r' || mhal_uart_rx_byte=='\0' || mhal_uart_rx_byte=='\n' ){//message ended
+						mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
+						USART6->CR1 &= ~USART_CR1_RXNEIE;
+						mhal_uart_rx_len = mhal_uart_rx_idx;
+						}
+					else{ //message not ended
+						mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
+						//no need to increase length var, it'll be updated eventually on enter or buffer full??
+						//ofcourse you should increase it, to show you how much has come in
+						//VITALLY, IF LEN > MAX_BUF_SIZE (check in application), there has been overflow
+						mhal_uart_rx_len++;
+						}
+					}
+				else{
+					mhal_uart_rx_idx = 0U; //loop around
+					//USART6->CR1 &= ~USART_CR1_RXNEIE; //buffer full, stop receiving. you can change this if you prefer to override.
+				}
+				}
+			}
+}
