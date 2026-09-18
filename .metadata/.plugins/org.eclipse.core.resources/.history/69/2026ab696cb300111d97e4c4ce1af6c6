@@ -1,0 +1,33 @@
+#include "mhal_spi.h"
+#include "stm32f401xe.h"
+
+void mhal_spi_config(SPI_TypeDef *spi, mhal_spi_config_t *config){
+	uint32_t spi_clk;
+#ifdef SPI1
+	if(spi==SPI1){
+		RCC->APB2ENR |= RCC_APB2ENR_SPI1EN; //enable clock
+		spi_clk = mhal_rcc_get_periph_freq(MHAL_SPI1_PERIPHERAL); //get clock
+
+	}
+#endif
+#ifdef SPI2
+	if(spi==SPI2){
+
+	}
+#endif
+#ifdef SPI3
+	if(spi==SPI3){
+
+	}
+#endif
+#ifdef SPI4
+	if(spi==SPI4){
+
+	}
+#endif
+
+
+	spi->CR1 &= ~(SPI_CR1_CPHA_Msk|SPI_CR1_CPOL_Msk|SPI_CR1_MSTR_Msk|SPI_CR1_BR_Msk|SPI_CR1_LSBFIRST_Msk);
+	spi->CR1 |= (config->mode<<0U)|(config->role<<2U)|(config->baud<<3U)|(config->order<<7U);
+	spi->CR1 |= SPI_CR1_SPE;
+}

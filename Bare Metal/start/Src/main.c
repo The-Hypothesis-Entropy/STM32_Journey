@@ -117,6 +117,8 @@ uint8_t beep = 0U;
 uint32_t idx = 0;
 uint32_t usart2clock = 0;
 uint8_t *message = "Here is a message!\r\n";
+
+uint8_t *data_block = "incoming!\r\n";
 int main(){
 	//mhal_gpio_init(GPIOC, 13, &MHAL_GPIO_CFG_INPUT_PULLUP);
 	mhal_gpio_init(GPIOA, 5, &MHAL_GPIO_CFG_OUTPUT);
@@ -138,6 +140,11 @@ int main(){
 	//mhal_uart_init(USART2, PA2, AF7, PA3, AF7);
 
 	//mhal_uart_disable(USART2);
+	mhal_spi_master_device(SPI1, PA0);
+	mhal_spi_slave_device(SPI2, PB1);
+	mhal_spi_receive_begin(SPI2);
+	mhal_delay(1000);
+	//mhal_spi_write(SPI1, data_block, 5);
 
 	while(1){
 		//mhal_uart_transmit(USART2, message);
@@ -162,8 +169,15 @@ int main(){
 		}
 */
 	//}
+		mhal_spi_write(SPI1, data_block, 11);
+		if(beep>=3 && beep<=7){mhal_spi_receive_end(SPI2);}
+		if(beep==7){mhal_spi_receive_begin(SPI2);}
+		beep++;
 		mhal_delay(1000);
-		mhal_uart_transmit(USART2, message, 20);
+
+
+
+		//mhal_uart_transmit(USART2, message, 20);
 		//mhal_uart_read_byte(USART2);
 
 }
@@ -218,4 +232,16 @@ void USART1_IRQHandler(void){
 
 void USART6_IRQHandler(void){
 	mhal_uart6_handler();
+}
+
+void SPI1_IRQHandler(void){
+	mhal_spi1_handler();
+}
+
+void SPI2_IRQHandler(void){
+	mhal_spi2_handler();
+	//mhal_gpio_on(PA5);
+	//mhal_delay(1000);
+	//mhal_gpio_off(PA5);
+	//mhal_delay(1000);
 }

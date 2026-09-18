@@ -1,0 +1,70 @@
+#include "mhal_spi.h"
+#include "stm32f401xe.h"
+
+void mhal_spi_config(SPI_TypeDef *spi, mhal_spi_config_t *config){
+	uint32_t spi_clk;
+#ifdef SPI1
+	if(spi==SPI1){
+		RCC->APB2ENR |= RCC_APB2ENR_SPI1EN; //enable clock
+		spi_clk = mhal_rcc_get_periph_freq(MHAL_SPI1_PERIPHERAL); //get clock
+
+	}
+#endif
+#ifdef SPI2
+	if(spi==SPI2){
+
+	}
+#endif
+#ifdef SPI3
+	if(spi==SPI3){
+
+	}
+#endif
+#ifdef SPI4
+	if(spi==SPI4){
+
+	}
+#endif
+
+
+	spi->CR1 &= ~(SPI_CR1_CPHA_Msk|SPI_CR1_CPOL_Msk|SPI_CR1_MSTR_Msk|SPI_CR1_BR_Msk|SPI_CR1_LSBFIRST_Msk);
+	spi->CR1 |= (config->mode<<0U)|(config->role<<2U)|(config->baud<<3U)|(config->order<<7U);
+
+	//interrupt enabling
+
+	spi->CR1 |= SPI_CR1_SPE; //ENABLE SPI
+}
+
+void mhal_spi_master_init(SPI_TypeDef *spi){
+	//pin config (include CS?)
+#ifdef SP1
+	if(spi==SP1){
+		mhal_gpio_config_t pin_config = MHAL_GPIO_CFG_AF;
+		pin_config.af = AF5;
+		mhal_gpio_init(GPIOB, 3, &pin_config); //clock
+		mhal_gpio_init(GPIOA, 6, &pin_config); //miso
+		mhal_gpio_init(GPIOA, 7, &pin_config); //mosi
+	}
+#endif
+#ifdef SP2
+	else if(spi==SP2){
+		mhal_gpio_config_t pin_config = MHAL_GPIO_CFG_AF;
+		pin_config.af = AF5;
+		mhal_gpio_init(GPIOB, 13, &pin_config); //clock
+		mhal_gpio_init(GPIOB, 14, &pin_config); //miso
+		mhal_gpio_init(GPIOB, 15, &pin_config); //mosi
+	}
+#endif
+#ifdef SP3
+	else if(spi==SP3){
+
+	}
+#endif
+#ifdef SP4
+	else if(spi==SP4){
+
+	}
+#endif
+
+	//spi config
+}

@@ -5,6 +5,6 @@ configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Level1_GPIO_IRQ_
 eclipse.preferences.version=1
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Level1_GPIO_IRQ_UART\ Debug/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Level1_GPIO_IRQ_UART\ Debug/activeLaunchTarget=null\:---
-org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:start\ Debug/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:start\ Debug/activeLaunchMode=debug
 org.eclipse.launchbar.core.descriptorType.default\:Level1_GPIO_IRQ_UART\ Debug/activeLaunchMode=run
 org.eclipse.launchbar.core.descriptorType.default\:Level1_GPIO_IRQ_UART\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local

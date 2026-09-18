@@ -8,4 +8,4 @@ C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:94:6:
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:105:6:mhal_gpio_toggle	24	static
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:115:15:mhal_dename_port	24	static
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:145:9:mhal_dename_pin	24	static
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:153:6:mhal_delay	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:156:6:mhal_delay	24	static

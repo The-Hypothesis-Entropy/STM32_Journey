@@ -1,0 +1,185 @@
+#include "mhal_spi.h"
+#include "stm32f401xe.h"
+
+void mhal_spi_config(SPI_TypeDef *spi, mhal_spi_config_t *config){
+	//uint32_t spi_clk;
+
+#ifdef SPI1
+	if(spi==SPI1){
+		RCC->APB2ENR |= RCC_APB2ENR_SPI1EN; //enable clock
+		//spi_clk = mhal_rcc_get_periph_freq(MHAL_SPI1_PERIPHERAL); //get clock
+		NVIC_SetPriority(SPI1_IRQn, 0);
+		NVIC_EnableIRQ(SPI1_IRQn);
+	}
+#endif
+#ifdef SPI2
+	if(spi==SPI2){
+		RCC->APB1ENR |= RCC_APB1ENR_SPI2EN;
+		NVIC_SetPriority(SPI2_IRQn, 0);
+		NVIC_EnableIRQ(SPI2_IRQn);
+	}
+#endif
+#ifdef SPI3
+	if(spi==SPI3){
+		RCC->APB1ENR |= RCC_APB1ENR_SPI3EN;
+		NVIC_SetPriority(SPI3_IRQn, 0);
+		NVIC_EnableIRQ(SPI3_IRQn);
+	}
+#endif
+#ifdef SPI4
+	if(spi==SPI4){
+		RCC->APB2ENR |= RCC_APB2ENR_SPI4EN;
+		NVIC_SetPriority(SPI4_IRQn, 0);
+		NVIC_EnableIRQ(SPI4_IRQn);
+	}
+#endif
+
+	//Manual CS
+	spi->CR1 |= (SPI_CR1_SSM | SPI_CR1_SSI);
+
+	//SPI clock phase, polarity, role, mode, baud setting
+	spi->CR1 &= ~(SPI_CR1_CPHA_Msk|SPI_CR1_CPOL_Msk|SPI_CR1_MSTR_Msk|SPI_CR1_BR_Msk|SPI_CR1_LSBFIRST_Msk);
+	spi->CR1 |= (config->mode<<0U)|(config->role<<2U)|(config->baud<<3U)|(config->order<<7U);
+
+	//interrupt enabling
+	spi->CR2 |= (SPI_CR2_TXEIE | SPI_CR2_RXNEIE); //NOT NOW. WHEN TRANSFER IS READY INSTEAD
+
+	spi->CR1 |= SPI_CR1_SPE; //ENABLE SPI
+	//NOT NOW EITHER
+}
+
+void mhal_spi_master_init(SPI_TypeDef *spi){
+	//pin config (include CS?)
+#ifdef SPI1
+	if(spi==SPI1){
+		mhal_gpio_config_t pin_config = MHAL_GPIO_CFG_AF;
+		pin_config.af = AF5;
+		mhal_gpio_init(GPIOB, 3, &pin_config); //clock
+		mhal_gpio_init(GPIOA, 6, &pin_config); //miso
+		mhal_gpio_init(GPIOA, 7, &pin_config); //mosi
+	}
+#endif
+#ifdef SPI2
+	if(spi==SPI2){
+		mhal_gpio_config_t pin_config = MHAL_GPIO_CFG_AF;
+		pin_config.af = AF5;
+		mhal_gpio_init(GPIOB, 13, &pin_config); //clock
+		mhal_gpio_init(GPIOB, 14, &pin_config); //miso
+		mhal_gpio_init(GPIOB, 15, &pin_config); //mosi
+	}
+#endif
+#ifdef SPI3
+	if(spi==SPI3){
+		mhal_gpio_config_t pin_config = MHAL_GPIO_CFG_AF;
+		pin_config.af = AF6;
+		mhal_gpio_init(GPIOC, 10, &pin_config); //clock
+		mhal_gpio_init(GPIOC, 11, &pin_config); //miso
+		mhal_gpio_init(GPIOC, 12, &pin_config); //mosi
+	}
+#endif
+#ifdef SPI4
+	if(spi==SPI4){
+		mhal_gpio_config_t pin_config = MHAL_GPIO_CFG_AF;
+		pin_config.af = AF5;
+		mhal_gpio_init(GPIOE, 12, &pin_config); //clock
+		mhal_gpio_init(GPIOE, 13, &pin_config); //miso
+		mhal_gpio_init(GPIOE, 14, &pin_config); //mosi
+	}
+#endif
+
+	//spi config
+	mhal_spi_config_t spi_config = MHAL_SPI_MASTER_CFG_DEFAULT;
+	mhal_spi_config(spi, &spi_config);
+}
+
+void mhal_spi_slave_init(SPI_TypeDef *spi){
+	//pin config (include CS?)
+#ifdef SPI1
+	if(spi==SPI1){
+		mhal_gpio_config_t pin_config = MHAL_GPIO_CFG_AF;
+		pin_config.af = AF5;
+		mhal_gpio_init(GPIOB, 3, &pin_config); //clock
+		mhal_gpio_init(GPIOA, 6, &pin_config); //miso
+		mhal_gpio_init(GPIOA, 7, &pin_config); //mosi
+	}
+#endif
+#ifdef SPI2
+	if(spi==SPI2){
+		mhal_gpio_config_t pin_config = MHAL_GPIO_CFG_AF;
+		pin_config.af = AF5;
+		mhal_gpio_init(GPIOB, 13, &pin_config); //clock
+		mhal_gpio_init(GPIOB, 14, &pin_config); //miso
+		mhal_gpio_init(GPIOB, 15, &pin_config); //mosi
+	}
+#endif
+#ifdef SPI3
+	if(spi==SPI3){
+		mhal_gpio_config_t pin_config = MHAL_GPIO_CFG_AF;
+		pin_config.af = AF6;
+		mhal_gpio_init(GPIOC, 10, &pin_config); //clock
+		mhal_gpio_init(GPIOC, 11, &pin_config); //miso
+		mhal_gpio_init(GPIOC, 12, &pin_config); //mosi
+	}
+#endif
+#ifdef SPI4
+	if(spi==SPI4){
+		mhal_gpio_config_t pin_config = MHAL_GPIO_CFG_AF;
+		pin_config.af = AF5;
+		mhal_gpio_init(GPIOE, 12, &pin_config); //clock
+		mhal_gpio_init(GPIOE, 13, &pin_config); //miso
+		mhal_gpio_init(GPIOE, 14, &pin_config); //mosi
+	}
+#endif
+
+	//spi config
+	mhal_spi_config_t spi_config = MHAL_SPI_SLAVE_CFG_DEFAULT;
+	mhal_spi_config(spi, &spi_config);
+}
+
+void mhal_spi_master_device(SPI_TypeDef *spi, const char *cs_ref){
+	GPIO_TypeDef *port = mhal_dename_port(cs_ref);
+	uint32_t pin = mhal_dename_pin(cs_ref);
+	mhal_gpio_init(port, pin, &MHAL_GPIO_CFG_OUTPUT);
+	mhal_gpio_write(port, pin, MHAL_GPIO_HIGH); //IMPORTANT, CS DEACTIVATED.
+	mhal_spi_master_init(spi);
+}
+
+void mhal_spi_slave_device(SPI_TypeDef *spi, const char *cs_ref){
+	GPIO_TypeDef *port = mhal_dename_port(cs_ref);
+	uint32_t pin = mhal_dename_pin(cs_ref);
+	mhal_gpio_init(port, pin, &MHAL_GPIO_CFG_OUTPUT);
+	mhal_gpio_write(port, pin, MHAL_GPIO_HIGH); //IMPORTANT, CS DEACTIVATED.
+	mhal_spi_slave_init(spi);
+}
+
+void mhal_spi_write_byte(SPI_TypeDef *spi, uint8_t byte){
+	mhal_spi_tx_len = 1U;
+	mhal_spi_tx_idx = 0U;
+	mhal_spi_tx_data[0] = byte;
+	while(!(spi->SR & SPI_SR_TXE)){}
+	spi->DR = mhal_spi_tx_data[mhal_spi_tx_idx++];
+}
+
+void mhal_spi_write(SPI_TypeDef *spi, uint8_t *data, uint8_t len){
+	mhal_spi_tx_len = len;
+	mhal_spi_tx_idx = 0U;
+	if(len>MHAL_SPI_TX_MAX_BUF_SIZE){len=MHAL_SPI_TX_MAX_BUF_SIZE;}
+	for (uint8_t i=0; i<len; i++){
+		mhal_spi_tx_data[i] = data[i];
+	}
+	//spi->CR1 |= SPI_CR1_SPE; //ENABLE SPI
+	//while(!(spi->SR & SPI_SR_TXE)){}
+	//spi->DR = mhal_spi_tx_data[mhal_spi_tx_idx++];
+	//spi->CR2 |= SPI_CR2_TXEIE;
+}
+
+void mhal_spi1_handler(void){
+	if((SPI1->SR & SPI_SR_TXE) && (SPI1->CR2 & SPI_CR2_TXEIE)){
+		SPI1->DR = mhal_spi_tx_data[mhal_spi_tx_idx++];
+		if(mhal_spi_tx_idx == mhal_spi_tx_len){//is transfer done?
+			SPI1->CR2 &= ~(SPI_CR2_TXEIE);
+		}
+	}
+
+
+}

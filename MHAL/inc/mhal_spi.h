@@ -3,6 +3,7 @@
 
 #include "mhal_gpio.h"
 #include "mhal_tim.h"
+#include "mhal_globals.h"
 
 //--------------------------------------------------------------
 // ENUMS
@@ -34,11 +35,31 @@ typedef struct{
 	uint8_t baud;
 }mhal_spi_config_t;
 
-#define MHAL_SPI_MASTER_CFG_DEFAULT (mhal_spi_config_t *){.role=MHAL_SPI_MASTER_ROLE, .order=MHAL_SPI_MSB_FIRST, .mode=MHAL_SPI_CLK_MODE_0, .baud=0U}
-#define MHAL_SPI_SLAVE_CFG_DEFAULT (mhal_spi_config_t *){.role=MHAL_SPI_SLAVE_ROLE, .order=MHAL_SPI_MSB_FIRST, .mode=MHAL_SPI_CLK_MODE_0, .baud=0U}
+#define MHAL_SPI_MASTER_CFG_DEFAULT ((mhal_spi_config_t){.role=MHAL_SPI_MASTER_ROLE, .order=MHAL_SPI_MSB_FIRST, .mode=MHAL_SPI_CLK_MODE_0, .baud=7U})
+#define MHAL_SPI_SLAVE_CFG_DEFAULT ((mhal_spi_config_t){.role=MHAL_SPI_SLAVE_ROLE, .order=MHAL_SPI_MSB_FIRST, .mode=MHAL_SPI_CLK_MODE_0, .baud=7U})
 
-void mhal_spi_master_config(SPI_TypeDef *spi, mhal_spi_config_t *config);
+void mhal_spi_config(SPI_TypeDef *spi, mhal_spi_config_t *config);
+void mhal_spi_master_init(SPI_TypeDef *spi, const char *cs_ref);
+void mhal_spi_slave_init(SPI_TypeDef *spi, const char *cs_ref);
+
+void mhal_spi_master_device(SPI_TypeDef *spi, const char *cs_ref);
+void mhal_spi_slave_device(SPI_TypeDef *spi, const char *cs_ref);
+
+void mhal_spi_write_byte(SPI_TypeDef *spi, uint8_t byte);
+void mhal_spi_write(SPI_TypeDef *spi, uint8_t *data, uint8_t len);
+
+void mhal_spi_receive_begin(SPI_TypeDef *spi);
+void mhal_spi_receive_end(SPI_TypeDef *spi);
+//----------------------------------------------------------------
 
 
+
+//----------------------------------------------------------------
+//-----------------INTERRUPT HANDLER NESTED FUNCTIONS-------------
+
+void mhal_spi1_handler(void);
+void mhal_spi2_handler(void);
+void mhal_spi3_handler(void);
+void mhal_spi4_handler(void);
 
 #endif

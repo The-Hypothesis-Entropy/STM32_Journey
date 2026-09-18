@@ -146,6 +146,9 @@ uint8_t mhal_dename_pin(const char* pin){
 	/*
 	 * RETURN PIN NUMBER (Y) OF PXY
 	 */
+	if (pin=='A' || pin=='B' || pin=='C' || pin=='D' || pin=='E' || pin=='F'){
+		return (uint8_t)((pin-'A')+10U);
+	}
 	uint8_t pin_ref = pin[2] - '0';
 	return pin_ref;
 }
