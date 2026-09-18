@@ -146,6 +146,17 @@ void mhal_spi_slave_init(SPI_TypeDef *spi, const char *cs_ref){
 	mhal_spi_config(spi, &spi_config);
 }
 
+void mhal_spi_write_byte(SPI_TypeDef *spi, uint8_t byte){
+	mhal_spi_tx_len = 1U;
+	mhal_spi_tx_idx = 0U;
+	mhal_spi_tx_data[0] = byte;
+	while(!(spi->SR & SPI_SR_TXE)){}
+	spi->DR = mhal_spi_tx_data[mhal_spi_tx_idx++];
+}
+
+
+//------------------------------FOR THE USER--------------------------------------
+
 void mhal_spi_master_device(SPI_TypeDef *spi, const char *cs_ref){
 	GPIO_TypeDef *port = mhal_dename_port(cs_ref);
 	uint32_t pin = mhal_dename_pin(cs_ref);
@@ -159,14 +170,6 @@ void mhal_spi_slave_device(SPI_TypeDef *spi, const char *cs_ref){
 	uint32_t pin = mhal_dename_pin(cs_ref);
 	mhal_gpio_init(port, pin, &MHAL_GPIO_CFG_INPUT);
 	mhal_spi_slave_init(spi, cs_ref);
-}
-
-void mhal_spi_write_byte(SPI_TypeDef *spi, uint8_t byte){
-	mhal_spi_tx_len = 1U;
-	mhal_spi_tx_idx = 0U;
-	mhal_spi_tx_data[0] = byte;
-	while(!(spi->SR & SPI_SR_TXE)){}
-	spi->DR = mhal_spi_tx_data[mhal_spi_tx_idx++];
 }
 
 void mhal_spi_write(SPI_TypeDef *spi, uint8_t *data, uint8_t len){
@@ -210,6 +213,9 @@ void mhal_spi_receive_end(SPI_TypeDef *spi){
 	spi->CR2 &= ~SPI_CR2_RXNEIE;
 }
 
+
+
+//----------------------------INTERRUPT NESTED HANDLER FUNCTIONS-----------------------
 void mhal_spi1_handler(void){
 	if((SPI1->SR & SPI_SR_TXE) && (SPI1->CR2 & SPI_CR2_TXEIE)){
 		SPI1->DR = mhal_spi_tx_data[mhal_spi_tx_idx++];
