@@ -4,6 +4,7 @@
 #include "mhal_gpio.h"
 #include "mhal_tim.h"
 #include "mhal_globals.h"
+#include "mhal_dma.h"
 
 /*
  * HOW TO USE THIS DRIVER LIBRARY:
@@ -11,6 +12,10 @@
  * -> mhal_spi_receive_begin allows reception of spi data
  * -> mhal_spi_receive_end stops reception of spi data
  * -> mhal_spi_write transmits data
+ * All data reads and writes are from/to the corresponding global variables. see mhal_globals.h
+ * For DMA transfer; first create the device, and then use dma_send or dma_rcv functions
+ *
+ * All data transfers are to and from the corresponding global variables. see mhal_globals.h
  */
 
 //--------------------------------------------------------------
@@ -49,9 +54,11 @@ typedef struct{
 //----------------------------------------------------------------
 //-----------------------LEMMA FUNCTIONS--------------------------
 //----------------------------------------------------------------
-void mhal_spi_config(SPI_TypeDef *spi, mhal_spi_config_t *config);
-void mhal_spi_master_init(SPI_TypeDef *spi, const char *cs_ref);
-void mhal_spi_slave_init(SPI_TypeDef *spi, const char *cs_ref);
+//void mhal_spi_config(SPI_TypeDef *spi, mhal_spi_config_t *config);
+//void mhal_spi_master_init(SPI_TypeDef *spi, const char *cs_ref);
+//void mhal_spi_slave_init(SPI_TypeDef *spi, const char *cs_ref);
+
+uint8_t mhal_spi_read_byte(SPI_TypeDef *spi);
 void mhal_spi_write_byte(SPI_TypeDef *spi, uint8_t byte);
 
 
@@ -60,13 +67,12 @@ void mhal_spi_write_byte(SPI_TypeDef *spi, uint8_t byte);
 //----------------------------------------------------------------
 void mhal_spi_master_device(SPI_TypeDef *spi, const char *cs_ref);
 void mhal_spi_slave_device(SPI_TypeDef *spi, const char *cs_ref);
-void mhal_spi_write(SPI_TypeDef *spi, uint8_t *data, uint8_t len);
+void mhal_spi_write(SPI_TypeDef *spi, uint8_t len);
 void mhal_spi_receive_begin(SPI_TypeDef *spi);
 void mhal_spi_receive_end(SPI_TypeDef *spi);
-//----------------------------------------------------------------
-//----------------------------------------------------------------
 
-
+void mhal_spi_dma_send(SPI_TypeDef *spi, uint8_t len);
+void mhal_spi_dma_rcv(SPI_TypeDef *spi, uint8_t len);
 //----------------------------------------------------------------
 //-----------------INTERRUPT HANDLER NESTED FUNCTIONS-------------
 //----------------------------------------------------------------

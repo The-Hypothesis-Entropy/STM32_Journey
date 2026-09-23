@@ -2,8 +2,81 @@
 #include "stm32f401xe.h"
 #include "mhal_tim.h"
 
+//----------------------LEMMA FUNCTIONS------------------------
+static IRQn_Type mhal_uart_get_irqn(USART_TypeDef *uart){
+	IRQn_Type irq_num;
+	#ifdef USART1
+		if(uart==USART1){
+			irq_num = USART1_IRQn;
+		}
+	#endif
+	#ifdef USART2
+		else if(uart==USART2){
+			irq_num = USART2_IRQn;
+		}
+	#endif
+	#ifdef USART3
+		else if(uart==USART3)irq_num = USART3_IRQn;
+	#endif
+	#ifdef USART4
+		else if(uart==USART4)irq_num = USART4_IRQn;
+	#endif
+	#ifdef USART5
+		else if(uart==USART5)irq_num = USART5_IRQn;
+	#endif
+	#ifdef USART6
+		else if(uart==USART6){
+			irq_num = USART6_IRQn;
+		}
+	#endif
+	//********************************************
+		return irq_num;
+}
 
-void mhal_uart_set_baud(USART_TypeDef *uart, uint32_t baud_rate){
+static void mhal_uart_clock_enable(USART_TypeDef *uart){
+	#ifdef USART1
+		if(uart==USART1){
+			RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
+		}
+	#endif
+	#ifdef USART2
+		else if(uart==USART2){
+			RCC->APB1ENR |= RCC_APB1ENR_USART2EN;
+		}
+	#endif
+	#ifdef USART3
+		else if(uart==USART3)irq_num = USART3_IRQn;
+	#endif
+	#ifdef USART4
+		else if(uart==USART4)irq_num = USART4_IRQn;
+	#endif
+	#ifdef USART5
+		else if(uart==USART5)irq_num = USART5_IRQn;
+	#endif
+	#ifdef USART6
+		else if(uart==USART6){
+			RCC->APB2ENR |= RCC_APB2ENR_USART6EN;
+		}
+	#endif
+	//********************************************
+
+}
+
+static void mhal_uart_interrupt_enable(USART_TypeDef *uart, uint8_t priority){
+	//Enable Transmitter and Receiver and interrupts for duplex transmission
+		uart->CR1 |= (USART_CR1_RXNEIE);// | USART_CR1_TXEIE);
+		//-----------------------------------
+		//Enable interrupt (above)
+		//uart->CR1 |= USART_CR1_TXEIE; //interrupt generated whenever TXE=1 (byte write out done)
+		          //No need to interrupt on TC bit. will only check it later on
+		//uart->CR1 |= USART_CR1_RXNEIE; //interrupt generated whenever ORE or RXNE is 1.-byte received
+
+		IRQn_Type irq_num = mhal_uart_get_irqn(uart);
+		NVIC_SetPriority(irq_num, 0);
+		NVIC_EnableIRQ(irq_num);
+}
+
+static void mhal_uart_set_baud(USART_TypeDef *uart, uint32_t baud_rate){
 	uint32_t uart_clk, brr;
 #ifdef USART1
 	if (uart == USART1){
@@ -27,6 +100,26 @@ void mhal_uart_set_baud(USART_TypeDef *uart, uint32_t baud_rate){
 	uart->BRR = brr;
 
 }
+
+static uint8_t mhal_uart_tx_busy(USART_TypeDef *uart){
+	return !(uart->SR & USART_SR_TXE);
+}
+
+static uint8_t mhal_uart_rx_ready(USART_TypeDef *uart){
+	return uart->SR & USART_SR_RXNE;
+}
+
+
+//void mhal_uart_disable(USART_TypeDef *uart){//turn it off, save power.
+//	uart->CR1 &= USART_CR1_UE;
+//}
+
+//void mhal_uart_enable(USART_TypeDef *uart){
+
+//	uart->CR1 |= USART_CR1_UE;
+//}
+//
+//---------------------------------------------------------------------
 
 void mhal_uart_init(USART_TypeDef *uart, const char* tx, mhal_gpio_alt_fn_t tx_af, const char* rx, mhal_gpio_alt_fn_t rx_af){
 	/*
@@ -60,35 +153,9 @@ void mhal_uart_init(USART_TypeDef *uart, const char* tx, mhal_gpio_alt_fn_t tx_a
 	//-----------------------------------------------------------------------------
 
 	//------------------------------Enable UART------------------------------------
-	IRQn_Type irq_num;
-	#ifdef USART1
-		if(uart==USART1){
-			irq_num = USART1_IRQn;
-			RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
-		}
-	#endif
-	#ifdef USART2
-		else if(uart==USART2){
-			irq_num = USART2_IRQn;
-			RCC->APB1ENR |= RCC_APB1ENR_USART2EN;
-		}
-	#endif
-	#ifdef USART3
-		else if(uart==USART3)irq_num = USART3_IRQn;
-	#endif
-	#ifdef USART4
-		else if(uart==USART4)irq_num = USART4_IRQn;
-	#endif
-	#ifdef USART5
-		else if(uart==USART5)irq_num = USART5_IRQn;
-	#endif
-	#ifdef USART6
-		else if(uart==USART6){
-			irq_num = USART6_IRQn;
-			RCC->APB2ENR |= RCC_APB2ENR_USART6EN;
-		}
-	#endif
-	//********************************************
+	mhal_uart_clock_enable(uart);
+
+
 	//uart->BRR = 0x8B;
 	mhal_uart_set_baud(uart, 115200);
 
@@ -105,45 +172,36 @@ void mhal_uart_init(USART_TypeDef *uart, const char* tx, mhal_gpio_alt_fn_t tx_a
 	uart->CR2 &= ~USART_CR2_STOP_Msk;
 	uart->CR2 |= (MHAL_UART_CONFIG_DEFAULT.stop)<<USART_CR2_STOP_Pos;
 
-	//Enable Transmitter and Receiver and interrupts for duplex transmission
-	uart->CR1 |= (USART_CR1_TE | USART_CR1_RE | USART_CR1_RXNEIE);// | USART_CR1_TXEIE);
-	//-----------------------------------
-	//Enable interrupt (above)
-	//uart->CR1 |= USART_CR1_TXEIE; //interrupt generated whenever TXE=1 (byte write out done)
-	          //No need to interrupt on TC bit. will only check it later on
-	//uart->CR1 |= USART_CR1_RXNEIE; //interrupt generated whenever ORE or RXNE is 1.-byte received
-
-
-	NVIC_SetPriority(irq_num, 0);
-	NVIC_EnableIRQ(irq_num);
-
+	uart->CR1 |= (USART_CR1_TE | USART_CR1_RE);
 //}
-
 	//----------------------------------------------------------------------------------------------------------------
-
-
 }
 
 void mhal_uart_write_byte(USART_TypeDef *uart, uint8_t byte){
 	/*
-	 * write one byte to the data register.
+	 * POLLING: write one byte to the data register.
 	 */
-	if(uart->SR & USART_SR_TXE){ //Transmit data register empty
-		uart->DR = byte;
-	}
+	while(!(uart->SR & USART_SR_TXE)){} //Transmit data not register empty
+	uart->DR = byte;
 
 }
 
 uint8_t mhal_uart_read_byte(USART_TypeDef *uart){
-	mhal_uart_rx_len = 0U; //only for this function
-	mhal_uart_rx_idx = 0U;
-	uart->CR1 |= USART_CR1_RXNEIE;
+	/*
+	 * POLLING: Read a byte
+	 */
+	//mhal_uart_rx_len = 0U; //only for this function
+	//mhal_uart_rx_idx = 0U;
+	//uart->CR1 |= USART_CR1_RXNEIE;
+	while (!(uart->SR & USART_SR_RXNE)){}
+	return uart->DR;
 
 }
 
-void mhal_uart_receive(USART_TypeDef *uart, uint8_t *buf){
+void mhal_uart_receive(USART_TypeDef *uart){
 /*
  * ALL-IN-ONE FUNCTION: WILL RECEIVE UNTIL \r
+ * INTERRUPT-BASED
  */
 	#ifdef USART1
 	if(uart==USART1){
@@ -163,13 +221,14 @@ void mhal_uart_receive(USART_TypeDef *uart, uint8_t *buf){
 
 	mhal_uart_rx_len = 0U;
 	mhal_uart_rx_idx = 0;
-
-	uart->CR1 |= USART_CR1_RXNEIE;
+	mhal_uart_interrupt_enable(uart, 0);
+	//uart->CR1 |= USART_CR1_RXNEIE;
 }
 
 void mhal_uart_transmit(USART_TypeDef *uart, uint8_t *msg, uint8_t len){
 	/*
 	 * ALL-IN-ONE FUNCTION: Nothing else to be done
+	 * INTERRUPT-BASED
 	 */
 
 	/*
@@ -196,26 +255,92 @@ void mhal_uart_transmit(USART_TypeDef *uart, uint8_t *msg, uint8_t len){
 	mhal_uart_tx_idx = 0U;
 	mhal_uart_tx_len = len;
 	mhal_uart_tx_msg = msg;
+	mhal_uart_interrupt_enable(uart, 0);
 	uart->CR1 |= USART_CR1_TXEIE;
 
 }
 
-uint8_t mhal_uart_tx_busy(USART_TypeDef *uart){
-	return !(uart->SR & USART_SR_TXE);
+void mhal_uart_dma_send(USART_TypeDef *uart, uint8_t len){
+	/*
+	 * ALL-IN-ONE:
+	 * DMA-BASED
+	 */
+	mhal_uart_tx_idx = 0U;
+	mhal_uart_tx_len = (len<MHAL_UART_TX_MAX_BUF_SIZE) ? len : MHAL_UART_TX_MAX_BUF_SIZE;
+
+	mhal_dma_config_t config;
+#ifdef USART1
+	if(uart==USART1){
+		mhal_uart_init(uart, PB6, AF7, PB7, AF7);
+		config = MHAL_DMA_USART1_SEND_CONFIG_DEFAULT;
+	}
+#endif
+#ifdef USART2
+	if(uart==USART2){
+		mhal_uart_init(uart, PA2, AF7, PA3, AF7);
+		config = MHAL_DMA_USART2_SEND_CONFIG_DEFAULT;
+	}
+#endif
+#ifdef USART6
+	if(uart==USART6){
+		mhal_uart_init(uart, PC6, AF8, PC7, AF8);
+		config = MHAL_DMA_USART6_SEND_CONFIG_DEFAULT;
+	}
+#endif
+	//-------------------------------------------------------------------------------
+
+	config.length = len;
+	mhal_dma_init(&config);
+	uart->CR3 |= USART_CR3_DMAT;
+	mhal_dma_start(config.stream);
+
 }
 
-uint8_t mhal_uart_rx_ready(USART_TypeDef *uart){
-	return uart->SR & USART_SR_RXNE;
+void mhal_uart_dma_rcv(USART_TypeDef *uart, uint8_t len){
+	/*
+	 * ALL-IN-ONE:
+	 * DMA-BASED
+	 */
+	mhal_uart_tx_idx = 0U;
+	mhal_uart_tx_len = (len<MHAL_UART_TX_MAX_BUF_SIZE) ? len : MHAL_UART_TX_MAX_BUF_SIZE;
+#ifdef USART1
+	if(uart==USART1){
+		mhal_uart_init(uart, PB6, AF7, PB7, AF7);
+		mhal_dma_config_t config = MHAL_DMA_USART1_RECV_CONFIG_DEFAULT;
+		config.length = len;
+		mhal_dma_init(&config);
+		uart->CR3 |= USART_CR3_DMAR;
+		mhal_dma_start(config.stream);
+	}
+#endif
+#ifdef USART2
+	if(uart==USART2){
+		mhal_uart_init(uart, PA2, AF7, PA3, AF7);
+		mhal_dma_config_t config = MHAL_DMA_USART2_RECV_CONFIG_DEFAULT;
+		config.length = len;
+		mhal_dma_init(&config);
+		uart->CR3 |= USART_CR3_DMAR;
+		mhal_dma_start(config.stream);
+	}
+#endif
+#ifdef USART6
+	if(uart==USART6){
+		mhal_uart_init(uart, PC6, AF8, PC7, AF8);
+		mhal_dma_config_t config = MHAL_DMA_USART6_RECV_CONFIG_DEFAULT;
+		config.length = len;
+		mhal_dma_init(&config);
+		uart->CR3 |= USART_CR3_DMAR;
+		mhal_dma_start(config.stream);
+	}
+#endif
+	//-------------------------------------------------------------------------------
+
+
+
 }
 
 
-//void mhal_uart_disable(USART_TypeDef *uart){//turn it off, save power.
-//	uart->CR1 &= USART_CR1_UE;
-//}
 
-//void mhal_uart_enable(USART_TypeDef *uart){
-//	uart->CR1 |= USART_CR1_UE;
-//}
 
 /*
  * INTERRUPT HANDLER NESTED FUNCTIONS: PASTE THESE INTO THE CORRESPONDING INTERRUPT HANDLERS
@@ -224,7 +349,7 @@ uint8_t mhal_uart_rx_ready(USART_TypeDef *uart){
 void mhal_uart1_handler(void){
 	if((USART1->SR & USART_SR_TXE) && (USART1->CR1 & USART_CR1_TXEIE)){ //meaning we are coming from mhal_uart_transmit call
 			if(mhal_uart_tx_idx < mhal_uart_tx_len){ //is there more to be sent?
-				mhal_uart_write_byte(USART1, mhal_uart_tx_msg[mhal_uart_tx_idx++]); //send current byte
+				USART1->DR = mhal_uart_tx_msg[mhal_uart_tx_idx++]; //send current byte
 			}
 			else{ //all bytes sent
 				mhal_uart_tx_msg = (void *)0;
@@ -237,7 +362,7 @@ void mhal_uart1_handler(void){
 
 		if (USART1->SR & USART_SR_RXNE){
 			if(mhal_uart_rx_len==0U){
-				mhal_uart_rx_len==1U;
+				mhal_uart_rx_len++;
 				mhal_uart_rx_byte = USART1->DR;
 				mhal_uart_rx_msg[mhal_uart_rx_idx] = mhal_uart_rx_byte;
 				USART1->CR1 &= ~USART_CR1_RXNEIE;
@@ -269,7 +394,7 @@ void mhal_uart1_handler(void){
 void mhal_uart2_handler(void){
 	if((USART2->SR & USART_SR_TXE) && (USART2->CR1 & USART_CR1_TXEIE)){ //meaning we are coming from mhal_uart_transmit call
 			if(mhal_uart_tx_idx < mhal_uart_tx_len){ //is there more to be sent?
-				mhal_uart_write_byte(USART2, mhal_uart_tx_msg[mhal_uart_tx_idx++]); //send current byte
+				USART2->DR = mhal_uart_tx_msg[mhal_uart_tx_idx++]; //send current byte
 			}
 			else{ //all bytes sent
 				mhal_uart_tx_msg = (void *)0;
@@ -282,7 +407,7 @@ void mhal_uart2_handler(void){
 
 		if (USART2->SR & USART_SR_RXNE){
 			if(mhal_uart_rx_len==0U){
-				mhal_uart_rx_len==1U;
+				mhal_uart_rx_len++;
 				mhal_uart_rx_byte = USART2->DR;
 				mhal_uart_rx_msg[mhal_uart_rx_idx] = mhal_uart_rx_byte;
 				USART2->CR1 &= ~USART_CR1_RXNEIE;
@@ -314,7 +439,7 @@ void mhal_uart2_handler(void){
 void mhal_uart6_handler(void){
 	if((USART6->SR & USART_SR_TXE) && (USART6->CR1 & USART_CR1_TXEIE)){ //meaning we are coming from mhal_uart_transmit call
 			if(mhal_uart_tx_idx < mhal_uart_tx_len){ //is there more to be sent?
-				mhal_uart_write_byte(USART6, mhal_uart_tx_msg[mhal_uart_tx_idx++]); //send current byte
+				USART6->DR = mhal_uart_tx_msg[mhal_uart_tx_idx++]; //send current byte
 			}
 			else{ //all bytes sent
 				mhal_uart_tx_msg = (void *)0;
@@ -327,7 +452,7 @@ void mhal_uart6_handler(void){
 
 		if (USART6->SR & USART_SR_RXNE){
 			if(mhal_uart_rx_len==0U){
-				mhal_uart_rx_len==1U;
+				mhal_uart_rx_len++;
 				mhal_uart_rx_byte = USART6->DR;
 				mhal_uart_rx_msg[mhal_uart_rx_idx] = mhal_uart_rx_byte;
 				USART6->CR1 &= ~USART_CR1_RXNEIE;

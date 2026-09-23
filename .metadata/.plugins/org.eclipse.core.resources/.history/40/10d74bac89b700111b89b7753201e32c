@@ -1,0 +1,305 @@
+#include "stm32f401xe.h"
+#include "mhal.h"
+#include "mhal_exti.h"
+#include "mhal_fsm.h"
+#include "mhal_dma.h"
+
+
+/*
+int main_one(){
+	//Enable the power to GPIOA
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN;
+
+	//Config PA5
+	GPIOA->MODER |= 0x01<<10;
+
+	//Config PC13
+
+
+	while(1){
+		if(GPIOC->IDR & 0x01<<13){
+			GPIOA->BSRR = 0x01<<5;
+		}
+		else{
+			GPIOA->BSRR = 0x01<<(5+16);
+		}
+	}
+}
+
+int main_one_example(){
+	//Activate GPIOB
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN;
+
+	//Configure PB3
+	GPIOB->MODER &= ~(0x11<<6);
+	GPIOB->MODER |= 0x01<<6;
+
+	GPIOB->OTYPER |= 0x01<<3;
+
+	//Pull PB3 low
+	GPIOB->BSRR = 0x01<<(3+16);
+}
+
+int main_interrupt_one(){
+	//Power up GPIOA
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+	//Configure PA5
+	GPIOA->MODER |= 0x01<<10;
+
+	//Power up GPIOC
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN;
+	//Configure PC13
+	//defaults from reset are fine
+
+	//Interrupt Workflow: SYSCFG, EXTI, NVIC, Handler
+
+	//SYSCFG config
+	RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN; //Power enabled
+	SYSCFG->EXTICR[3] |= 0x01<<5; //Choose port c to supply t
+
+	//EXTI config
+	EXTI->IMR |= 0x01<<13; //unmask line 13, allow EXTI to send requests to the NVIC
+	EXTI->FTSR |= 0x01<<13; //falling edge for line 13 to be observed by NVIC
+	//EXTI will automatically set pending bit when the edge change is detected.!
+
+	//NVIC config
+	NVIC_EnableIRQ(EXTI15_10_IRQn); //EXTI line allowed to get cpu attention
+	NVIC_SetPriority(EXTI15_10_IRQn, 0); //with respect to other tasks.
+
+	while(1){}
+
+//PLACE OUTSIDE OF MAIN
+	void EXTI15_10_IRQHandler(void){
+		if(EXTI->PR & 0x01<<13){ //confirm it was line 13 that made the call
+			//CLEAR THE PENDING FLAG!!!!
+			EXTI->PR |= 0x01<<13;
+			GPIOA->BSRR = (GPIOA->ODR & 0x01<<5) ? (0x01<<(5+16)) : (0x01<<5);
+		}
+	}
+}
+
+int main_hold(){
+	//Power and Configure PA5
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+	GPIOA->MODER &= ~(0x03<<10);
+	GPIOA->MODER |= 0x01<<10;
+
+	//Power up GPIOB
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN;
+
+	//Configure PB0
+	GPIOB->MODER &= ~(0x03<<0);
+	GPIOB->PUPDR &= ~(0b0011<<0);
+	GPIOB->PUPDR |= 0x02<<0;
+
+	//SYSCFG
+	RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN; //Power
+	SYSCFG->EXTICR[0] &= ~(0x0F);
+	SYSCFG->EXTICR[0] |= 0x01; //Choose what port connects to exti0
+
+	//EXTI
+	EXTI->IMR |= (0x01<<0); //EXTI0 line unmasked, permitted to request to nvic
+	EXTI->RTSR |= 0x01<<0; //Rising edge to be observed for by EXTI
+	//because there is an edge to observe, the pending bit will be set when edge switch occurs
+	//because that line is unmasked, exti will fire interrupt request when edge switch observed.
+	//exti will wait for handler to SET EXTI->PR as acknowledgment of handling. else will refire
+	//once the handler is declared inactive by nvic
+
+	//NVIC
+	NVIC_EnableIRQ(EXTI0_IRQn);
+	NVIC_SetPriority(EXTI0_IRQn, 0);
+
+	//					DONE: CAKE ICING ON THE HANDLER
+	while(1);
+}
+*/
+
+uint8_t beep = 0U;
+uint32_t idx = 0;
+uint32_t usart2clock = 0;
+uint8_t *message = "Here is a message!\r\n";
+
+uint8_t *data_block = "incoming!\r\n";
+uint8_t *src = "Hello Peter! This message is brought to you via SPI";
+
+uint8_t dst[100];
+
+int main(){
+	//mhal_gpio_init(GPIOC, 13, &MHAL_GPIO_CFG_INPUT_PULLUP);
+	mhal_gpio_init(GPIOA, 5, &MHAL_GPIO_CFG_OUTPUT);
+	mhal_interrupt(GPIOC, 13, GPIO_FALLING_EDGE, 1);
+	mhal_spi_tx_data = src;
+	mhal_spi_master_device(SPI3, PC9);
+	mhal_spi_write(SPI3, 20);
+	//mhal_spi_dma_send(SPI3, 50);
+
+	//mhal_tim_pwm_cfg(TIM2, PA0, MHAL_TIM_CH1, AF1, 5000U, 100);
+	//mhal_tim_base_on(TIM2, 100, 0);
+	//mhal_tim_pwm_stop(TIM2);
+
+	//mhal_tim_ic_cfg(TIM2, PA0, MHAL_TIM_CH1, AF1, MHAL_TIM_IC_RISING);
+	//mhal_tim_ic_start(TIM2, MHAL_TIM_CH1);
+
+	//mhal_fsm_start(PC13);
+
+	//mhal_uart_init(USART2, PA2, 7, PA3, 7);
+
+	//mhal_uart_transmit(USART2, "JESUS");
+	//mhal_uart_disable(USART2);
+	//mhal_uart_init(USART2, PA2, AF7, PA3, AF7);
+
+	//mhal_uart_disable(USART2);
+	//mhal_spi_master_device(SPI1, PA0);
+	//mhal_spi_slave_device(SPI2, PB1);
+	//mhal_spi_receive_begin(SPI2);
+	///mhal_delay(1000);
+	//mhal_spi_write(SPI1, data_block, 5);
+	//mhal_uart_init(USART1, PB6, AF7, PB7, AF7);
+	//mhal_uart_receive(USART1);
+
+
+/*
+	mhal_dma_init(&(mhal_dma_config_t){
+		.stream = DMA2_Stream0,
+		.channel = 0,
+		.direction = MHAL_DMA_DIR_MEM_MEM,
+		.periph_size = MHAL_DMA_SIZE_BYTE,
+		.mem_size = MHAL_DMA_SIZE_BYTE,
+		.priority = MHAL_DMA_PRIO_LOW,
+		.periph_inc = 1,
+		.mem_inc = 1,
+		.circular = 0,
+		.periph_addr = (uint32_t)src,
+		.mem_addr = (uint32_t)dst,
+		.length = 150
+	});
+	mhal_dma_start(DMA2_Stream0);
+*/	//mhal_uart_dma_rcv(USART1, 10);
+	//mhal_uart_transmit(USART1, (uint8_t *)"HELLLLLLOOO BOY!\r\n", 8);
+	//mhal_uart_dma_send(USART1, 10);
+	//mhal_uart_dma_send(USART1, 10);
+
+	while(1){
+		//mhal_uart_transmit(USART2, message);
+		//mhal_delay(100);
+		//mhal_uart_write_byte(USART2, message[idx++]);
+		//if(message[idx]=='\0'){
+		//	mhal_uart_write_byte(USART2, '\n');
+		//	mhal_delay(1000);
+		//}
+
+		//usart2clock = mhal_rcc_get_periph_freq(MHAL_USART2_PERIPHERAL);
+		/*if (beep==1){
+		mhal_tim_pwm_start(TIM2);
+		mhal_delay(300);
+		mhal_tim_pwm_stop(TIM2);
+		mhal_delay(300);
+		mhal_tim_pwm_start(TIM2);
+		mhal_delay(300);
+		mhal_tim_pwm_stop(TIM2);
+		mhal_delay(300);
+		beep = 0;
+		}
+*/
+	//}
+		//mhal_spi_write(SPI1, data_block, 11);
+		//if(beep>=3 && beep<=7){mhal_spi_receive_end(SPI2);}
+		//if(beep==7){mhal_spi_receive_begin(SPI2);}
+		//beep++;
+		//mhal_delay(1000);
+
+
+		//mhal_uart_dma_send(USART1, 10);
+		//mhal_uart_transmit(USART2, message, 20);
+		//mhal_uart_read_byte(USART2);
+		//mhal_uart_transmit(USART1, (uint8_t *)"HELLLLLLOOO BOY!\r\n", 15);
+		//mhal_spi_write(SPI3, 50);
+		mhal_delay(500);
+		//mhal_uart_dma_send(USART1, MHAL_UART_TX_MAX_BUF_SIZE);
+
+}
+	return 0;
+}
+
+
+void EXTI15_10_IRQHandler(void){
+	//no need to check for the pending register condition, but must "CLEAR" the PR bit
+	//if (EXTI->PR & ((uint32_t)1U<<13U)){
+		//mhal_exti_clear_pr(13);
+		//mhal_gpio_toggle(PA5);
+	//mhal_tim_clear_update_flag(TIM2);
+	//mhal_exti_clear_pr(13);
+	//mhal_gpio_toggle(PA5);x=0;
+		//beep = 1U;
+		//if(x==5){
+			//mhal_tim_pwm_set_duty(TIM2, MHAL_TIM_CH1, 1U);
+
+		//}
+
+
+	//GPIO_MODER_MODER;
+	//EXTI_IMR_IM13;
+}
+
+void TIM2_IRQHandler(void){
+	if(mhal_tim_ic_check_flag(TIM2, MHAL_TIM_CH1)){
+	mhal_tim_ic_clear_status(TIM2, MHAL_TIM_CH1);
+	mhal_gpio_toggle(PA5);
+
+	//x = mhal_tim_ic_read_capture(TIM2, MHAL_TIM_CH1);
+	}
+
+}
+
+void TIM3_IRQHandler(void){
+	mhal_tim_clear_update_flag(TIM3);
+	mhal_fsm_tick();
+	fsm_gpio_pin = (current_state==low || current_state==high) ? current_state : fsm_gpio_pin; //debounced result
+	//fsmgpiopin is externed, use it freely in main code
+
+}
+
+void USART2_IRQHandler(void){
+	mhal_uart2_handler();
+	if(mhal_uart_rx_msg[mhal_uart_rx_idx-1]=='f' && mhal_uart_rx_msg[mhal_uart_rx_idx-2]=='f' && mhal_uart_rx_msg[mhal_uart_rx_idx-3]=='o'){
+		mhal_gpio_off(PA5);
+	}
+	else if(mhal_uart_rx_msg[mhal_uart_rx_idx-1]=='n' && mhal_uart_rx_msg[mhal_uart_rx_idx-2]=='o'){
+		mhal_gpio_on(PA5);
+	}
+}
+
+void USART1_IRQHandler(void){
+	mhal_uart1_handler();
+	if(mhal_uart_rx_msg[mhal_uart_rx_idx-1]=='f' && mhal_uart_rx_msg[mhal_uart_rx_idx-2]=='f' && mhal_uart_rx_msg[mhal_uart_rx_idx-3]=='o'){
+			mhal_gpio_off(PA5);
+		}
+		else if(mhal_uart_rx_msg[mhal_uart_rx_idx-1]=='n' && mhal_uart_rx_msg[mhal_uart_rx_idx-2]=='o'){
+			mhal_gpio_on(PA5);
+		}
+}
+
+void USART6_IRQHandler(void){
+	mhal_uart6_handler();
+}
+
+void SPI1_IRQHandler(void){
+	mhal_spi1_handler();
+}
+
+void SPI2_IRQHandler(void){
+	mhal_spi2_handler();
+	//mhal_gpio_on(PA5);
+	//mhal_delay(1000);
+	//mhal_gpio_off(PA5);
+	//mhal_delay(1000);
+}
+
+void SPI3_IRQHandler(void){
+	mhal_spi3_handler();
+}
+
+void SPI4_IRQHandler(void){
+	mhal_spi4_handler();
+}

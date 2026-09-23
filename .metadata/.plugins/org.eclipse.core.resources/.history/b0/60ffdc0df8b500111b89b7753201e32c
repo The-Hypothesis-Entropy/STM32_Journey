@@ -1,0 +1,49 @@
+#include "mhal_dma.h"
+
+//----------------LEMMA FUNCTIONS-----------------
+
+static uint32_t mhal_dma_stream_to_index(DMA_Stream_TypeDef *stream){
+	if (stream == DMA1_Stream0) return 0;
+	if (stream == DMA1_Stream1) return 1;
+	if (stream == DMA1_Stream2) return 2;
+	if (stream == DMA1_Stream3) return 3;
+	if (stream == DMA1_Stream4) return 4;
+	if (stream == DMA1_Stream5) return 5;
+	if (stream == DMA1_Stream6) return 6;
+	if (stream == DMA1_Stream7) return 7;
+#ifdef DMA2
+	if (stream == DMA2_Stream0) return 8;
+	if (stream == DMA2_Stream1) return 9;
+	if (stream == DMA2_Stream2) return 10;
+	if (stream == DMA2_Stream3) return 11;
+	if (stream == DMA2_Stream4) return 12;
+	if (stream == DMA2_Stream5) return 13;
+	if (stream == DMA2_Stream6) return 14;
+	if (stream == DMA2_Stream7) return 15;
+#endif
+	return 0;
+}
+
+static IRQn_Type mhal_dma_stream_to_irqn(DMA_Stream_TypeDef *stream){
+	if (stream == DMA1_Stream0) return DMA1_Stream0_IRQn;
+	if (stream == DMA1_Stream1) return DMA1_Stream1_IRQn;
+	if (stream == DMA1_Stream2) return DMA1_Stream2_IRQn;
+	if (stream == DMA1_Stream3) return DMA1_Stream3_IRQn;
+	if (stream == DMA1_Stream4) return DMA1_Stream4_IRQn;
+	if (stream == DMA1_Stream5) return DMA1_Stream5_IRQn;
+	if (stream == DMA1_Stream6) return DMA1_Stream6_IRQn;
+	if (stream == DMA1_Stream7) return DMA1_Stream7_IRQn;
+#ifdef DMA2
+	if (stream == DMA2_Stream0) return DMA2_Stream0_IRQn;
+	if (stream == DMA2_Stream1) return DMA2_Stream1_IRQn;
+	if (stream == DMA2_Stream2) return DMA2_Stream2_IRQn;
+	if (stream == DMA2_Stream3) return DMA2_Stream3_IRQn;
+	if (stream == DMA2_Stream4) return DMA2_Stream4_IRQn;
+	if (stream == DMA2_Stream5) return DMA2_Stream5_IRQn;
+	if (stream == DMA2_Stream6) return DMA2_Stream6_IRQn;
+	if (stream == DMA2_Stream7) return DMA2_Stream7_IRQn;
+#endif
+	return (IRQn_Type)0;
+}
+
+//-----------------------------------------------------------------------

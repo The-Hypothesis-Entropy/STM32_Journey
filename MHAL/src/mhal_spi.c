@@ -1,7 +1,7 @@
 #include "mhal_spi.h"
 #include "stm32f401xe.h"
 
-void mhal_spi_config(SPI_TypeDef *spi, mhal_spi_config_t *config){
+static void mhal_spi_config(SPI_TypeDef *spi, mhal_spi_config_t *config){
 	//uint32_t spi_clk;
 
 #ifdef SPI1
@@ -50,7 +50,7 @@ void mhal_spi_config(SPI_TypeDef *spi, mhal_spi_config_t *config){
 	//NOT NOW EITHER
 }
 
-void mhal_spi_master_init(SPI_TypeDef *spi, const char *cs_ref){
+static void mhal_spi_master_init(SPI_TypeDef *spi, const char *cs_ref){
 	//pin config (include CS?)
 #ifdef SPI1
 	if(spi==SPI1){
@@ -98,7 +98,7 @@ void mhal_spi_master_init(SPI_TypeDef *spi, const char *cs_ref){
 	mhal_spi_config(spi, &spi_config);
 }
 
-void mhal_spi_slave_init(SPI_TypeDef *spi, const char *cs_ref){
+static void mhal_spi_slave_init(SPI_TypeDef *spi, const char *cs_ref){
 	//pin config (include CS?)
 #ifdef SPI1
 	if(spi==SPI1){
@@ -147,13 +147,34 @@ void mhal_spi_slave_init(SPI_TypeDef *spi, const char *cs_ref){
 }
 
 void mhal_spi_write_byte(SPI_TypeDef *spi, uint8_t byte){
+	//CS-LOW
+		const char *current_cs;
+	#ifdef SPI1
+		if(spi==SPI1){current_cs = mhal_spi1_cs;}
+	#endif
+	#ifdef SPI2
+		if(spi==SPI2){current_cs = mhal_spi2_cs;}
+	#endif
+	#ifdef SPI3
+		if(spi==SPI3){current_cs = mhal_spi3_cs;}
+	#endif
+	#ifdef SPI4
+		if(spi==SPI4){current_cs = mhal_spi4_cs;}
+	#endif
+	mhal_gpio_write(mhal_dename_port(current_cs), mhal_dename_pin(current_cs), MHAL_GPIO_LOW);
 	mhal_spi_tx_len = 1U;
 	mhal_spi_tx_idx = 0U;
 	mhal_spi_tx_data[0] = byte;
 	while(!(spi->SR & SPI_SR_TXE)){}
 	spi->DR = mhal_spi_tx_data[mhal_spi_tx_idx++];
+	while(spi->SR & SPI_SR_BSY){} //ENSURE THE BYTE IS FULLY TRANSMITTED BEFORE PULLING CS HIGH
+	mhal_gpio_write(mhal_dename_port(current_cs), mhal_dename_pin(current_cs), MHAL_GPIO_HIGH);
 }
 
+uint8_t mhal_spi_read_byte(SPI_TypeDef *spi){
+	while(!(spi->SR & SPI_SR_RXNE)){}
+	return spi->DR;
+}
 
 //------------------------------FOR THE USER--------------------------------------
 
@@ -172,7 +193,7 @@ void mhal_spi_slave_device(SPI_TypeDef *spi, const char *cs_ref){
 	mhal_spi_slave_init(spi, cs_ref);
 }
 
-void mhal_spi_write(SPI_TypeDef *spi, uint8_t *data, uint8_t len){
+void mhal_spi_write(SPI_TypeDef *spi, uint8_t len){ // uint8_t *data,
 	//CS-LOW
 	const char *current_cs;
 #ifdef SPI1
@@ -192,9 +213,9 @@ void mhal_spi_write(SPI_TypeDef *spi, uint8_t *data, uint8_t len){
 	mhal_spi_tx_len = len;
 	mhal_spi_tx_idx = 0U;
 	if(len>MHAL_SPI_TX_MAX_BUF_SIZE){len=MHAL_SPI_TX_MAX_BUF_SIZE;}
-	for (uint8_t i=0; i<len; i++){
-		mhal_spi_tx_data[i] = data[i];
-	}
+	//for (uint8_t i=0; i<len; i++){
+	//	mhal_spi_tx_data[i] = data[i];
+	//}
 	//spi->CR1 |= SPI_CR1_SPE; //ENABLE SPI
 	//while(!(spi->SR & SPI_SR_TXE)){}
 	//spi->DR = mhal_spi_tx_data[mhal_spi_tx_idx++];
@@ -204,6 +225,21 @@ void mhal_spi_write(SPI_TypeDef *spi, uint8_t *data, uint8_t len){
 }
 
 void mhal_spi_receive_begin(SPI_TypeDef *spi){
+	//CS-LOW
+	const char *current_cs;
+#ifdef SPI1
+	if(spi==SPI1){current_cs = mhal_spi1_cs;}
+#endif
+#ifdef SPI2
+	if(spi==SPI2){current_cs = mhal_spi2_cs;}
+#endif
+#ifdef SPI3
+	if(spi==SPI3){current_cs = mhal_spi3_cs;}
+#endif
+#ifdef SPI4
+	if(spi==SPI4){current_cs = mhal_spi4_cs;}
+#endif
+	mhal_gpio_write(mhal_dename_port(current_cs), mhal_dename_pin(current_cs), MHAL_GPIO_LOW);
 	//Data stored in global mhal_spi_rx_data
 	mhal_spi_rx_idx = 0U; //will guide you to know where to stop reading when you collect the data from buffer
 	spi->CR2 |= SPI_CR2_RXNEIE;
@@ -211,10 +247,106 @@ void mhal_spi_receive_begin(SPI_TypeDef *spi){
 
 void mhal_spi_receive_end(SPI_TypeDef *spi){
 	spi->CR2 &= ~SPI_CR2_RXNEIE;
+	mhal_gpio_write(mhal_dename_port(mhal_spi3_cs), mhal_dename_pin(mhal_spi3_cs), MHAL_GPIO_HIGH);
 }
 
+void mhal_spi_dma_send(SPI_TypeDef *spi, uint8_t len){
 
+	mhal_spi_tx_idx = 0U;
+	mhal_spi_tx_len = (len<MHAL_SPI_TX_MAX_BUF_SIZE) ? len : MHAL_SPI_TX_MAX_BUF_SIZE;
+	mhal_dma_config_t config;
+	const char *current_cs;
+#ifdef SPI1
+	if(spi==SPI1){
+		config = MHAL_DMA_SPI1_SEND_CONFIG_DEFAULT;
+		current_cs = mhal_spi1_cs;
+	}
+#endif
+#ifdef SPI2
+	if(spi==SPI2){
+		config = MHAL_DMA_SPI2_SEND_CONFIG_DEFAULT;
+		current_cs = mhal_spi2_cs;
+	}
+#endif
+#ifdef SPI3
+	if(spi==SPI3){
+		config = MHAL_DMA_SPI3_SEND_CONFIG_DEFAULT;
+		current_cs = mhal_spi3_cs;
+	}
+#endif
+#ifdef SPI4
+	if(spi==SPI4){
+		config = MHAL_DMA_SPI4_SEND_CONFIG_DEFAULT;
+		current_cs = mhal_spi4_cs;
+	}
+#endif
+	mhal_gpio_write(mhal_dename_port(current_cs), mhal_dename_pin(current_cs), MHAL_GPIO_LOW);
+	config.length = len;
+	mhal_dma_init(&config);
+	spi->CR2 |= SPI_CR2_TXDMAEN;
+	mhal_dma_start(config.stream);
 
+}
+
+void mhal_spi_dma_rcv(SPI_TypeDef *spi, uint8_t len){
+	mhal_spi_tx_idx = 0U;
+	mhal_spi_tx_len = (len<MHAL_SPI_TX_MAX_BUF_SIZE) ? len : MHAL_SPI_TX_MAX_BUF_SIZE;
+	mhal_dma_config_t config;
+#ifdef SPI1
+	if(spi==SPI1){
+		config = MHAL_DMA_SPI1_RECV_CONFIG_DEFAULT;
+		config.length = len;
+		mhal_dma_init(&config);
+		spi->CR2 |= SPI_CR2_RXDMAEN;
+		mhal_dma_start(config.stream);
+	}
+#endif
+#ifdef SPI2
+	if(spi==SPI2){
+		config = MHAL_DMA_SPI2_RECV_CONFIG_DEFAULT;
+		config.length = len;
+		mhal_dma_init(&config);
+		spi->CR2 |= SPI_CR2_RXDMAEN;
+		mhal_dma_start(config.stream);
+	}
+#endif
+#ifdef SPI3
+	if(spi==SPI3){
+		config = MHAL_DMA_SPI3_RECV_CONFIG_DEFAULT;
+		config.length = len;
+		mhal_dma_init(&config);
+		spi->CR2 |= SPI_CR2_RXDMAEN;
+		mhal_dma_start(config.stream);
+	}
+#endif
+#ifdef SPI4
+	if(spi==SPI4){
+		config = MHAL_DMA_SPI4_RECV_CONFIG_DEFAULT;
+		config.length = len;
+		mhal_dma_init(&config);
+		spi->CR2 |= SPI_CR2_RXDMAEN;
+		mhal_dma_start(config.stream);
+	}
+#endif
+
+}
+
+void mhal_spi_dma_stop(SPI_TypeDef *spi){ //pull cs high
+	const char *current_cs;
+	#ifdef SPI1
+		if(spi==SPI1){current_cs = mhal_spi1_cs;}
+	#endif
+	#ifdef SPI2
+		if(spi==SPI2){current_cs = mhal_spi2_cs;}
+	#endif
+	#ifdef SPI3
+		if(spi==SPI3){current_cs = mhal_spi3_cs;}
+	#endif
+	#ifdef SPI4
+		if(spi==SPI4){current_cs = mhal_spi4_cs;}
+	#endif
+	mhal_gpio_write(mhal_dename_port(current_cs), mhal_dename_pin(current_cs), MHAL_GPIO_HIGH);
+}
 //----------------------------INTERRUPT NESTED HANDLER FUNCTIONS-----------------------
 void mhal_spi1_handler(void){
 	if((SPI1->SR & SPI_SR_TXE) && (SPI1->CR2 & SPI_CR2_TXEIE)){
@@ -227,7 +359,7 @@ void mhal_spi1_handler(void){
 
 	if((SPI1->SR & SPI_SR_RXNE) && (SPI1->CR2 & SPI_CR2_RXNEIE)){
 		mhal_spi_rx_data[mhal_spi_rx_idx++] = SPI1->DR;
-		if(mhal_spi_rx_idx==MHAL_SPI_RX_MAX_BUF_SIZE){mhal_spi_rx_idx=0U;}
+		if(mhal_spi_rx_idx==MHAL_SPI_RX_MAX_BUF_SIZE){mhal_spi_rx_idx=0U;} //loop around
 	}
 
 }

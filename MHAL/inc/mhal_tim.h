@@ -93,7 +93,6 @@ void mhal_tim_clear_update_flag(TIM_TypeDef *tim);
 
 mhal_bool_t mhal_tim_check_timebase_flag(TIM_TypeDef *tim);
 
-uint32_t mhal_tim_get_counter(TIM_TypeDef *tim);
 
 //---------------------------------ESSENTIAL---------------------------------------
 
@@ -103,11 +102,9 @@ void mhal_tim_base_start(TIM_TypeDef *tim);
 
 void mhal_tim_base_stop(TIM_TypeDef *tim);
 
-/*
- * void TIMx_IRQHandler(void){mhal_tim_clear_update_flag(TIMx);}
- */
-//---------------------------------------------------------------------------------
+uint32_t mhal_tim_get_counter(TIM_TypeDef *tim);
 
+//---------------------------------------------------------------------------------
 
 
 /*------------------------------------------------------------------------------

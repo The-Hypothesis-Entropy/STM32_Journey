@@ -13,7 +13,7 @@ uint8_t mhal_uart_rx_msg[MHAL_UART_RX_MAX_BUF_SIZE];
 //---------SPI GLOBALS-----------
 uint8_t mhal_spi_tx_len = 0U;
 uint8_t mhal_spi_tx_idx = 0U;
-uint8_t mhal_spi_tx_data[MHAL_SPI_TX_MAX_BUF_SIZE];
+uint8_t *mhal_spi_tx_data = (void *)0;;
 const char *mhal_spi1_cs;
 const char *mhal_spi2_cs;
 const char *mhal_spi3_cs;

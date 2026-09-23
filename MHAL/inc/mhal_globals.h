@@ -2,9 +2,10 @@
 #define MHAL_GLOBALS_H
 
 #include <stdint.h>
-#define MHAL_UART_RX_MAX_BUF_SIZE 64U
-#define MHAL_SPI_TX_MAX_BUF_SIZE 64U
-#define MHAL_SPI_RX_MAX_BUF_SIZE 64U
+#define MHAL_UART_TX_MAX_BUF_SIZE 150U
+#define MHAL_UART_RX_MAX_BUF_SIZE 150U
+#define MHAL_SPI_TX_MAX_BUF_SIZE 150U
+#define MHAL_SPI_RX_MAX_BUF_SIZE 150U
 
 //---------USART GLOBALS-----------
 extern uint8_t *mhal_uart_tx_msg;
@@ -20,7 +21,7 @@ extern uint8_t mhal_uart_rx_msg[MHAL_UART_RX_MAX_BUF_SIZE];
 //---------SPI GLOBALS-----------
 extern uint8_t mhal_spi_tx_len;
 extern uint8_t mhal_spi_tx_idx;
-extern uint8_t mhal_spi_tx_data[MHAL_SPI_TX_MAX_BUF_SIZE];
+extern uint8_t *mhal_spi_tx_data;
 extern const char *mhal_spi1_cs;
 extern const char *mhal_spi2_cs;
 extern const char *mhal_spi3_cs;

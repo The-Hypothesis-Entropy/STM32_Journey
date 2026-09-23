@@ -4,6 +4,7 @@
 #include "mhal_gpio.h"
 #include "stm32f4xx.h"
 #include "mhal_globals.h"
+#include "mhal_dma.h"
 
 /*
  * HOW TO USE THIS DRIVER LIBRARY:
@@ -98,28 +99,21 @@ typedef struct {
 	uint8_t tx_len;
 }mhal_uart_t;
 
-void mhal_uart_enable_rx_irq(USART_TypeDef *uart);
-uint8_t mhal_uart_tx_busy(USART_TypeDef *uart);
-uint8_t mhal_uart_rx_ready(USART_TypeDef *uart);
-//void mhal_uart_disable(USART_TypeDef *uart);
-//void mhal_uart_enable(USART_TypeDef *uart);
-
-//---------------------------FOR THE USER-----------------------------------------
 
 void mhal_uart_init(USART_TypeDef *uart, const char* tx, mhal_gpio_alt_fn_t tx_af, const char* rx, mhal_gpio_alt_fn_t rx_af);
-void mhal_uart_set_baud(USART_TypeDef *uart, uint32_t baud_rate);
+
 void mhal_uart_write_byte(USART_TypeDef *uart, uint8_t byte);
 uint8_t mhal_uart_read_byte(USART_TypeDef *uart);
 
 void mhal_uart_transmit(USART_TypeDef *uart, uint8_t *msg, uint8_t len);
-void mhal_uart_receive(USART_TypeDef *uart, uint8_t *buf);
-
-
-
-//------------------------------INTERRUPT HANDLER NESTED FUNCTIONS--------------------------------
+void mhal_uart_receive(USART_TypeDef *uart); //read from mhal_uart_rx_msg
 void mhal_uart1_handler(void);
 void mhal_uart2_handler(void);
 void mhal_uart6_handler(void);
+
+void mhal_uart_dma_send(USART_TypeDef *uart, uint8_t len); //point mhal_uart_tx_msg to your data, then use this function
+void mhal_uart_dma_rcv(USART_TypeDef *uart, uint8_t len); //use this function and read data from mhal_uart_rx_msg
+
 
 #endif
 

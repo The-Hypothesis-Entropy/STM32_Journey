@@ -2,6 +2,8 @@
 #include "mhal.h"
 #include "mhal_exti.h"
 #include "mhal_fsm.h"
+#include "mhal_dma.h"
+
 
 /*
 int main_one(){
@@ -119,10 +121,18 @@ uint32_t usart2clock = 0;
 uint8_t *message = "Here is a message!\r\n";
 
 uint8_t *data_block = "incoming!\r\n";
+uint8_t *src = "Hello Peter! This message is brought to you via SPI";
+
+uint8_t dst[100];
+
 int main(){
 	//mhal_gpio_init(GPIOC, 13, &MHAL_GPIO_CFG_INPUT_PULLUP);
 	mhal_gpio_init(GPIOA, 5, &MHAL_GPIO_CFG_OUTPUT);
 	mhal_interrupt(GPIOC, 13, GPIO_FALLING_EDGE, 1);
+	mhal_spi_tx_data = src;
+	mhal_spi_master_device(SPI3, PC9);
+	//mhal_spi_write(SPI3, 20);
+	mhal_spi_dma_send(SPI3, 25);
 
 	//mhal_tim_pwm_cfg(TIM2, PA0, MHAL_TIM_CH1, AF1, 5000U, 100);
 	//mhal_tim_base_on(TIM2, 100, 0);
@@ -140,11 +150,35 @@ int main(){
 	//mhal_uart_init(USART2, PA2, AF7, PA3, AF7);
 
 	//mhal_uart_disable(USART2);
-	mhal_spi_master_device(SPI1, PA0);
-	mhal_spi_slave_device(SPI2, PB1);
-	mhal_spi_receive_begin(SPI2);
-	mhal_delay(1000);
+	//mhal_spi_master_device(SPI1, PA0);
+	//mhal_spi_slave_device(SPI2, PB1);
+	//mhal_spi_receive_begin(SPI2);
+	///mhal_delay(1000);
 	//mhal_spi_write(SPI1, data_block, 5);
+	//mhal_uart_init(USART1, PB6, AF7, PB7, AF7);
+	//mhal_uart_receive(USART1);
+
+
+/*
+	mhal_dma_init(&(mhal_dma_config_t){
+		.stream = DMA2_Stream0,
+		.channel = 0,
+		.direction = MHAL_DMA_DIR_MEM_MEM,
+		.periph_size = MHAL_DMA_SIZE_BYTE,
+		.mem_size = MHAL_DMA_SIZE_BYTE,
+		.priority = MHAL_DMA_PRIO_LOW,
+		.periph_inc = 1,
+		.mem_inc = 1,
+		.circular = 0,
+		.periph_addr = (uint32_t)src,
+		.mem_addr = (uint32_t)dst,
+		.length = 150
+	});
+	mhal_dma_start(DMA2_Stream0);
+*/	//mhal_uart_dma_rcv(USART1, 10);
+	//mhal_uart_transmit(USART1, (uint8_t *)"HELLLLLLOOO BOY!\r\n", 8);
+	//mhal_uart_dma_send(USART1, 10);
+	//mhal_uart_dma_send(USART1, 10);
 
 	while(1){
 		//mhal_uart_transmit(USART2, message);
@@ -169,16 +203,20 @@ int main(){
 		}
 */
 	//}
-		mhal_spi_write(SPI1, data_block, 11);
-		if(beep>=3 && beep<=7){mhal_spi_receive_end(SPI2);}
-		if(beep==7){mhal_spi_receive_begin(SPI2);}
-		beep++;
-		mhal_delay(1000);
+		//mhal_spi_write(SPI1, data_block, 11);
+		//if(beep>=3 && beep<=7){mhal_spi_receive_end(SPI2);}
+		//if(beep==7){mhal_spi_receive_begin(SPI2);}
+		//beep++;
+		//mhal_delay(1000);
 
 
-
+		//mhal_uart_dma_send(USART1, 10);
 		//mhal_uart_transmit(USART2, message, 20);
 		//mhal_uart_read_byte(USART2);
+		//mhal_uart_transmit(USART1, (uint8_t *)"HELLLLLLOOO BOY!\r\n", 15);
+		//mhal_spi_write(SPI3, 50);
+		mhal_delay(500);
+		//mhal_uart_dma_send(USART1, MHAL_UART_TX_MAX_BUF_SIZE);
 
 }
 	return 0;
@@ -224,10 +262,22 @@ void TIM3_IRQHandler(void){
 
 void USART2_IRQHandler(void){
 	mhal_uart2_handler();
+	if(mhal_uart_rx_msg[mhal_uart_rx_idx-1]=='f' && mhal_uart_rx_msg[mhal_uart_rx_idx-2]=='f' && mhal_uart_rx_msg[mhal_uart_rx_idx-3]=='o'){
+		mhal_gpio_off(PA5);
+	}
+	else if(mhal_uart_rx_msg[mhal_uart_rx_idx-1]=='n' && mhal_uart_rx_msg[mhal_uart_rx_idx-2]=='o'){
+		mhal_gpio_on(PA5);
+	}
 }
 
 void USART1_IRQHandler(void){
 	mhal_uart1_handler();
+	if(mhal_uart_rx_msg[mhal_uart_rx_idx-1]=='f' && mhal_uart_rx_msg[mhal_uart_rx_idx-2]=='f' && mhal_uart_rx_msg[mhal_uart_rx_idx-3]=='o'){
+			mhal_gpio_off(PA5);
+		}
+		else if(mhal_uart_rx_msg[mhal_uart_rx_idx-1]=='n' && mhal_uart_rx_msg[mhal_uart_rx_idx-2]=='o'){
+			mhal_gpio_on(PA5);
+		}
 }
 
 void USART6_IRQHandler(void){
@@ -244,4 +294,12 @@ void SPI2_IRQHandler(void){
 	//mhal_delay(1000);
 	//mhal_gpio_off(PA5);
 	//mhal_delay(1000);
+}
+
+void SPI3_IRQHandler(void){
+	mhal_spi3_handler();
+}
+
+void SPI4_IRQHandler(void){
+	mhal_spi4_handler();
 }

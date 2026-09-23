@@ -1,0 +1,357 @@
+#include "mhal_uart.h"
+#include "stm32f401xe.h"
+#include "mhal_tim.h"
+
+
+void mhal_uart_set_baud(USART_TypeDef *uart, uint32_t baud_rate){
+	uint32_t uart_clk, brr;
+#ifdef USART1
+	if (uart == USART1){
+	uart_clk = mhal_rcc_get_periph_freq(MHAL_USART1_PERIPHERAL);
+	}
+#endif
+
+#ifdef USART2
+	if (uart == USART2){
+	uart_clk = mhal_rcc_get_periph_freq(MHAL_USART2_PERIPHERAL);
+	}
+#endif
+
+#ifdef USART6
+	if (uart == USART6){
+	uart_clk = mhal_rcc_get_periph_freq(MHAL_USART6_PERIPHERAL);
+	}
+#endif
+
+	brr = (uart_clk + (baud_rate/2U)) / baud_rate; //round up
+	uart->BRR = brr;
+
+}
+
+void mhal_uart_init(USART_TypeDef *uart, const char* tx, mhal_gpio_alt_fn_t tx_af, const char* rx, mhal_gpio_alt_fn_t rx_af){
+	/*
+	 * * VERY USEFUL. ONCE DONE, THE PERIPHERAL IS ALREADY ON AND WORKING
+	 * * RECEIVED DATA IS STORED IN THE GLOBAL BUFFER, JUST READ IT
+	 * * TO SEND DATA, SIMPLY USE THE WRITE OR TRANSMIT
+	 */
+
+	/*
+	 * Configures and starts UART peripheral (8N1 default. free to change)
+	 * USART allows clock pulse and even address. that is not set by default here.
+	 * The preference here is atleast interrupts, and then dma
+	 * The code is built in this direction, that transmission is via interrupt mechanisms for every byte
+	 * -> CPU busy with other tasks...then if a byte has to be sent, it goes to the isr.
+	 * -> CPU busy with other tasks...then if a byte is received, it goes to isr to read/transfer it to memory.
+	 */
+
+	//if(uart->CR1 & USART_CR1_UE){}
+	//else{
+	//------------------------------Configure PINS---------------------------------
+		GPIO_TypeDef *tx_port = mhal_dename_port(tx);
+		uint32_t tx_pin = mhal_dename_pin(tx);
+		GPIO_TypeDef *rx_port = mhal_dename_port(rx);
+		uint32_t rx_pin = mhal_dename_pin(rx);
+
+		mhal_gpio_config_t cfg = MHAL_GPIO_CFG_AF;
+		cfg.af = tx_af;
+		mhal_gpio_init(tx_port, tx_pin, &cfg);
+		cfg.af = rx_af;
+		mhal_gpio_init(rx_port, rx_pin, &cfg);
+	//-----------------------------------------------------------------------------
+
+	//------------------------------Enable UART------------------------------------
+	IRQn_Type irq_num;
+	#ifdef USART1
+		if(uart==USART1){
+			irq_num = USART1_IRQn;
+			RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
+		}
+	#endif
+	#ifdef USART2
+		else if(uart==USART2){
+			irq_num = USART2_IRQn;
+			RCC->APB1ENR |= RCC_APB1ENR_USART2EN;
+		}
+	#endif
+	#ifdef USART3
+		else if(uart==USART3)irq_num = USART3_IRQn;
+	#endif
+	#ifdef USART4
+		else if(uart==USART4)irq_num = USART4_IRQn;
+	#endif
+	#ifdef USART5
+		else if(uart==USART5)irq_num = USART5_IRQn;
+	#endif
+	#ifdef USART6
+		else if(uart==USART6){
+			irq_num = USART6_IRQn;
+			RCC->APB2ENR |= RCC_APB2ENR_USART6EN;
+		}
+	#endif
+	//********************************************
+	//uart->BRR = 0x8B;
+	mhal_uart_set_baud(uart, 115200);
+
+	uart->CR1 |= USART_CR1_UE;
+
+	//Word length
+	uart->CR1 &= ~USART_CR1_M_Msk;
+	uart->CR1 |= (MHAL_UART_CONFIG_DEFAULT.word)<<USART_CR1_M_Pos;
+
+	//Parity (default is no parity. if you include it, you can also enable the parity error flag)
+	//PCE bit is 0 (disabled) at reset...it will not be modified here. create parity initialization here if you want
+
+	//Stop
+	uart->CR2 &= ~USART_CR2_STOP_Msk;
+	uart->CR2 |= (MHAL_UART_CONFIG_DEFAULT.stop)<<USART_CR2_STOP_Pos;
+
+	//Enable Transmitter and Receiver and interrupts for duplex transmission
+	uart->CR1 |= (USART_CR1_TE | USART_CR1_RE | USART_CR1_RXNEIE);// | USART_CR1_TXEIE);
+	//-----------------------------------
+	//Enable interrupt (above)
+	//uart->CR1 |= USART_CR1_TXEIE; //interrupt generated whenever TXE=1 (byte write out done)
+	          //No need to interrupt on TC bit. will only check it later on
+	//uart->CR1 |= USART_CR1_RXNEIE; //interrupt generated whenever ORE or RXNE is 1.-byte received
+
+
+	NVIC_SetPriority(irq_num, 0);
+	NVIC_EnableIRQ(irq_num);
+
+//}
+
+	//----------------------------------------------------------------------------------------------------------------
+
+
+}
+
+void mhal_uart_write_byte(USART_TypeDef *uart, uint8_t byte){
+	/*
+	 * write one byte to the data register.
+	 */
+	if(uart->SR & USART_SR_TXE){ //Transmit data register empty
+		uart->DR = byte;
+	}
+
+}
+
+uint8_t mhal_uart_read_byte(USART_TypeDef *uart){
+	mhal_uart_rx_len = 0U; //only for this function
+	mhal_uart_rx_idx = 0U;
+	uart->CR1 |= USART_CR1_RXNEIE;
+
+}
+
+void mhal_uart_receive(USART_TypeDef *uart){
+/*
+ * ALL-IN-ONE FUNCTION: WILL RECEIVE UNTIL \r
+ */
+	#ifdef USART1
+	if(uart==USART1){
+		mhal_uart_init(uart, PB6, AF7, PB7, AF7);
+	}
+#endif
+#ifdef USART2
+	if(uart==USART2){
+		mhal_uart_init(uart, PA2, AF7, PA3, AF7);
+	}
+#endif
+#ifdef USART6
+	if(uart==USART6){
+		mhal_uart_init(uart, PC6, AF8, PC7, AF8);
+	}
+#endif
+
+	mhal_uart_rx_len = 0U;
+	mhal_uart_rx_idx = 0;
+
+	uart->CR1 |= USART_CR1_RXNEIE;
+}
+
+void mhal_uart_transmit(USART_TypeDef *uart, uint8_t *msg, uint8_t len){
+	/*
+	 * ALL-IN-ONE FUNCTION: Nothing else to be done
+	 */
+
+	/*
+	 * Facilitated config for nucleof401re. change for your own board
+	 * Also, there are multiple pins that can act as USART tx or rx. I just chose convenient ones. you can change them
+	 */
+#ifdef USART1
+	if(uart==USART1){
+		mhal_uart_init(uart, PB6, AF7, PB7, AF7);
+	}
+#endif
+#ifdef USART2
+	if(uart==USART2){
+		mhal_uart_init(uart, PA2, AF7, PA3, AF7);
+	}
+#endif
+#ifdef USART6
+	if(uart==USART6){
+		mhal_uart_init(uart, PC6, AF8, PC7, AF8);
+	}
+#endif
+	//-------------------------------------------------------------------------------
+
+	mhal_uart_tx_idx = 0U;
+	mhal_uart_tx_len = len;
+	mhal_uart_tx_msg = msg;
+	uart->CR1 |= USART_CR1_TXEIE;
+
+}
+
+uint8_t mhal_uart_tx_busy(USART_TypeDef *uart){
+	return !(uart->SR & USART_SR_TXE);
+}
+
+uint8_t mhal_uart_rx_ready(USART_TypeDef *uart){
+	return uart->SR & USART_SR_RXNE;
+}
+
+
+//void mhal_uart_disable(USART_TypeDef *uart){//turn it off, save power.
+//	uart->CR1 &= USART_CR1_UE;
+//}
+
+//void mhal_uart_enable(USART_TypeDef *uart){
+//	uart->CR1 |= USART_CR1_UE;
+//}
+
+/*
+ * INTERRUPT HANDLER NESTED FUNCTIONS: PASTE THESE INTO THE CORRESPONDING INTERRUPT HANDLERS
+ */
+
+void mhal_uart1_handler(void){
+	if((USART1->SR & USART_SR_TXE) && (USART1->CR1 & USART_CR1_TXEIE)){ //meaning we are coming from mhal_uart_transmit call
+			if(mhal_uart_tx_idx < mhal_uart_tx_len){ //is there more to be sent?
+				mhal_uart_write_byte(USART1, mhal_uart_tx_msg[mhal_uart_tx_idx++]); //send current byte
+			}
+			else{ //all bytes sent
+				mhal_uart_tx_msg = (void *)0;
+				mhal_uart_tx_len = 0U;
+				mhal_uart_tx_idx = 0U;
+				USART1->CR1 &= ~USART_CR1_TXEIE;
+			}
+
+		}
+
+		if (USART1->SR & USART_SR_RXNE){
+			if(mhal_uart_rx_len==0U){
+				mhal_uart_rx_len==1U;
+				mhal_uart_rx_byte = USART1->DR;
+				mhal_uart_rx_msg[mhal_uart_rx_idx] = mhal_uart_rx_byte;
+				USART1->CR1 &= ~USART_CR1_RXNEIE;
+				}
+			else{ //called from general receive
+				mhal_uart_rx_byte = USART1->DR;
+				if(mhal_uart_rx_idx<MHAL_UART_RX_MAX_BUF_SIZE){//buffer not full
+					if(mhal_uart_rx_byte=='\r' || mhal_uart_rx_byte=='\0' || mhal_uart_rx_byte=='\n' ){//message ended
+						mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
+						USART1->CR1 &= ~USART_CR1_RXNEIE;
+						mhal_uart_rx_len = mhal_uart_rx_idx;
+						}
+					else{ //message not ended
+						mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
+						//no need to increase length var, it'll be updated eventually on enter or buffer full??
+						//ofcourse you should increase it, to show you how much has come in
+						//VITALLY, IF LEN > MAX_BUF_SIZE (check in application), there has been overflow
+						mhal_uart_rx_len++;
+						}
+					}
+				else{
+					mhal_uart_rx_idx = 0U; //loop around
+					//USART1->CR1 &= ~USART_CR1_RXNEIE; //buffer full, stop receiving. you can change this if you prefer to override.
+				}
+				}
+			}
+}
+
+void mhal_uart2_handler(void){
+	if((USART2->SR & USART_SR_TXE) && (USART2->CR1 & USART_CR1_TXEIE)){ //meaning we are coming from mhal_uart_transmit call
+			if(mhal_uart_tx_idx < mhal_uart_tx_len){ //is there more to be sent?
+				mhal_uart_write_byte(USART2, mhal_uart_tx_msg[mhal_uart_tx_idx++]); //send current byte
+			}
+			else{ //all bytes sent
+				mhal_uart_tx_msg = (void *)0;
+				mhal_uart_tx_len = 0U;
+				mhal_uart_tx_idx = 0U;
+				USART2->CR1 &= ~USART_CR1_TXEIE;
+			}
+
+		}
+
+		if (USART2->SR & USART_SR_RXNE){
+			if(mhal_uart_rx_len==0U){
+				mhal_uart_rx_len==1U;
+				mhal_uart_rx_byte = USART2->DR;
+				mhal_uart_rx_msg[mhal_uart_rx_idx] = mhal_uart_rx_byte;
+				USART2->CR1 &= ~USART_CR1_RXNEIE;
+				}
+			else{ //called from general receive
+				mhal_uart_rx_byte = USART2->DR;
+				if(mhal_uart_rx_idx<MHAL_UART_RX_MAX_BUF_SIZE){//buffer not full
+					if(mhal_uart_rx_byte=='\r' || mhal_uart_rx_byte=='\0' || mhal_uart_rx_byte=='\n' ){//message ended
+						mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
+						USART2->CR1 &= ~USART_CR1_RXNEIE;
+						mhal_uart_rx_len = mhal_uart_rx_idx;
+						}
+					else{ //message not ended
+						mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
+						//no need to increase length var, it'll be updated eventually on enter or buffer full??
+						//ofcourse you should increase it, to show you how much has come in
+						//VITALLY, IF LEN > MAX_BUF_SIZE (check in application), there has been overflow
+						mhal_uart_rx_len++;
+						}
+					}
+				else{
+					mhal_uart_rx_idx = 0U; //loop around
+					//USART2->CR1 &= ~USART_CR1_RXNEIE; //buffer full, stop receiving. you can change this if you prefer to override.
+				}
+				}
+			}
+}
+
+void mhal_uart6_handler(void){
+	if((USART6->SR & USART_SR_TXE) && (USART6->CR1 & USART_CR1_TXEIE)){ //meaning we are coming from mhal_uart_transmit call
+			if(mhal_uart_tx_idx < mhal_uart_tx_len){ //is there more to be sent?
+				mhal_uart_write_byte(USART6, mhal_uart_tx_msg[mhal_uart_tx_idx++]); //send current byte
+			}
+			else{ //all bytes sent
+				mhal_uart_tx_msg = (void *)0;
+				mhal_uart_tx_len = 0U;
+				mhal_uart_tx_idx = 0U;
+				USART6->CR1 &= ~USART_CR1_TXEIE;
+			}
+
+		}
+
+		if (USART6->SR & USART_SR_RXNE){
+			if(mhal_uart_rx_len==0U){
+				mhal_uart_rx_len==1U;
+				mhal_uart_rx_byte = USART6->DR;
+				mhal_uart_rx_msg[mhal_uart_rx_idx] = mhal_uart_rx_byte;
+				USART6->CR1 &= ~USART_CR1_RXNEIE;
+				}
+			else{ //called from general receive
+				mhal_uart_rx_byte = USART6->DR;
+				if(mhal_uart_rx_idx<MHAL_UART_RX_MAX_BUF_SIZE){//buffer not full
+					if(mhal_uart_rx_byte=='\r' || mhal_uart_rx_byte=='\0' || mhal_uart_rx_byte=='\n' ){//message ended
+						mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
+						USART6->CR1 &= ~USART_CR1_RXNEIE;
+						mhal_uart_rx_len = mhal_uart_rx_idx;
+						}
+					else{ //message not ended
+						mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
+						//no need to increase length var, it'll be updated eventually on enter or buffer full??
+						//ofcourse you should increase it, to show you how much has come in
+						//VITALLY, IF LEN > MAX_BUF_SIZE (check in application), there has been overflow
+						mhal_uart_rx_len++;
+						}
+					}
+				else{
+					mhal_uart_rx_idx = 0U; //loop around
+					//USART6->CR1 &= ~USART_CR1_RXNEIE; //buffer full, stop receiving. you can change this if you prefer to override.
+				}
+				}
+			}
+}
