@@ -4,7 +4,8 @@
 #include "mhal_gpio.h"
 #include "mhal_tim.h"
 #include "mhal_globals.h"
-
+#include "stm32f401xe.h"
+#include "stdint.h"
 
 /*
  * FOUR MODES:
@@ -35,15 +36,31 @@
  *
  */
 
+/*
+ * START ---> ADDRESS+R/W ---> ACK/NACK ---> DATA(acked after each byte) ---> STOP
+ *
+ */
 
+typedef enum {
+	MHAL_I2C_SPEED_STANDARD = 0U, //100KHz
+	MHAL_I2C_SPEED_FAST = 1U, //400KHz
+}mhal_i2c_speed_t;
 
+typedef struct {
+	mhal_i2c_speed_t speed;
+}mhal_i2c_config_t;
 
+#define MHAL_I2C_CONFIG_DEFAULT ((mhal_i2c_config_t){.speed = MHAL_I2C_SPEED_STANDARD})
 
+#define MHAL_I2C_OK 0U
+#define MHAL_I2C_ERR_NACK 1U
+#define MHAL_I2C_ERR_TIMEOUT 2U
 
-
-
-
-
+void mhal_i2c_init(I2C_TypeDef *i2c, const mhal_i2c_config_t *config);
+uint8_t mhal_i2c_write(I2C_TypeDef *i2c, uint8_t dev, const uint8_t *data, uint32_t len);
+uint8_t mhal_i2c_read(I2C_TypeDef *i2c, uint8_t dev, uint8_t *data, uint32_t len);
+uint8_t mhal_i2c_write_reg(I2C_TypeDef *i2c, uint8_t dev, uint8_t reg, const uint8_t *data, uint32_t len);
+uint8_t mhal_i2c_read_reg(I2C_TypeDef *i2c, uint8_t dev, uint8_t reg, uint8_t *data, uint32_t len);
 
 
 

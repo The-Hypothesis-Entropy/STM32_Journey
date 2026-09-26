@@ -11,7 +11,8 @@ src/mhal_tim.o: \
  ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h \
  ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_gpio.h \
- C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_gpio.h
+ C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_gpio.h \
+ C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_rcc.h
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:
 ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
 ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h:
@@ -24,3 +25,4 @@ C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:
 ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_gpio.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_gpio.h:
+C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_rcc.h:

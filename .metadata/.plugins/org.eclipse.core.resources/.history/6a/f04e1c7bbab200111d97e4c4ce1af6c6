@@ -1,3 +1,0 @@
-#include "mhal_globals.h"
-
-uint8_t *mhal_tx_msg = "";

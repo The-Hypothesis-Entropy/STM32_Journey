@@ -15,6 +15,7 @@
 "./src/mhal_globals.o"
 "./src/mhal_gpio.o"
 "./src/mhal_i2c.o"
+"./src/mhal_rcc.o"
 "./src/mhal_spi.o"
 "./src/mhal_tim.o"
 "./src/mhal_uart.o"

@@ -1,7 +1,0 @@
-#include "mhal_dma.h"
-
-//----------------LEMMA FUNCTIONS-----------------
-
-static uint32_t mhal_dma_stream_to_index(DMA_Stream_TypeDef *stream){
-	if (stream == DMA1_Stream0) return 0;
-}

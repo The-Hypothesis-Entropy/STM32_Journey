@@ -1,0 +1,8 @@
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:92:13:tf_set_outputs	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:106:13:tf_enter	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:114:13:traffic_tick	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:158:13:button_tick	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:204:5:main	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:251:6:SystemClock_Config	88	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:298:13:MX_GPIO_Init	48	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:348:6:Error_Handler	4	static,ignoring_inline_asm

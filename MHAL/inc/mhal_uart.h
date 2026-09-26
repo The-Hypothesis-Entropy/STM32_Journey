@@ -5,6 +5,7 @@
 #include "stm32f4xx.h"
 #include "mhal_globals.h"
 #include "mhal_dma.h"
+#include "mhal_rcc.h"
 
 /*
  * HOW TO USE THIS DRIVER LIBRARY:
