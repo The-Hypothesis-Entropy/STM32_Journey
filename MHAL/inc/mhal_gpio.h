@@ -186,6 +186,8 @@ typedef enum{
 
 #define MHAL_GPIO_CFG_INPUT ((mhal_gpio_config_t){ .mode = MHAL_GPIO_MODE_INPUT, .type = MHAL_GPIO_OT_PP, .speed = MHAL_GPIO_OSPEED_LOW, .pull = MHAL_GPIO_PUPD_NONE, .af = 20})
 
+#define MHAL_GPIO_CFG_ANALOG ((mhal_gpio_config_t){ .mode = MHAL_GPIO_MODE_ANALOG, .type = MHAL_GPIO_OT_PP, .speed = MHAL_GPIO_OSPEED_HIGH, .pull = MHAL_GPIO_PUPD_NONE, .af = 20})
+
 #define MHAL_GPIO_CFG_AF ((mhal_gpio_config_t){ .mode = MHAL_GPIO_MODE_AF, .type = MHAL_GPIO_OT_PP, .speed = MHAL_GPIO_OSPEED_HIGH, .pull = MHAL_GPIO_PUPD_NONE, .af = 0})
 
 #define MHAL_GPIO_CFG_INPUT_PULLUP \

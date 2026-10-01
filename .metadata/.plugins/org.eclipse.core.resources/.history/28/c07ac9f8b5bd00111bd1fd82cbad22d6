@@ -1,0 +1,48 @@
+#include "mhal_adc.h"
+#include "stm32f401xe.h"
+/*
+ * -> ADC on APB2, but has it's own prescaler. should work under 36MHz
+ *
+ *
+ */
+
+void mhal_adc_init(ADC_TypeDef *adc){
+	//CLOCK ENABLE
+	RCC->APB2ENR |= RCC_APB2ENR_ADC1EN;
+
+	//PRESCALER CONFIG
+	ADC_Common_TypeDef *gen_adc = ADC1_COMMON;
+	gen_adc->CCR &= ~ADC_CCR_ADCPRE_Msk;
+	gen_adc->CCR |= (config.prescaler)<<ADC_CCR_ADCPRE_Pos;
+
+	mhal_adc_config_t config = MHAL_ADC_CFG_DEFAULT;
+
+	//RESOLUTION
+	adc->CR1 &= ~ADC_CR1_RES_Msk;
+	adc->CR1 |= (config.resolution)<<ADC_CR1_RES_Pos;
+
+	//CHANNEL CONFIG
+	adc->SQR3 &= ~ADC_SQR3_SQ1_Msk;
+	adc->SQR3 |= (config.channel)<<ADC_SQR3_SQ1_Pos;
+
+	//SAMPLE TIME (first channel only)
+	adc->SMPR2 &= ~ADC_SMPR2_SMP0_Msk;
+	adc->SMPR2 |= (config.sample_time)<<(config.channel * 3U);
+
+	//SCAN MODE ENABLED (cycle through input channels converting each one)
+	adc->CR1 |= ADC_CR1_SCAN;
+
+	//CONTINOUS MODE ENABLED (keep reading the enabled channel(s))
+	adc->CR2 |= ADC_CR2_CONT;
+
+	//ADC ON
+	adc->CR2 |= ADC_CR2_ADON;
+
+	//CALIBRATE
+}
+
+uint32_t mhal_adc_read(ADC_TypeDef *adc){
+	adc->CR2 |= ADC_CR2_SWSTART;
+
+	return adc->DR;
+}

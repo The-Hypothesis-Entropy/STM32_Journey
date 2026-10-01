@@ -1,25 +1,14 @@
-22:50:23 **** Incremental Build of configuration Debug for project start ****
+18:34:44 **** Incremental Build of configuration Debug for project start ****
 make -j16 all 
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_FULL_LL_DRIVER -DHSE_VALUE=8000000 -DHSE_STARTUP_TIMEOUT=100 -DLSE_STARTUP_TIMEOUT=5000 -DLSE_VALUE=32768 -DEXTERNAL_CLOCK_VALUE=12288000 -DHSI_VALUE=16000000 -DLSI_VALUE=32000 -DVDD_VALUE=3300 -DPREFETCH_ENABLE=1 -DINSTRUCTION_CACHE_ENABLE=1 -DDATA_CACHE_ENABLE=1 -DSTM32F401xE -c -I../../Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"src/mhal_uart.d" -MT"src/mhal_uart.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "src/mhal_uart.o"
 arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_FULL_LL_DRIVER -DHSE_VALUE=8000000 -DHSE_STARTUP_TIMEOUT=100 -DLSE_STARTUP_TIMEOUT=5000 -DLSE_VALUE=32768 -DEXTERNAL_CLOCK_VALUE=12288000 -DHSI_VALUE=16000000 -DLSI_VALUE=32000 -DVDD_VALUE=3300 -DPREFETCH_ENABLE=1 -DINSTRUCTION_CACHE_ENABLE=1 -DDATA_CACHE_ENABLE=1 -DSTM32F401xE -c -I../../Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/main.d" -MT"Application/User/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/main.o"
-In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:3:
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:75:17: warning: 'mhal_tim_get_clock' declared 'static' but never defined [-Wunused-function]
-   75 | static uint32_t mhal_tim_get_clock(TIM_TypeDef *tim);
-      |                 ^~~~~~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:108:16: warning: 'mhal_uart_rx_ready' defined but not used [-Wunused-function]
-  108 | static uint8_t mhal_uart_rx_ready(USART_TypeDef *uart){
-      |                ^~~~~~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:104:16: warning: 'mhal_uart_tx_busy' defined but not used [-Wunused-function]
-  104 | static uint8_t mhal_uart_tx_busy(USART_TypeDef *uart){
-      |                ^~~~~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:121:20: warning: pointer targets in initialization of 'uint8_t *' {aka 'unsigned char *'} from 'char *' differ in signedness [-Wpointer-sign]
-  121 | uint8_t *message = "Here is a message!\r\n";
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:122:20: warning: pointer targets in initialization of 'uint8_t *' {aka 'unsigned char *'} from 'char *' differ in signedness [-Wpointer-sign]
+  122 | uint8_t *message = "Here is a message!\r\n";
       |                    ^~~~~~~~~~~~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:123:23: warning: pointer targets in initialization of 'uint8_t *' {aka 'unsigned char *'} from 'char *' differ in signedness [-Wpointer-sign]
-  123 | uint8_t *data_block = "incoming!\r\n";
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:124:23: warning: pointer targets in initialization of 'uint8_t *' {aka 'unsigned char *'} from 'char *' differ in signedness [-Wpointer-sign]
+  124 | uint8_t *data_block = "incoming!\r\n";
       |                       ^~~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:124:16: warning: pointer targets in initialization of 'uint8_t *' {aka 'unsigned char *'} from 'char *' differ in signedness [-Wpointer-sign]
-  124 | uint8_t *src = "Hello Peter! This message is brought to you via SPI";
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:125:16: warning: pointer targets in initialization of 'uint8_t *' {aka 'unsigned char *'} from 'char *' differ in signedness [-Wpointer-sign]
+  125 | uint8_t *src = "Hello Peter! This message is brought to you via SPI";
       |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal.h:6,
                  from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:2:
@@ -32,402 +21,62 @@ Finished building target: start.elf
 arm-none-eabi-size  start.elf 
 arm-none-eabi-objdump -h -S start.elf  > "start.list"
    text	   data	    bss	    dec	    hex	filename
-   7968	      8	   1904	   9880	   2698	start.elf
+   6232	      4	   1908	   8144	   1fd0	start.elf
 Finished building: default.size.stdout
  
 Finished building: start.list
  
-17:45:24 **** Build of configuration Debug for project CH1-Traffic Lights ****
+18:35:16 **** Incremental Build of configuration Debug for project start ****
 make -j16 all 
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal.d" -MT"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_cortex.d" -MT"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_cortex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_cortex.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dma.d" -MT"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dma.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dma.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dma_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dma_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dma_ex.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_exti.d" -MT"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_exti.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_exti.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_flash.d" -MT"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_flash.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_flash.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_flash_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_flash_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_flash_ex.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_flash_ramfunc.d" -MT"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_flash_ramfunc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_flash_ramfunc.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_gpio.d" -MT"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_gpio.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_pwr.d" -MT"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_pwr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_pwr.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_pwr_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_pwr_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_pwr_ex.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_rcc.d" -MT"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_rcc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_rcc.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_rcc_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_rcc_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_rcc_ex.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/system_stm32f4xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/CMSIS/system_stm32f4xx.d" -MT"Drivers/CMSIS/system_stm32f4xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/CMSIS/system_stm32f4xx.o"
-arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Application/User/Startup/startup_stm32f401retx.d" -MT"Application/User/Startup/startup_stm32f401retx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/Startup/startup_stm32f401retx.o" "../Application/User/Startup/startup_stm32f401retx.s"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/Core/main.d" -MT"Application/User/Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/Core/main.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/Core/stm32f4xx_hal_msp.d" -MT"Application/User/Core/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/Core/stm32f4xx_hal_msp.o"
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: In function 'tf_set_outputs':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:94:27: error: 'RED_GPIO_Port' undeclared (first use in this function); did you mean 'SWO_GPIO_Port'?
-   94 |         HAL_GPIO_WritePin(RED_GPIO_Port, RED_Pin, (s==ST_RED || s==ST_RED_YELLOW || s==ST_PEDESTRIAN) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-      |                           ^~~~~~~~~~~~~
-      |                           SWO_GPIO_Port
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:94:27: note: each undeclared identifier is reported only once for each function it appears in
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:94:42: error: 'RED_Pin' undeclared (first use in this function)
-   94 |         HAL_GPIO_WritePin(RED_GPIO_Port, RED_Pin, (s==ST_RED || s==ST_RED_YELLOW || s==ST_PEDESTRIAN) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-      |                                          ^~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:97:27: error: 'YELLOW_GPIO_Port' undeclared (first use in this function); did you mean 'LED_YELLOW_GPIO_Port'?
-   97 |         HAL_GPIO_WritePin(YELLOW_GPIO_Port, YELLOW_Pin, (s==ST_YELLOW || s==ST_RED_YELLOW) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-      |                           ^~~~~~~~~~~~~~~~
-      |                           LED_YELLOW_GPIO_Port
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:97:45: error: 'YELLOW_Pin' undeclared (first use in this function); did you mean 'LED_YELLOW_Pin'?
-   97 |         HAL_GPIO_WritePin(YELLOW_GPIO_Port, YELLOW_Pin, (s==ST_YELLOW || s==ST_RED_YELLOW) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-      |                                             ^~~~~~~~~~
-      |                                             LED_YELLOW_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:100:27: error: 'GREEN_GPIO_Port' undeclared (first use in this function); did you mean 'LED_GREEN_GPIO_Port'?
-  100 |         HAL_GPIO_WritePin(GREEN_GPIO_Port, GREEN_Pin, s==ST_GREEN ? GPIO_PIN_SET : GPIO_PIN_RESET);
-      |                           ^~~~~~~~~~~~~~~
-      |                           LED_GREEN_GPIO_Port
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:100:44: error: 'GREEN_Pin' undeclared (first use in this function); did you mean 'LED_GREEN_Pin'?
-  100 |         HAL_GPIO_WritePin(GREEN_GPIO_Port, GREEN_Pin, s==ST_GREEN ? GPIO_PIN_SET : GPIO_PIN_RESET);
-      |                                            ^~~~~~~~~
-      |                                            LED_GREEN_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:103:27: error: 'PEDESTRIAN_GPIO_Port' undeclared (first use in this function); did you mean 'LED_GREEN_GPIO_Port'?
-  103 |         HAL_GPIO_WritePin(PEDESTRIAN_GPIO_Port, PEDESTRIAN_Pin, s==ST_PEDESTRIAN ? GPIO_PIN_SET : GPIO_PIN_RESET);
-      |                           ^~~~~~~~~~~~~~~~~~~~
-      |                           LED_GREEN_GPIO_Port
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:103:49: error: 'PEDESTRIAN_Pin' undeclared (first use in this function)
-  103 |         HAL_GPIO_WritePin(PEDESTRIAN_GPIO_Port, PEDESTRIAN_Pin, s==ST_PEDESTRIAN ? GPIO_PIN_SET : GPIO_PIN_RESET);
-      |                                                 ^~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: In function 'traffic_tick':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:115:34: error: 'traffic_state_ms' undeclared (first use in this function); did you mean 'traffic_state_t'?
-  115 |         uint32_t elapsed = now - traffic_state_ms;
-      |                                  ^~~~~~~~~~~~~~~~
-      |                                  traffic_state_t
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:117:16: error: 'traffic_state' undeclared (first use in this function); did you mean 'traffic_state_t'?
-  117 |         switch(traffic_state){
-      |                ^~~~~~~~~~~~~
-      |                traffic_state_t
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:120:25: error: implicit declaration of function 'traffic_enter' [-Wimplicit-function-declaration]
-  120 |                         traffic_enter(ST_RED_YELLOW, now);
-      |                         ^~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: In function 'MX_GPIO_Init':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:28: error: 'LED_GREEN_Pin_Pin' undeclared (first use in this function); did you mean 'LED_GREEN_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                            ^~~~~~~~~~~~~~~~~
-      |                            LED_GREEN_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:46: error: 'LED_RED_Pin_Pin' undeclared (first use in this function); did you mean 'LED_RED_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                              ^~~~~~~~~~~~~~~
-      |                                              LED_RED_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:62: error: 'LED_YELLOW_Pin_Pin' undeclared (first use in this function); did you mean 'LED_YELLOW_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                                              ^~~~~~~~~~~~~~~~~~
-      |                                                              LED_YELLOW_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:81: error: 'LED_PED_Pin_Pin' undeclared (first use in this function); did you mean 'LED_PED_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                                                                 ^~~~~~~~~~~~~~~
-      |                                                                                 LED_PED_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:315:25: error: 'BTN_Pin_Pin' undeclared (first use in this function); did you mean 'BTN_Pin'?
-  315 |   GPIO_InitStruct.Pin = BTN_Pin_Pin;
-      |                         ^~~~~~~~~~~
-      |                         BTN_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:318:17: error: 'BTN_Pin_GPIO_Port' undeclared (first use in this function); did you mean 'BTN_GPIO_Port'?
-  318 |   HAL_GPIO_Init(BTN_Pin_GPIO_Port, &GPIO_InitStruct);
-      |                 ^~~~~~~~~~~~~~~~~
-      |                 BTN_GPIO_Port
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: At top level:
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:106:13: warning: 'tf_enter' defined but not used [-Wunused-function]
-  106 | static void tf_enter(traffic_state_t next, uint32_t now){
-      |             ^~~~~~~~
-make: *** [Application/User/Core/subdir.mk:31: Application/User/Core/main.o] Error 1
-make: *** Waiting for unfinished jobs....
-"make -j16 all" terminated with exit code 2. Build might be incomplete.
-17:46:08 **** Incremental Build of configuration Debug for project CH1-Traffic Lights ****
-make -j16 all 
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/Core/main.d" -MT"Application/User/Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/Core/main.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/Core/stm32f4xx_it.d" -MT"Application/User/Core/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/Core/stm32f4xx_it.o"
-arm-none-eabi-gcc "../Application/User/Core/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/Core/syscalls.d" -MT"Application/User/Core/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/Core/syscalls.o"
-arm-none-eabi-gcc "../Application/User/Core/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/Core/sysmem.d" -MT"Application/User/Core/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/Core/sysmem.o"
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: In function 'tf_set_outputs':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:94:27: error: 'RED_GPIO_Port' undeclared (first use in this function); did you mean 'SWO_GPIO_Port'?
-   94 |         HAL_GPIO_WritePin(RED_GPIO_Port, LED_RED_Pin, (s==ST_RED || s==ST_RED_YELLOW || s==ST_PEDESTRIAN) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-      |                           ^~~~~~~~~~~~~
-      |                           SWO_GPIO_Port
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:94:27: note: each undeclared identifier is reported only once for each function it appears in
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:97:27: error: 'YELLOW_GPIO_Port' undeclared (first use in this function); did you mean 'LED_YELLOW_GPIO_Port'?
-   97 |         HAL_GPIO_WritePin(YELLOW_GPIO_Port, LED_YELLOW_Pin, (s==ST_YELLOW || s==ST_RED_YELLOW) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-      |                           ^~~~~~~~~~~~~~~~
-      |                           LED_YELLOW_GPIO_Port
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:100:27: error: 'GREEN_GPIO_Port' undeclared (first use in this function); did you mean 'LED_GREEN_GPIO_Port'?
-  100 |         HAL_GPIO_WritePin(GREEN_GPIO_Port, LED_GREEN_Pin, s==ST_GREEN ? GPIO_PIN_SET : GPIO_PIN_RESET);
-      |                           ^~~~~~~~~~~~~~~
-      |                           LED_GREEN_GPIO_Port
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:103:27: error: 'PEDESTRIAN_GPIO_Port' undeclared (first use in this function); did you mean 'LED_GREEN_GPIO_Port'?
-  103 |         HAL_GPIO_WritePin(PEDESTRIAN_GPIO_Port, LED_PEDESTRIAN_Pin, s==ST_PEDESTRIAN ? GPIO_PIN_SET : GPIO_PIN_RESET);
-      |                           ^~~~~~~~~~~~~~~~~~~~
-      |                           LED_GREEN_GPIO_Port
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:103:49: error: 'LED_PEDESTRIAN_Pin' undeclared (first use in this function)
-  103 |         HAL_GPIO_WritePin(PEDESTRIAN_GPIO_Port, LED_PEDESTRIAN_Pin, s==ST_PEDESTRIAN ? GPIO_PIN_SET : GPIO_PIN_RESET);
-      |                                                 ^~~~~~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: In function 'traffic_tick':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:115:34: error: 'traffic_state_ms' undeclared (first use in this function); did you mean 'traffic_state_t'?
-  115 |         uint32_t elapsed = now - traffic_state_ms;
-      |                                  ^~~~~~~~~~~~~~~~
-      |                                  traffic_state_t
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:117:16: error: 'traffic_state' undeclared (first use in this function); did you mean 'traffic_state_t'?
-  117 |         switch(traffic_state){
-      |                ^~~~~~~~~~~~~
-      |                traffic_state_t
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:120:25: error: implicit declaration of function 'traffic_enter' [-Wimplicit-function-declaration]
-  120 |                         traffic_enter(ST_RED_YELLOW, now);
-      |                         ^~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: In function 'MX_GPIO_Init':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:28: error: 'LED_GREEN_Pin_Pin' undeclared (first use in this function); did you mean 'LED_GREEN_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                            ^~~~~~~~~~~~~~~~~
-      |                            LED_GREEN_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:46: error: 'LED_RED_Pin_Pin' undeclared (first use in this function); did you mean 'LED_RED_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                              ^~~~~~~~~~~~~~~
-      |                                              LED_RED_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:62: error: 'LED_YELLOW_Pin_Pin' undeclared (first use in this function); did you mean 'LED_YELLOW_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                                              ^~~~~~~~~~~~~~~~~~
-      |                                                              LED_YELLOW_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:81: error: 'LED_PED_Pin_Pin' undeclared (first use in this function); did you mean 'LED_PED_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                                                                 ^~~~~~~~~~~~~~~
-      |                                                                                 LED_PED_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:315:25: error: 'BTN_Pin_Pin' undeclared (first use in this function); did you mean 'BTN_Pin'?
-  315 |   GPIO_InitStruct.Pin = BTN_Pin_Pin;
-      |                         ^~~~~~~~~~~
-      |                         BTN_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:318:17: error: 'BTN_Pin_GPIO_Port' undeclared (first use in this function); did you mean 'BTN_GPIO_Port'?
-  318 |   HAL_GPIO_Init(BTN_Pin_GPIO_Port, &GPIO_InitStruct);
-      |                 ^~~~~~~~~~~~~~~~~
-      |                 BTN_GPIO_Port
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: At top level:
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:106:13: warning: 'tf_enter' defined but not used [-Wunused-function]
-  106 | static void tf_enter(traffic_state_t next, uint32_t now){
-      |             ^~~~~~~~
-make: *** [Application/User/Core/subdir.mk:31: Application/User/Core/main.o] Error 1
-make: *** Waiting for unfinished jobs....
-"make -j16 all" terminated with exit code 2. Build might be incomplete.
-17:46:30 **** Incremental Build of configuration Debug for project CH1-Traffic Lights ****
-make -j16 all 
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/Core/main.d" -MT"Application/User/Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/Core/main.o"
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: In function 'tf_set_outputs':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:103:27: error: 'LED_PEDESTRIAN_GPIO_Port' undeclared (first use in this function); did you mean 'LED_PED_GPIO_Port'?
-  103 |         HAL_GPIO_WritePin(LED_PEDESTRIAN_GPIO_Port, LED_PEDESTRIAN_Pin, s==ST_PEDESTRIAN ? GPIO_PIN_SET : GPIO_PIN_RESET);
-      |                           ^~~~~~~~~~~~~~~~~~~~~~~~
-      |                           LED_PED_GPIO_Port
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:103:27: note: each undeclared identifier is reported only once for each function it appears in
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:103:53: error: 'LED_PEDESTRIAN_Pin' undeclared (first use in this function)
-  103 |         HAL_GPIO_WritePin(LED_PEDESTRIAN_GPIO_Port, LED_PEDESTRIAN_Pin, s==ST_PEDESTRIAN ? GPIO_PIN_SET : GPIO_PIN_RESET);
-      |                                                     ^~~~~~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: In function 'traffic_tick':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:115:34: error: 'traffic_state_ms' undeclared (first use in this function); did you mean 'traffic_state_t'?
-  115 |         uint32_t elapsed = now - traffic_state_ms;
-      |                                  ^~~~~~~~~~~~~~~~
-      |                                  traffic_state_t
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:117:16: error: 'traffic_state' undeclared (first use in this function); did you mean 'traffic_state_t'?
-  117 |         switch(traffic_state){
-      |                ^~~~~~~~~~~~~
-      |                traffic_state_t
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:120:25: error: implicit declaration of function 'traffic_enter' [-Wimplicit-function-declaration]
-  120 |                         traffic_enter(ST_RED_YELLOW, now);
-      |                         ^~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: In function 'MX_GPIO_Init':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:28: error: 'LED_GREEN_Pin_Pin' undeclared (first use in this function); did you mean 'LED_GREEN_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                            ^~~~~~~~~~~~~~~~~
-      |                            LED_GREEN_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:46: error: 'LED_RED_Pin_Pin' undeclared (first use in this function); did you mean 'LED_RED_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                              ^~~~~~~~~~~~~~~
-      |                                              LED_RED_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:62: error: 'LED_YELLOW_Pin_Pin' undeclared (first use in this function); did you mean 'LED_YELLOW_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                                              ^~~~~~~~~~~~~~~~~~
-      |                                                              LED_YELLOW_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:81: error: 'LED_PED_Pin_Pin' undeclared (first use in this function); did you mean 'LED_PED_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                                                                 ^~~~~~~~~~~~~~~
-      |                                                                                 LED_PED_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:315:25: error: 'BTN_Pin_Pin' undeclared (first use in this function); did you mean 'BTN_Pin'?
-  315 |   GPIO_InitStruct.Pin = BTN_Pin_Pin;
-      |                         ^~~~~~~~~~~
-      |                         BTN_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:318:17: error: 'BTN_Pin_GPIO_Port' undeclared (first use in this function); did you mean 'BTN_GPIO_Port'?
-  318 |   HAL_GPIO_Init(BTN_Pin_GPIO_Port, &GPIO_InitStruct);
-      |                 ^~~~~~~~~~~~~~~~~
-      |                 BTN_GPIO_Port
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: At top level:
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:106:13: warning: 'tf_enter' defined but not used [-Wunused-function]
-  106 | static void tf_enter(traffic_state_t next, uint32_t now){
-      |             ^~~~~~~~
-make: *** [Application/User/Core/subdir.mk:31: Application/User/Core/main.o] Error 1
-"make -j16 all" terminated with exit code 2. Build might be incomplete.
-17:46:53 **** Incremental Build of configuration Debug for project CH1-Traffic Lights ****
-make -j16 all 
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/Core/main.d" -MT"Application/User/Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/Core/main.o"
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: In function 'traffic_tick':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:115:34: error: 'traffic_state_ms' undeclared (first use in this function); did you mean 'traffic_state_t'?
-  115 |         uint32_t elapsed = now - traffic_state_ms;
-      |                                  ^~~~~~~~~~~~~~~~
-      |                                  traffic_state_t
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:115:34: note: each undeclared identifier is reported only once for each function it appears in
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:117:16: error: 'traffic_state' undeclared (first use in this function); did you mean 'traffic_state_t'?
-  117 |         switch(traffic_state){
-      |                ^~~~~~~~~~~~~
-      |                traffic_state_t
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:120:25: error: implicit declaration of function 'traffic_enter' [-Wimplicit-function-declaration]
-  120 |                         traffic_enter(ST_RED_YELLOW, now);
-      |                         ^~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: In function 'MX_GPIO_Init':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:28: error: 'LED_GREEN_Pin_Pin' undeclared (first use in this function); did you mean 'LED_GREEN_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                            ^~~~~~~~~~~~~~~~~
-      |                            LED_GREEN_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:46: error: 'LED_RED_Pin_Pin' undeclared (first use in this function); did you mean 'LED_RED_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                              ^~~~~~~~~~~~~~~
-      |                                              LED_RED_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:62: error: 'LED_YELLOW_Pin_Pin' undeclared (first use in this function); did you mean 'LED_YELLOW_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                                              ^~~~~~~~~~~~~~~~~~
-      |                                                              LED_YELLOW_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:81: error: 'LED_PED_Pin_Pin' undeclared (first use in this function); did you mean 'LED_PED_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                                                                 ^~~~~~~~~~~~~~~
-      |                                                                                 LED_PED_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:315:25: error: 'BTN_Pin_Pin' undeclared (first use in this function); did you mean 'BTN_Pin'?
-  315 |   GPIO_InitStruct.Pin = BTN_Pin_Pin;
-      |                         ^~~~~~~~~~~
-      |                         BTN_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:318:17: error: 'BTN_Pin_GPIO_Port' undeclared (first use in this function); did you mean 'BTN_GPIO_Port'?
-  318 |   HAL_GPIO_Init(BTN_Pin_GPIO_Port, &GPIO_InitStruct);
-      |                 ^~~~~~~~~~~~~~~~~
-      |                 BTN_GPIO_Port
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: At top level:
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:106:13: warning: 'tf_enter' defined but not used [-Wunused-function]
-  106 | static void tf_enter(traffic_state_t next, uint32_t now){
-      |             ^~~~~~~~
-make: *** [Application/User/Core/subdir.mk:31: Application/User/Core/main.o] Error 1
-"make -j16 all" terminated with exit code 2. Build might be incomplete.
-17:47:19 **** Incremental Build of configuration Debug for project CH1-Traffic Lights ****
-make -j16 all 
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/Core/main.d" -MT"Application/User/Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/Core/main.o"
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: In function 'traffic_tick':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:120:25: error: implicit declaration of function 'traffic_enter' [-Wimplicit-function-declaration]
-  120 |                         traffic_enter(ST_RED_YELLOW, now);
-      |                         ^~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: In function 'MX_GPIO_Init':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:28: error: 'LED_GREEN_Pin_Pin' undeclared (first use in this function); did you mean 'LED_GREEN_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                            ^~~~~~~~~~~~~~~~~
-      |                            LED_GREEN_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:28: note: each undeclared identifier is reported only once for each function it appears in
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:46: error: 'LED_RED_Pin_Pin' undeclared (first use in this function); did you mean 'LED_RED_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                              ^~~~~~~~~~~~~~~
-      |                                              LED_RED_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:62: error: 'LED_YELLOW_Pin_Pin' undeclared (first use in this function); did you mean 'LED_YELLOW_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                                              ^~~~~~~~~~~~~~~~~~
-      |                                                              LED_YELLOW_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:81: error: 'LED_PED_Pin_Pin' undeclared (first use in this function); did you mean 'LED_PED_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                                                                 ^~~~~~~~~~~~~~~
-      |                                                                                 LED_PED_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:315:25: error: 'BTN_Pin_Pin' undeclared (first use in this function); did you mean 'BTN_Pin'?
-  315 |   GPIO_InitStruct.Pin = BTN_Pin_Pin;
-      |                         ^~~~~~~~~~~
-      |                         BTN_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:318:17: error: 'BTN_Pin_GPIO_Port' undeclared (first use in this function); did you mean 'BTN_GPIO_Port'?
-  318 |   HAL_GPIO_Init(BTN_Pin_GPIO_Port, &GPIO_InitStruct);
-      |                 ^~~~~~~~~~~~~~~~~
-      |                 BTN_GPIO_Port
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: At top level:
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:106:13: warning: 'tf_enter' defined but not used [-Wunused-function]
-  106 | static void tf_enter(traffic_state_t next, uint32_t now){
-      |             ^~~~~~~~
-make: *** [Application/User/Core/subdir.mk:31: Application/User/Core/main.o] Error 1
-"make -j16 all" terminated with exit code 2. Build might be incomplete.
-17:47:42 **** Incremental Build of configuration Debug for project CH1-Traffic Lights ****
-make -j16 all 
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/Core/main.d" -MT"Application/User/Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/Core/main.o"
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: In function 'traffic_tick':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:150:25: error: implicit declaration of function 'traffic_enter' [-Wimplicit-function-declaration]
-  150 |                         traffic_enter(ST_RED, now);
-      |                         ^~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: In function 'MX_GPIO_Init':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:28: error: 'LED_GREEN_Pin_Pin' undeclared (first use in this function); did you mean 'LED_GREEN_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                            ^~~~~~~~~~~~~~~~~
-      |                            LED_GREEN_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:28: note: each undeclared identifier is reported only once for each function it appears in
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:46: error: 'LED_RED_Pin_Pin' undeclared (first use in this function); did you mean 'LED_RED_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                              ^~~~~~~~~~~~~~~
-      |                                              LED_RED_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:62: error: 'LED_YELLOW_Pin_Pin' undeclared (first use in this function); did you mean 'LED_YELLOW_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                                              ^~~~~~~~~~~~~~~~~~
-      |                                                              LED_YELLOW_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:81: error: 'LED_PED_Pin_Pin' undeclared (first use in this function); did you mean 'LED_PED_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                                                                 ^~~~~~~~~~~~~~~
-      |                                                                                 LED_PED_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:315:25: error: 'BTN_Pin_Pin' undeclared (first use in this function); did you mean 'BTN_Pin'?
-  315 |   GPIO_InitStruct.Pin = BTN_Pin_Pin;
-      |                         ^~~~~~~~~~~
-      |                         BTN_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:318:17: error: 'BTN_Pin_GPIO_Port' undeclared (first use in this function); did you mean 'BTN_GPIO_Port'?
-  318 |   HAL_GPIO_Init(BTN_Pin_GPIO_Port, &GPIO_InitStruct);
-      |                 ^~~~~~~~~~~~~~~~~
-      |                 BTN_GPIO_Port
-make: *** [Application/User/Core/subdir.mk:31: Application/User/Core/main.o] Error 1
-"make -j16 all" terminated with exit code 2. Build might be incomplete.
-17:47:49 **** Incremental Build of configuration Debug for project CH1-Traffic Lights ****
-make -j16 all 
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/Core/main.d" -MT"Application/User/Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/Core/main.o"
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c: In function 'MX_GPIO_Init':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:28: error: 'LED_GREEN_Pin_Pin' undeclared (first use in this function); did you mean 'LED_GREEN_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                            ^~~~~~~~~~~~~~~~~
-      |                            LED_GREEN_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:28: note: each undeclared identifier is reported only once for each function it appears in
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:46: error: 'LED_RED_Pin_Pin' undeclared (first use in this function); did you mean 'LED_RED_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                              ^~~~~~~~~~~~~~~
-      |                                              LED_RED_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:62: error: 'LED_YELLOW_Pin_Pin' undeclared (first use in this function); did you mean 'LED_YELLOW_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                                              ^~~~~~~~~~~~~~~~~~
-      |                                                              LED_YELLOW_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:312:81: error: 'LED_PED_Pin_Pin' undeclared (first use in this function); did you mean 'LED_PED_Pin'?
-  312 |   HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin_Pin|LED_RED_Pin_Pin|LED_YELLOW_Pin_Pin|LED_PED_Pin_Pin, GPIO_PIN_RESET);
-      |                                                                                 ^~~~~~~~~~~~~~~
-      |                                                                                 LED_PED_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:315:25: error: 'BTN_Pin_Pin' undeclared (first use in this function); did you mean 'BTN_Pin'?
-  315 |   GPIO_InitStruct.Pin = BTN_Pin_Pin;
-      |                         ^~~~~~~~~~~
-      |                         BTN_Pin
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c:318:17: error: 'BTN_Pin_GPIO_Port' undeclared (first use in this function); did you mean 'BTN_GPIO_Port'?
-  318 |   HAL_GPIO_Init(BTN_Pin_GPIO_Port, &GPIO_InitStruct);
-      |                 ^~~~~~~~~~~~~~~~~
-      |                 BTN_GPIO_Port
-make: *** [Application/User/Core/subdir.mk:31: Application/User/Core/main.o] Error 1
-"make -j16 all" terminated with exit code 2. Build might be incomplete.
-17:49:08 **** Incremental Build of configuration Debug for project CH1-Traffic Lights ****
-make -j16 all 
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/CH1-Traffic Lights/Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/Core/main.d" -MT"Application/User/Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/Core/main.o"
-arm-none-eabi-gcc -o "CH1-Traffic Lights.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\CH1-Traffic Lights\STM32CubeIDE\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CH1-Traffic Lights.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CH1-Traffic Lights.elf
+arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_FULL_LL_DRIVER -DHSE_VALUE=8000000 -DHSE_STARTUP_TIMEOUT=100 -DLSE_STARTUP_TIMEOUT=5000 -DLSE_VALUE=32768 -DEXTERNAL_CLOCK_VALUE=12288000 -DHSI_VALUE=16000000 -DLSI_VALUE=32000 -DVDD_VALUE=3300 -DPREFETCH_ENABLE=1 -DINSTRUCTION_CACHE_ENABLE=1 -DDATA_CACHE_ENABLE=1 -DSTM32F401xE -c -I../../Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/main.d" -MT"Application/User/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/main.o"
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:122:20: warning: pointer targets in initialization of 'uint8_t *' {aka 'unsigned char *'} from 'char *' differ in signedness [-Wpointer-sign]
+  122 | uint8_t *message = "Here is a message!\r\n";
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:124:23: warning: pointer targets in initialization of 'uint8_t *' {aka 'unsigned char *'} from 'char *' differ in signedness [-Wpointer-sign]
+  124 | uint8_t *data_block = "incoming!\r\n";
+      |                       ^~~~~~~~~~~~~~~
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:125:16: warning: pointer targets in initialization of 'uint8_t *' {aka 'unsigned char *'} from 'char *' differ in signedness [-Wpointer-sign]
+  125 | uint8_t *src = "Hello Peter! This message is brought to you via SPI";
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal.h:6,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Src/main.c:2:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:75:17: warning: 'mhal_tim_get_clock' declared 'static' but never defined [-Wunused-function]
+   75 | static uint32_t mhal_tim_get_clock(TIM_TypeDef *tim);
+      |                 ^~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "start.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Bare Metal\start\STM32CubeIDE\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="start.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: start.elf
  
-arm-none-eabi-size  CH1-Traffic\ Lights.elf 
-arm-none-eabi-objdump -h -S CH1-Traffic\ Lights.elf  > "CH1-Traffic Lights.list"
+arm-none-eabi-size  start.elf 
+arm-none-eabi-objdump -h -S start.elf  > "start.list"
    text	   data	    bss	    dec	    hex	filename
-   6668	     12	   1580	   8260	   2044	CH1-Traffic Lights.elf
+   6232	      4	   1908	   8144	   1fd0	start.elf
 Finished building: default.size.stdout
  
-Finished building: CH1-Traffic Lights.list
+Finished building: start.list
  
-17:49:21 **** Incremental Build of configuration Debug for project CH1-Traffic Lights ****
+18:43:51 **** Incremental Build of configuration Debug for project start ****
 make -j16 all 
-arm-none-eabi-size  CH1-Traffic\ Lights.elf 
+arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_adc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_FULL_LL_DRIVER -DHSE_VALUE=8000000 -DHSE_STARTUP_TIMEOUT=100 -DLSE_STARTUP_TIMEOUT=5000 -DLSE_VALUE=32768 -DEXTERNAL_CLOCK_VALUE=12288000 -DHSI_VALUE=16000000 -DLSI_VALUE=32000 -DVDD_VALUE=3300 -DPREFETCH_ENABLE=1 -DINSTRUCTION_CACHE_ENABLE=1 -DDATA_CACHE_ENABLE=1 -DSTM32F401xE -c -I../../Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"src/mhal_adc.d" -MT"src/mhal_adc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "src/mhal_adc.o"
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_adc.h:5,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_adc.c:1:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:75:17: warning: 'mhal_tim_get_clock' declared 'static' but never defined [-Wunused-function]
+   75 | static uint32_t mhal_tim_get_clock(TIM_TypeDef *tim);
+      |                 ^~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "start.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\Bare Metal\start\STM32CubeIDE\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="start.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: start.elf
+ 
+arm-none-eabi-size  start.elf 
+arm-none-eabi-objdump -h -S start.elf  > "start.list"
    text	   data	    bss	    dec	    hex	filename
-   6668	     12	   1580	   8260	   2044	CH1-Traffic Lights.elf
+   6212	      4	   1908	   8124	   1fbc	start.elf
+Finished building: default.size.stdout
+ 
+Finished building: start.list
+ 
+18:43:58 **** Incremental Build of configuration Debug for project start ****
+make -j16 all 
+arm-none-eabi-size  start.elf 
+   text	   data	    bss	    dec	    hex	filename
+   6212	      4	   1908	   8124	   1fbc	start.elf
 Finished building: default.size.stdout
  

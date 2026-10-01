@@ -1,0 +1,110 @@
+#include "mhal_adc.h"
+#include "stm32f401xe.h"
+#include "mhal_gpio.h"
+/*
+ * -> ADC on APB2, but has it's own prescaler. should work under 36MHz
+ *
+ *
+ */
+
+//---------------------------LEMMA FUNCTIONS------------------------------
+static uint8_t mhal_adc_pin_to_channel(const char* pin_name){
+	GPIO_TypeDef *port = mhal_dename_port(pin_name);
+	uint32_t pin = mhal_dename_pin(pin_name);
+	mhal_gpio_config_t gpio_config = MHAL_GPIO_CFG_ANALOG;
+	mhal_gpio_init(port, pin, &gpio_config);
+
+	if(pin_name==PA0){
+		return 0U;
+	}
+	else if(pin_name==PA1){
+		return 1U;
+	}
+	else if(pin_name==PA2){
+			return 2U;
+		}
+	else if(pin_name==PA3){
+			return 3U;
+		}
+	else if(pin_name==PA4){
+			return 4U;
+		}
+	else if(pin_name==PA5){
+			return 5U;
+		}
+	else if(pin_name==PA6){
+			return 6U;
+		}
+	else if(pin_name==PA7){
+			return 7U;
+		}
+	else if(pin_name==PB0){
+			return 8U;
+		}
+	else if(pin_name==PB1){
+			return 9U;
+		}
+	else if(pin_name==PC0){
+			return 10U;
+		}
+	else if(pin_name==PC1){
+			return 11U;
+		}
+	else if(pin_name==PC2){
+			return 12U;
+		}
+	else if(pin_name==PC3){
+			return 13U;
+		}
+	else if(pin_name==PC4){
+			return 14U;
+		}
+	else if(pin_name==PC5){
+			return 15U;
+		}
+	return 0U; //if user chose pin which isnt channel, then default to PA0
+}
+
+//------------------------------------------------------------------------
+
+void mhal_adc_init(ADC_TypeDef *adc, const char* pin_name){
+	//CLOCK ENABLE
+	RCC->APB2ENR |= RCC_APB2ENR_ADC1EN;
+
+	mhal_adc_config_t config = MHAL_ADC_CFG_DEFAULT;
+	config.channel = mhal_adc_pin_to_channel(pin_name);
+	//PRESCALER CONFIG
+	ADC_Common_TypeDef *gen_adc = ADC1_COMMON;
+	gen_adc->CCR &= ~ADC_CCR_ADCPRE_Msk;
+	gen_adc->CCR |= (config.prescaler)<<ADC_CCR_ADCPRE_Pos;
+
+	//RESOLUTION
+	adc->CR1 &= ~ADC_CR1_RES_Msk;
+	adc->CR1 |= (config.resolution)<<ADC_CR1_RES_Pos;
+
+	//CHANNEL CONFIG
+	adc->SQR3 &= ~ADC_SQR3_SQ1_Msk;
+	adc->SQR3 |= (config.channel)<<ADC_SQR3_SQ1_Pos;
+
+	//SAMPLE TIME (first channel only)
+	adc->SMPR2 &= ~(ADC_SMPR2_SMP0_Msk<<(config.channel * 3U));
+	adc->SMPR2 |= (config.sample_time)<<(config.channel * 3U);
+
+	//SCAN MODE ENABLED (cycle through input channels converting each one)
+	adc->CR1 |= ADC_CR1_SCAN;
+
+	//CONTINOUS MODE ENABLED (keep reading the enabled channel(s))
+	adc->CR2 |= ADC_CR2_CONT;
+
+	//ADC ON
+	adc->CR2 |= ADC_CR2_ADON;
+}
+
+uint32_t mhal_adc_read(ADC_TypeDef *adc){
+	//adc->SR &= ~ADC_SR_EOC; race?
+	(void)adc->DR; //atomic, and clears EOC
+
+	adc->CR2 |= ADC_CR2_SWSTART;
+	while(!(adc->SR & ADC_SR_EOC)){}
+	return adc->DR;
+}

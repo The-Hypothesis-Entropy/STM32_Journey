@@ -1,0 +1,7 @@
+#include "mhal_adc.h"
+
+/*
+ * -> ADC on APB2, but has it's own prescaler. should work under 36MHz
+ *
+ *
+ */

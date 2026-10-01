@@ -1,0 +1,23 @@
+#include "mhal_adc.h"
+#include "stm32f401xe.h"
+/*
+ * -> ADC on APB2, but has it's own prescaler. should work under 36MHz
+ *
+ *
+ */
+
+void mhal_adc_init(ADC_TypeDef *adc){
+	mhal_adc_config_t config = MHAL_ADC_CFG_DEFAULT;
+
+	adc->CR1 &= ~ADC_CR1_RES_Msk;
+	adc->CR1 |= (config.resolution)<<ADC_CR1_RES_Pos;
+
+	//SCAN MODE ENABLED (cycle through input channels converting each one)
+	adc->CR1 |= ADC_CR1_SCAN;
+
+
+}
+
+void mhal_adc_read(ADC_TypeDef *adc){
+	adc->CR2 |= ADC_CR2_SWSTART;
+}

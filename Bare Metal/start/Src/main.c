@@ -3,6 +3,7 @@
 #include "mhal_exti.h"
 #include "mhal_fsm.h"
 #include "mhal_dma.h"
+#include "mhal_gpio.h"
 
 
 /*
@@ -125,14 +126,16 @@ uint8_t *src = "Hello Peter! This message is brought to you via SPI";
 
 uint8_t dst[100];
 
+uint16_t value;
 int main(){
 	//mhal_gpio_init(GPIOC, 13, &MHAL_GPIO_CFG_INPUT_PULLUP);
 	mhal_gpio_init(GPIOA, 5, &MHAL_GPIO_CFG_OUTPUT);
 	mhal_interrupt(GPIOC, 13, GPIO_FALLING_EDGE, 1);
-	mhal_spi_tx_data = src;
-	mhal_spi_master_device(SPI3, PC9);
+	mhal_adc_init(ADC1, PA7);
+	//mhal_spi_tx_data = src;
+	//mhal_spi_master_device(SPI3, PC9);
 	//mhal_spi_write(SPI3, 20);
-	mhal_spi_dma_send(SPI3, 25);
+	//mhal_spi_dma_send(SPI3, 25);
 
 	//mhal_tim_pwm_cfg(TIM2, PA0, MHAL_TIM_CH1, AF1, 5000U, 100);
 	//mhal_tim_base_on(TIM2, 100, 0);
@@ -215,6 +218,7 @@ int main(){
 		//mhal_uart_read_byte(USART2);
 		//mhal_uart_transmit(USART1, (uint8_t *)"HELLLLLLOOO BOY!\r\n", 15);
 		//mhal_spi_write(SPI3, 50);
+		value = mhal_adc_read(ADC1);
 		mhal_delay(500);
 		//mhal_uart_dma_send(USART1, MHAL_UART_TX_MAX_BUF_SIZE);
 

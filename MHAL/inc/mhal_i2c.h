@@ -6,6 +6,7 @@
 #include "mhal_globals.h"
 #include "stm32f401xe.h"
 #include "stdint.h"
+#include "mhal_rcc.h"
 
 /*
  * FOUR MODES:
