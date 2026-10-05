@@ -1,0 +1,168 @@
+19:06:06 **** Incremental Build of configuration Debug for project side_project ****
+make -j16 all 
+arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/win/lv_win.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"lvgl_src/widgets/win/lv_win.d" -MT"lvgl_src/widgets/win/lv_win.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "lvgl_src/widgets/win/lv_win.o"
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/win/../../core/../../include/lvgl/3d/lv_3dmath.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/win/../../core/../../include/lvgl/lvgl.h:5,
+arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tileview/lv_tileview.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"lvgl_src/widgets/tileview/lv_tileview.d" -MT"lvgl_src/widgets/tileview/lv_tileview.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "lvgl_src/widgets/tileview/lv_tileview.o"
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/win/../../core/../lvgl_public.h:8,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/win/../../core/lv_obj_private.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/win/lv_win_private.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/win/lv_win.c:9:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/win/../../core/../../include/lvgl/3d/../config/lv_conf_internal.h:5504:6: error: #error "LV_USE_GENERIC_MIPI must be enabled: Kconfig selects it from LV_USE_ST7735 || LV_USE_ST7789 || LV_USE_ST7796 || LV_USE_ILI9341 || LV_USE_NV3007"
+ 5504 |     #error "LV_USE_GENERIC_MIPI must be enabled: Kconfig selects it from LV_USE_ST7735 || LV_USE_ST7789 || LV_USE_ST7796 || LV_USE_ILI9341 || LV_USE_NV3007"
+      |      ^~~~~
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tileview/../../core/../../include/lvgl/3d/lv_3dmath.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tileview/../../core/../../include/lvgl/lvgl.h:5,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tileview/../../core/../lvgl_public.h:8,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tileview/../../core/lv_obj_private.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tileview/lv_tileview_private.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tileview/lv_tileview.c:10:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tileview/../../core/../../include/lvgl/3d/../config/lv_conf_internal.h:5504:6: error: #error "LV_USE_GENERIC_MIPI must be enabled: Kconfig selects it from LV_USE_ST7735 || LV_USE_ST7789 || LV_USE_ST7796 || LV_USE_ILI9341 || LV_USE_NV3007"
+ 5504 |     #error "LV_USE_GENERIC_MIPI must be enabled: Kconfig selects it from LV_USE_ST7735 || LV_USE_ST7789 || LV_USE_ST7796 || LV_USE_ILI9341 || LV_USE_NV3007"
+      |      ^~~~~
+arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/textarea/lv_textarea.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"lvgl_src/widgets/textarea/lv_textarea.d" -MT"lvgl_src/widgets/textarea/lv_textarea.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "lvgl_src/widgets/textarea/lv_textarea.o"
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/textarea/../../core/../../include/lvgl/3d/lv_3dmath.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/textarea/../../core/../../include/lvgl/lvgl.h:5,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/textarea/../../core/../lvgl_public.h:8,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/textarea/../../core/lv_obj_private.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/textarea/lv_textarea_private.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/textarea/lv_textarea.c:9:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/textarea/../../core/../../include/lvgl/3d/../config/lv_conf_internal.h:5504:6: error: #error "LV_USE_GENERIC_MIPI must be enabled: Kconfig selects it from LV_USE_ST7735 || LV_USE_ST7789 || LV_USE_ST7796 || LV_USE_ILI9341 || LV_USE_NV3007"
+ 5504 |     #error "LV_USE_GENERIC_MIPI must be enabled: Kconfig selects it from LV_USE_ST7735 || LV_USE_ST7789 || LV_USE_ST7796 || LV_USE_ILI9341 || LV_USE_NV3007"
+      |      ^~~~~
+arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tabview/lv_tabview.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"lvgl_src/widgets/tabview/lv_tabview.d" -MT"lvgl_src/widgets/tabview/lv_tabview.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "lvgl_src/widgets/tabview/lv_tabview.o"
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/win/../../core/../../include/lvgl/lvgl.h:85:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/win/../../core/../../include/lvgl/drivers/display/lv_st7735.h:31:9: error: unknown type name 'lv_lcd_send_cmd_cb_t'
+   31 | typedef lv_lcd_send_cmd_cb_t lv_st7735_send_cmd_cb_t;
+      |         ^~~~~~~~~~~~~~~~~~~~
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/win/../../core/../../include/lvgl/drivers/display/lv_st7735.h:32:9: error: unknown type name 'lv_lcd_send_color_cb_t'; did you mean 'lv_obj_set_color_t'?
+   32 | typedef lv_lcd_send_color_cb_t lv_st7735_send_color_cb_t;
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+      |         lv_obj_set_color_t
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/win/../../core/../../include/lvgl/drivers/display/lv_st7735.h:47:69: error: unknown type name 'lv_lcd_flag_t'; did you mean 'lv_obj_flag_t'?
+   47 | lv_display_t * lv_st7735_create(uint32_t hor_res, uint32_t ver_res, lv_lcd_flag_t flags,
+      |                                                                     ^~~~~~~~~~~~~
+      |                                                                     lv_obj_flag_t
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tabview/../../core/../../include/lvgl/3d/lv_3dmath.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tabview/../../core/../../include/lvgl/lvgl.h:5,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tabview/../../core/../lvgl_public.h:8,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tabview/../../core/lv_obj_private.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tabview/lv_tabview_private.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tabview/lv_tabview.c:9:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tabview/../../core/../../include/lvgl/3d/../config/lv_conf_internal.h:5504:6: error: #error "LV_USE_GENERIC_MIPI must be enabled: Kconfig selects it from LV_USE_ST7735 || LV_USE_ST7789 || LV_USE_ST7796 || LV_USE_ILI9341 || LV_USE_NV3007"
+ 5504 |     #error "LV_USE_GENERIC_MIPI must be enabled: Kconfig selects it from LV_USE_ST7735 || LV_USE_ST7789 || LV_USE_ST7796 || LV_USE_ILI9341 || LV_USE_NV3007"
+      |      ^~~~~
+arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/table/lv_table.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"lvgl_src/widgets/table/lv_table.d" -MT"lvgl_src/widgets/table/lv_table.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "lvgl_src/widgets/table/lv_table.o"
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tileview/../../core/../../include/lvgl/lvgl.h:85:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tileview/../../core/../../include/lvgl/drivers/display/lv_st7735.h:31:9: error: unknown type name 'lv_lcd_send_cmd_cb_t'
+   31 | typedef lv_lcd_send_cmd_cb_t lv_st7735_send_cmd_cb_t;
+      |         ^~~~~~~~~~~~~~~~~~~~
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tileview/../../core/../../include/lvgl/drivers/display/lv_st7735.h:32:9: error: unknown type name 'lv_lcd_send_color_cb_t'; did you mean 'lv_obj_set_color_t'?
+   32 | typedef lv_lcd_send_color_cb_t lv_st7735_send_color_cb_t;
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+      |         lv_obj_set_color_t
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tileview/../../core/../../include/lvgl/drivers/display/lv_st7735.h:47:69: error: unknown type name 'lv_lcd_flag_t'; did you mean 'lv_obj_flag_t'?
+   47 | lv_display_t * lv_st7735_create(uint32_t hor_res, uint32_t ver_res, lv_lcd_flag_t flags,
+      |                                                                     ^~~~~~~~~~~~~
+      |                                                                     lv_obj_flag_t
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/table/../../core/../../include/lvgl/3d/lv_3dmath.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/table/../../core/../../include/lvgl/lvgl.h:5,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/table/../../core/../lvgl_public.h:8,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/table/../../core/lv_obj_private.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/table/lv_table_private.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/table/lv_table.c:10:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/table/../../core/../../include/lvgl/3d/../config/lv_conf_internal.h:5504:6: error: #error "LV_USE_GENERIC_MIPI must be enabled: Kconfig selects it from LV_USE_ST7735 || LV_USE_ST7789 || LV_USE_ST7796 || LV_USE_ILI9341 || LV_USE_NV3007"
+ 5504 |     #error "LV_USE_GENERIC_MIPI must be enabled: Kconfig selects it from LV_USE_ST7735 || LV_USE_ST7789 || LV_USE_ST7796 || LV_USE_ILI9341 || LV_USE_NV3007"
+      |      ^~~~~
+arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/switch/lv_switch.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"lvgl_src/widgets/switch/lv_switch.d" -MT"lvgl_src/widgets/switch/lv_switch.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "lvgl_src/widgets/switch/lv_switch.o"
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/switch/../../core/../../include/lvgl/3d/lv_3dmath.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/switch/../../core/../../include/lvgl/lvgl.h:5,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/switch/../../core/../lvgl_public.h:8,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/switch/../../core/lv_obj_private.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/switch/lv_switch_private.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/switch/lv_switch.c:9:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/switch/../../core/../../include/lvgl/3d/../config/lv_conf_internal.h:5504:6: error: #error "LV_USE_GENERIC_MIPI must be enabled: Kconfig selects it from LV_USE_ST7735 || LV_USE_ST7789 || LV_USE_ST7796 || LV_USE_ILI9341 || LV_USE_NV3007"
+ 5504 |     #error "LV_USE_GENERIC_MIPI must be enabled: Kconfig selects it from LV_USE_ST7735 || LV_USE_ST7789 || LV_USE_ST7796 || LV_USE_ILI9341 || LV_USE_NV3007"
+      |      ^~~~~
+arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/spinner/lv_spinner.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"lvgl_src/widgets/spinner/lv_spinner.d" -MT"lvgl_src/widgets/spinner/lv_spinner.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "lvgl_src/widgets/spinner/lv_spinner.o"
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/textarea/../../core/../../include/lvgl/lvgl.h:85:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/textarea/../../core/../../include/lvgl/drivers/display/lv_st7735.h:31:9: error: unknown type name 'lv_lcd_send_cmd_cb_t'
+   31 | typedef lv_lcd_send_cmd_cb_t lv_st7735_send_cmd_cb_t;
+      |         ^~~~~~~~~~~~~~~~~~~~
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/textarea/../../core/../../include/lvgl/drivers/display/lv_st7735.h:32:9: error: unknown type name 'lv_lcd_send_color_cb_t'; did you mean 'lv_obj_set_color_t'?
+   32 | typedef lv_lcd_send_color_cb_t lv_st7735_send_color_cb_t;
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+      |         lv_obj_set_color_t
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/textarea/../../core/../../include/lvgl/drivers/display/lv_st7735.h:47:69: error: unknown type name 'lv_lcd_flag_t'; did you mean 'lv_obj_flag_t'?
+   47 | lv_display_t * lv_st7735_create(uint32_t hor_res, uint32_t ver_res, lv_lcd_flag_t flags,
+      |                                                                     ^~~~~~~~~~~~~
+      |                                                                     lv_obj_flag_t
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/spinner/../../core/../../include/lvgl/3d/lv_3dmath.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/spinner/../../core/../../include/lvgl/lvgl.h:5,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/spinner/../../core/../lvgl_public.h:8,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/spinner/../../core/lv_obj_private.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/spinner/lv_spinner_private.h:17,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/spinner/lv_spinner.c:10:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/spinner/../../core/../../include/lvgl/3d/../config/lv_conf_internal.h:5504:6: error: #error "LV_USE_GENERIC_MIPI must be enabled: Kconfig selects it from LV_USE_ST7735 || LV_USE_ST7789 || LV_USE_ST7796 || LV_USE_ILI9341 || LV_USE_NV3007"
+ 5504 |     #error "LV_USE_GENERIC_MIPI must be enabled: Kconfig selects it from LV_USE_ST7735 || LV_USE_ST7789 || LV_USE_ST7796 || LV_USE_ILI9341 || LV_USE_NV3007"
+      |      ^~~~~
+make: *** [lvgl_src/widgets/win/subdir.mk:19: lvgl_src/widgets/win/lv_win.o] Error 1
+make: *** Waiting for unfinished jobs....
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tabview/../../core/../../include/lvgl/lvgl.h:85:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tabview/../../core/../../include/lvgl/drivers/display/lv_st7735.h:31:9: error: unknown type name 'lv_lcd_send_cmd_cb_t'
+   31 | typedef lv_lcd_send_cmd_cb_t lv_st7735_send_cmd_cb_t;
+      |         ^~~~~~~~~~~~~~~~~~~~
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tabview/../../core/../../include/lvgl/drivers/display/lv_st7735.h:32:9: error: unknown type name 'lv_lcd_send_color_cb_t'; did you mean 'lv_obj_set_color_t'?
+   32 | typedef lv_lcd_send_color_cb_t lv_st7735_send_color_cb_t;
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+      |         lv_obj_set_color_t
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/tabview/../../core/../../include/lvgl/drivers/display/lv_st7735.h:47:69: error: unknown type name 'lv_lcd_flag_t'; did you mean 'lv_obj_flag_t'?
+   47 | lv_display_t * lv_st7735_create(uint32_t hor_res, uint32_t ver_res, lv_lcd_flag_t flags,
+      |                                                                     ^~~~~~~~~~~~~
+      |                                                                     lv_obj_flag_t
+make: *** [lvgl_src/widgets/tileview/subdir.mk:19: lvgl_src/widgets/tileview/lv_tileview.o] Error 1
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/table/../../core/../../include/lvgl/lvgl.h:85:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/table/../../core/../../include/lvgl/drivers/display/lv_st7735.h:31:9: error: unknown type name 'lv_lcd_send_cmd_cb_t'
+   31 | typedef lv_lcd_send_cmd_cb_t lv_st7735_send_cmd_cb_t;
+      |         ^~~~~~~~~~~~~~~~~~~~
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/table/../../core/../../include/lvgl/drivers/display/lv_st7735.h:32:9: error: unknown type name 'lv_lcd_send_color_cb_t'; did you mean 'lv_obj_set_color_t'?
+   32 | typedef lv_lcd_send_color_cb_t lv_st7735_send_color_cb_t;
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+      |         lv_obj_set_color_t
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/table/../../core/../../include/lvgl/drivers/display/lv_st7735.h:47:69: error: unknown type name 'lv_lcd_flag_t'; did you mean 'lv_obj_flag_t'?
+   47 | lv_display_t * lv_st7735_create(uint32_t hor_res, uint32_t ver_res, lv_lcd_flag_t flags,
+      |                                                                     ^~~~~~~~~~~~~
+      |                                                                     lv_obj_flag_t
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/switch/../../core/../../include/lvgl/lvgl.h:85:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/switch/../../core/../../include/lvgl/drivers/display/lv_st7735.h:31:9: error: unknown type name 'lv_lcd_send_cmd_cb_t'
+   31 | typedef lv_lcd_send_cmd_cb_t lv_st7735_send_cmd_cb_t;
+      |         ^~~~~~~~~~~~~~~~~~~~
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/switch/../../core/../../include/lvgl/drivers/display/lv_st7735.h:32:9: error: unknown type name 'lv_lcd_send_color_cb_t'; did you mean 'lv_obj_set_color_t'?
+   32 | typedef lv_lcd_send_color_cb_t lv_st7735_send_color_cb_t;
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+      |         lv_obj_set_color_t
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/switch/../../core/../../include/lvgl/drivers/display/lv_st7735.h:47:69: error: unknown type name 'lv_lcd_flag_t'; did you mean 'lv_obj_flag_t'?
+   47 | lv_display_t * lv_st7735_create(uint32_t hor_res, uint32_t ver_res, lv_lcd_flag_t flags,
+      |                                                                     ^~~~~~~~~~~~~
+      |                                                                     lv_obj_flag_t
+make: *** [lvgl_src/widgets/textarea/subdir.mk:19: lvgl_src/widgets/textarea/lv_textarea.o] Error 1
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/spinner/../../core/../../include/lvgl/lvgl.h:85:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/spinner/../../core/../../include/lvgl/drivers/display/lv_st7735.h:31:9: error: unknown type name 'lv_lcd_send_cmd_cb_t'
+   31 | typedef lv_lcd_send_cmd_cb_t lv_st7735_send_cmd_cb_t;
+      |         ^~~~~~~~~~~~~~~~~~~~
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/spinner/../../core/../../include/lvgl/drivers/display/lv_st7735.h:32:9: error: unknown type name 'lv_lcd_send_color_cb_t'; did you mean 'lv_obj_set_color_t'?
+   32 | typedef lv_lcd_send_color_cb_t lv_st7735_send_color_cb_t;
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+      |         lv_obj_set_color_t
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/lvgl/src/widgets/spinner/../../core/../../include/lvgl/drivers/display/lv_st7735.h:47:69: error: unknown type name 'lv_lcd_flag_t'; did you mean 'lv_obj_flag_t'?
+   47 | lv_display_t * lv_st7735_create(uint32_t hor_res, uint32_t ver_res, lv_lcd_flag_t flags,
+      |                                                                     ^~~~~~~~~~~~~
+      |                                                                     lv_obj_flag_t
+make: *** [lvgl_src/widgets/tabview/subdir.mk:19: lvgl_src/widgets/tabview/lv_tabview.o] Error 1
+make: *** [lvgl_src/widgets/table/subdir.mk:19: lvgl_src/widgets/table/lv_table.o] Error 1
+make: *** [lvgl_src/widgets/switch/subdir.mk:19: lvgl_src/widgets/switch/lv_switch.o] Error 1
+make: *** [lvgl_src/widgets/spinner/subdir.mk:19: lvgl_src/widgets/spinner/lv_spinner.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+
+19:06:10 Build Failed. 36 errors, 0 warnings. (took 4s.217ms)
+

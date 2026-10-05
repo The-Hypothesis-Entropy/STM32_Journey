@@ -1,10 +1,10 @@
-18:43:58 **** Incremental Build of configuration Debug for project start ****
+01:33:39 **** Incremental Build of configuration Debug for project start ****
 make -j16 all 
 arm-none-eabi-size  start.elf 
    text	   data	    bss	    dec	    hex	filename
-   6212	      4	   1908	   8124	   1fbc	start.elf
+   6960	      8	   1904	   8872	   22a8	start.elf
 Finished building: default.size.stdout
  
 
-18:43:58 Build Finished. 0 errors, 0 warnings. (took 162ms)
+01:33:39 Build Finished. 0 errors, 0 warnings. (took 192ms)
 

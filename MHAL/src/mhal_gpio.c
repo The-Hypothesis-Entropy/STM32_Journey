@@ -154,8 +154,7 @@ uint8_t mhal_dename_pin(const char* pin){
 }
 
 void mhal_delay(uint32_t delay){
-	for(volatile uint32_t i=0; i<delay*500; i++){
-		uint8_t x = 0;
-		x++;
+	for(volatile uint32_t i=0; i<delay*1600; i++){
+		__asm("nop");
 	}
 }

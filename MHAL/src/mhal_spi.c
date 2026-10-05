@@ -146,29 +146,44 @@ static void mhal_spi_slave_init(SPI_TypeDef *spi, const char *cs_ref){
 	mhal_spi_config(spi, &spi_config);
 }
 
-void mhal_spi_write_byte(SPI_TypeDef *spi, uint8_t byte){
+void mhal_spi_write_byte(SPI_TypeDef *spi, uint8_t byte, uint8_t release){
 	//CS-LOW
 		const char *current_cs;
-	#ifdef SPI1
-		if(spi==SPI1){current_cs = mhal_spi1_cs;}
-	#endif
-	#ifdef SPI2
-		if(spi==SPI2){current_cs = mhal_spi2_cs;}
-	#endif
-	#ifdef SPI3
-		if(spi==SPI3){current_cs = mhal_spi3_cs;}
-	#endif
-	#ifdef SPI4
-		if(spi==SPI4){current_cs = mhal_spi4_cs;}
-	#endif
-	mhal_gpio_write(mhal_dename_port(current_cs), mhal_dename_pin(current_cs), MHAL_GPIO_LOW);
-	mhal_spi_tx_len = 1U;
-	mhal_spi_tx_idx = 0U;
-	mhal_spi_tx_data[0] = byte;
-	while(!(spi->SR & SPI_SR_TXE)){}
-	spi->DR = mhal_spi_tx_data[mhal_spi_tx_idx++];
-	while(spi->SR & SPI_SR_BSY){} //ENSURE THE BYTE IS FULLY TRANSMITTED BEFORE PULLING CS HIGH
-	mhal_gpio_write(mhal_dename_port(current_cs), mhal_dename_pin(current_cs), MHAL_GPIO_HIGH);
+		#ifdef SPI1
+			if(spi==SPI1){current_cs = mhal_spi1_cs;}
+		#endif
+		#ifdef SPI2
+			if(spi==SPI2){current_cs = mhal_spi2_cs;}
+		#endif
+		#ifdef SPI3
+			if(spi==SPI3){current_cs = mhal_spi3_cs;}
+		#endif
+		#ifdef SPI4
+			if(spi==SPI4){current_cs = mhal_spi4_cs;}
+		#endif
+
+	//======================================
+		// 1. Set DC Pin (PB2)
+		    //if(dc_state) *GPIOB_ODR |= (1 << 2);
+		    //else         *GPIOB_ODR &= ~(1 << 2);
+
+		    // 2. Drop CS (PB0) Low
+			mhal_gpio_write(mhal_dename_port(current_cs), mhal_dename_pin(current_cs), MHAL_GPIO_LOW); // GPIOB->ODR &= ~(1 << 0);
+
+		    // 3. Clear existing flags and send byte
+			while(!(spi->SR & SPI_SR_TXE)); //while(!(SPI2->SR & (1 << 1))); // Wait for TXE
+		    SPI2->DR = byte;               // Strict 8-bit write execution
+
+		    // 4. Clean transmission wait
+		    while(!(spi->SR & SPI_SR_TXE)){} // Wait for TXE to clear out of buffer
+		    while(spi->SR & SPI_SR_BSY){}    // Wait for BSY to fall back to 0
+
+		    // 5. Raise CS (PB0) High
+		    if(release==1U){
+		    mhal_gpio_write(mhal_dename_port(current_cs), mhal_dename_pin(current_cs), MHAL_GPIO_HIGH);
+		    }
+		//======================================
+
 }
 
 uint8_t mhal_spi_read_byte(SPI_TypeDef *spi){

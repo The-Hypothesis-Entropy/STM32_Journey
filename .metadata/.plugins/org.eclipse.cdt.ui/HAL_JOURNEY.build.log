@@ -1,0 +1,10 @@
+01:33:37 **** Incremental Build of configuration Debug for project HAL_JOURNEY ****
+make -j16 all 
+arm-none-eabi-size  HAL_JOURNEY.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5984	     12	   1572	   7568	   1d90	HAL_JOURNEY.elf
+Finished building: default.size.stdout
+ 
+
+01:33:37 Build Finished. 0 errors, 0 warnings. (took 218ms)
+

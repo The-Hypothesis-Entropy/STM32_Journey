@@ -1,0 +1,120 @@
+#include "st7735.h"
+#include "mhal_spi.h"
+#include "mhal_gpio.h"
+
+#define PIN_CS "PC4"
+GPIO_TypeDef *port_rst = GPIOB;
+GPIO_TypeDef *port_dc = GPIOB;
+uint8_t pin_rst = 1;
+uint8_t pin_dc = 2;
+
+
+
+void ST7735_WriteCmd(uint8_t cmd){
+	//mhal_gpio_off(PIN_CS);
+	mhal_gpio_write(port_dc, pin_dc, 0); //COMMAND
+	mhal_spi_write_byte(SPI2, cmd);
+	//mhal_gpio_on(PIN_CS);
+}
+
+void ST7735_WriteData(uint8_t data){
+	//mhal_gpio_off(PIN_CS);
+	mhal_gpio_write(port_dc, pin_dc, 1); //DATA
+	mhal_spi_write_byte(SPI2, data);
+	//mhal_gpio_on(PIN_CS);
+}
+
+static void ST7735_SetWindow(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1){
+	ST7735_WriteCmd(0x2A); //column address set
+	ST7735_WriteData(0x00); ST7735_WriteData(x0 +2);
+	ST7735_WriteData(0x00); ST7735_WriteData(x1 + 2);
+
+	ST7735_WriteCmd(0x2B); //row address set
+	ST7735_WriteData(0x00); ST7735_WriteData(y0 + 3);
+	ST7735_WriteData(0x00); ST7735_WriteData(y1 + 3);
+
+	ST7735_WriteCmd(0x2C); //memory write
+
+
+}
+
+void ST7735_Init(const char *rst, const char *dc){
+	port_rst = mhal_dename_port(rst);
+	port_dc = mhal_dename_port(dc);
+	pin_rst = mhal_dename_pin(rst);
+	pin_dc = mhal_dename_pin(dc);
+	mhal_gpio_init(port_dc, pin_dc, &MHAL_GPIO_CFG_OUTPUT);
+	mhal_gpio_init(port_rst, pin_rst, &MHAL_GPIO_CFG_OUTPUT);
+	mhal_delay(50);
+//Hardware Reset Sequence
+	mhal_gpio_write(GPIOB, pin_rst, 0); mhal_delay(50);
+	mhal_gpio_write(GPIOB, pin_rst, 1); mhal_delay(120);
+
+	ST7735_WriteCmd(0x01); //software reset
+	mhal_delay(150);
+
+	ST7735_WriteCmd(0x11); //sleep out
+	mhal_delay(200);
+
+	ST7735_WriteCmd(0xC0); //Power control 1
+	ST7735_WriteData(0xA2); ST7735_WriteData(0x02); ST7735_WriteData(0x84);
+
+	ST7735_WriteCmd(0xC1); //Power control 2
+	ST7735_WriteData(0xC5);
+
+	ST7735_WriteCmd(0xC2); //Power control 3
+	ST7735_WriteData(0x0A); ST7735_WriteData(0x00);
+
+	ST7735_WriteCmd(0xC3); //Power control 4
+	ST7735_WriteData(0x8A); ST7735_WriteData(0x2A);
+
+	ST7735_WriteCmd(0xC4); //Power control 5
+	ST7735_WriteData(0x8A); ST7735_WriteData(0x2E);
+
+	ST7735_WriteCmd(0xC5); //VCOM Control 1
+	ST7735_WriteData(0x0E);
+
+	ST7735_WriteCmd(0x36); //Orientation (MADCTL)
+	ST7735_WriteData(0xC8);
+
+	ST7735_WriteCmd(0x3A); //interface pixel format
+	ST7735_WriteData(0x05); //16bit/pixel (rgb565)
+
+	ST7735_WriteCmd(0x29); //display on
+	mhal_delay(100);
+
+}
+
+void ST7735_FillRect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, uint16_t color){
+	ST7735_SetWindow(x, y, x+w-1, y+h-1);
+
+	uint8_t hi = color >> 8;
+	uint8_t lo = color & 0xFF;
+
+	mhal_gpio_write(GPIOB, pin_dc, 1);
+	//mhal_gpio_write(GPIOC, 4, 0);
+
+	for(uint16_t i = 0; i < (w*h); i++){
+		mhal_spi_write_byte(SPI2, hi);
+		mhal_spi_write_byte(SPI2, lo);
+	}
+	//mhal_gpio_write(GPIOC, 4, 1);
+}
+
+void ST7735_FillCircle(uint8_t x, uint8_t y, uint8_t r, uint16_t color){
+	uint8_t half_width = r;
+	uint16_t radius_squared = (uint16_t)r*r;
+	for(uint16_t row_offset = 0; row_offset<=r; row_offset++){
+		while((uint16_t)half_width*half_width + (uint16_t)row_offset*row_offset > radius_squared){
+			half_width--;
+		}
+		uint16_t span_x = x - half_width;
+		uint8_t span_width = (uint8_t)(2*half_width + 1);
+
+		ST7735_FillRect((uint8_t)span_x, (uint8_t)(y-row_offset), span_width, 1, color);
+
+		if(row_offset>0){
+			ST7735_FillRect((uint8_t)span_x, (uint8_t)(y+row_offset), span_width, 1, color);
+		}
+	}
+}

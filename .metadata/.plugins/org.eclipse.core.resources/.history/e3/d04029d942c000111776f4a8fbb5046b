@@ -1,0 +1,117 @@
+#include <stdint.h>
+#include "mhal.h"
+
+
+// Direct Memory Map Addresses for STM32F401RE Peripherals
+#define RCC_AHB1ENR  ((volatile uint32_t*)0x40023830)
+#define RCC_APB1ENR  ((volatile uint32_t*)0x40023840)
+
+#define GPIOB_MODER  ((volatile uint32_t*)0x40020400)
+#define GPIOB_OTYPER ((volatile uint32_t*)0x40020404)
+#define GPIOB_OSPEEDR ((volatile uint32_t*)0x40020408)
+#define GPIOB_ODR    ((volatile uint32_t*)0x40020414)
+#define GPIOB_AFRH   ((volatile uint32_t*)0x40020424)
+
+#define SPI2_CR1     ((volatile uint32_t*)0x40003800)
+#define SPI2_SR      ((volatile uint32_t*)0x40003808)
+#define SPI2_DR      ((volatile uint8_t*) 0x4000380C) // Explicit 8-bit pointer
+
+// Bare-metal microsecond/millisecond delays running off raw CPU cycles
+void RawDelayMs(uint32_t ms) {
+    volatile uint32_t cycles = ms * 1600; // Rough approximation for 16MHz internal clock
+    while(cycles--) { __asm("nop"); }
+}
+
+// Pure hardware byte write (Decoupled entirely from standard library drivers)
+void RawSPI_Write(uint8_t dc_state, uint8_t byte) {
+    // 1. Set DC Pin (PB2)
+    if(dc_state) *GPIOB_ODR |= (1 << 2);
+    else         *GPIOB_ODR &= ~(1 << 2);
+
+    // 2. Drop CS (PB0) Low
+    *GPIOB_ODR &= ~(1 << 0);
+
+    // 3. Clear existing flags and send byte
+    while(!(*SPI2_SR & (1 << 1))); // Wait for TXE
+    *SPI2_DR = byte;               // Strict 8-bit write execution
+
+    // 4. Clean transmission wait
+    while(!(*SPI2_SR & (1 << 1))); // Wait for TXE to clear out of buffer
+    while(*SPI2_SR & (1 << 7));    // Wait for BSY to fall back to 0
+
+    // 5. Raise CS (PB0) High
+    *GPIOB_ODR |= (1 << 0);
+}
+
+int main(void) {
+
+
+    // Step 1: Force Power Enable on Peripheral Buses (GPIOB and SPI2)
+    *RCC_AHB1ENR |= (1 << 1);  // Enable GPIOB Clock
+    *RCC_APB1ENR |= (1 << 14); // Enable SPI2 Clock
+
+    // Step 2: Configure Control Pins as Outputs (PB0=CS, PB1=RST, PB2=DC)
+    *GPIOB_MODER &= ~((3 << 0) | (3 << 2) | (3 << 4)); // Clear configuration bits
+    *GPIOB_MODER |=  ((1 << 0) | (1 << 2) | (1 << 4)); // Set to General Purpose Output Mode
+    *GPIOB_OTYPER &= ~((1 << 0) | (1 << 1) | (1 << 2)); // Explicitly force Push-Pull mode
+
+    // Step 3: Configure SPI2 Pins to Alternate Function Mode (PB13=SCK, PB15=MOSI)
+    *GPIOB_MODER &= ~((3 << 26) | (3 << 30));
+    *GPIOB_MODER |=  ((2 << 26) | (2 << 30)); // Set both to Alternate Function Mode
+
+    // Step 4: Map Pins to Internal SPI2 Engine (AF5 Mapping)
+    *GPIOB_AFRH &= ~((0xF << 20) | (0xF << 28)); // Clear pin 13 and 15 configuration blocks
+    *GPIOB_AFRH |=  ((5 << 20) | (5 << 28));   // Route to AF5 (SPI2)
+
+    // Step 5: Configure SPI2 Peripheral Engine to exact matching specs
+    *SPI2_CR1 = 0x037C; // Master, 8-Bit, CPOL=0, CPHA=0, Software Slave Management (SSI=1, SSM=1), Baud /256
+
+    // Step 6: Perform Hardware Screen Reset Command
+    *GPIOB_ODR |= (1 << 0); // CS High Default
+    *GPIOB_ODR |= (1 << 1); // RST High
+    mhal_delay(10);
+    *GPIOB_ODR &= ~(1 << 1); // RST Low
+    mhal_delay(50);
+    *GPIOB_ODR |= (1 << 1); // RST High
+    mhal_delay(120);
+
+    // Step 7: Push Core Initialization Sequences
+    RawSPI_Write(0, 0x01); // Software Reset
+    mhal_delay(150);
+    mhal_spi_write_byte(0, 0x11); // Sleep Out
+    mhal_delay(200);
+
+    // Power Control Setup block
+    mhal_spi_write_byte(0, 0xC0); mhal_spi_write_byte(1, 0xA2); mhal_spi_write_byte(1, 0x02); mhal_spi_write_byte(1, 0x84);
+    mhal_spi_write_byte(0, 0xC1); mhal_spi_write_byte(1, 0xC5);
+    mhal_spi_write_byte(0, 0xC2); mhal_spi_write_byte(1, 0x0A); mhal_spi_write_byte(1, 0x00);
+    mhal_spi_write_byte(0, 0xC3); mhal_spi_write_byte(1, 0x8A); mhal_spi_write_byte(1, 0x2A);
+    mhal_spi_write_byte(0, 0xC4); mhal_spi_write_byte(1, 0x8A); mhal_spi_write_byte(1, 0x2E);
+    mhal_spi_write_byte(0, 0xC5); mhal_spi_write_byte(1, 0x0E);
+
+    mhal_spi_write_byte(0, 0x36); mhal_spi_write_byte(1, 0xC8); // Color format matrix layout orientation
+    mhal_spi_write_byte(0, 0x3A); mhal_spi_write_byte(1, 0x05); // Set 16-Bit RGB565 mode
+    mhal_spi_write_byte(0, 0x29); // Turn Display ON
+    mhal_delay(100);
+
+    // Step 8: Open drawing frame window and execute full canvas color fill test
+    mhal_spi_write_byte(0, 0x2A); // Columns
+    mhal_spi_write_byte(1, 0x00); mhal_spi_write_byte(1, 0x02);
+    mhal_spi_write_byte(1, 0x00); mhal_spi_write_byte(1, 0x82);
+
+    mhal_spi_write_byte(0, 0x2B); // Rows
+    mhal_spi_write_byte(1, 0x00); mhal_spi_write_byte(1, 0x03);
+    mhal_spi_write_byte(1, 0x00); mhal_spi_write_byte(1, 0x83);
+
+    mhal_spi_write_byte(0, 0x2C); // Memory write loop command
+
+    // Flood the canvas completely to confirm physical panel communication works
+    for(uint32_t i = 0; i < (128 * 128); i++) {
+        mhal_spi_write_byte(1, 0x07); // Cyan High Byte
+        mhal_spi_write_byte(1, 0xFF); // Cyan Low Byte
+    }
+
+    while (1) {
+        // Halt here to show solid color block response
+    }
+}

@@ -48,7 +48,7 @@ typedef struct{
 	uint8_t baud;
 }mhal_spi_config_t;
 
-#define MHAL_SPI_MASTER_CFG_DEFAULT ((mhal_spi_config_t){.role=MHAL_SPI_MASTER_ROLE, .order=MHAL_SPI_MSB_FIRST, .mode=MHAL_SPI_CLK_MODE_0, .baud=7U})
+#define MHAL_SPI_MASTER_CFG_DEFAULT ((mhal_spi_config_t){.role=MHAL_SPI_MASTER_ROLE, .order=MHAL_SPI_MSB_FIRST, .mode=MHAL_SPI_CLK_MODE_0, .baud=0U})
 #define MHAL_SPI_SLAVE_CFG_DEFAULT ((mhal_spi_config_t){.role=MHAL_SPI_SLAVE_ROLE, .order=MHAL_SPI_MSB_FIRST, .mode=MHAL_SPI_CLK_MODE_0, .baud=7U})
 
 //----------------------------------------------------------------
@@ -59,7 +59,7 @@ typedef struct{
 //void mhal_spi_slave_init(SPI_TypeDef *spi, const char *cs_ref);
 
 uint8_t mhal_spi_read_byte(SPI_TypeDef *spi);
-void mhal_spi_write_byte(SPI_TypeDef *spi, uint8_t byte);
+void mhal_spi_write_byte(SPI_TypeDef *spi, uint8_t byte, uint8_t hold);
 
 
 //----------------------------------------------------------------

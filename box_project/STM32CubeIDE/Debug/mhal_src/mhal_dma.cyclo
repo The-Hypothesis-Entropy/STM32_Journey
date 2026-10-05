@@ -1,0 +1,11 @@
+../../Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	2
+../../Drivers/CMSIS/Include/core_cm4.h:1814:22:__NVIC_SetPriority	2
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_dma.c:5:17:mhal_dma_stream_to_index	17
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_dma.c:27:18:mhal_dma_stream_to_irqn	17
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_dma.c:49:13:mhal_dma_clear_flags	4
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_dma.c:75:6:mhal_dma_init	3
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_dma.c:135:6:mhal_dma_start	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_dma.c:139:6:mhal_dma_stop	2
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_dma.c:144:6:mhal_dma_enable_irq	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_dma.c:155:6:mhal_dma_disable_irq	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_dma.c:159:10:mhal_dma_remaining	1

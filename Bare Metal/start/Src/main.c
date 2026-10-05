@@ -150,7 +150,8 @@ int main(){
 
 	//mhal_uart_transmit(USART2, "JESUS");
 	//mhal_uart_disable(USART2);
-	//mhal_uart_init(USART2, PA2, AF7, PA3, AF7);
+	mhal_uart_receive(USART2);
+	mhal_uart_receive(USART1);
 
 	//mhal_uart_disable(USART2);
 	//mhal_spi_master_device(SPI1, PA0);
@@ -219,13 +220,12 @@ int main(){
 		//mhal_uart_transmit(USART1, (uint8_t *)"HELLLLLLOOO BOY!\r\n", 15);
 		//mhal_spi_write(SPI3, 50);
 		value = mhal_adc_read(ADC1);
-		mhal_delay(500);
+		mhal_delay(10);
 		//mhal_uart_dma_send(USART1, MHAL_UART_TX_MAX_BUF_SIZE);
 
 }
 	return 0;
 }
-
 
 void EXTI15_10_IRQHandler(void){
 	//no need to check for the pending register condition, but must "CLEAR" the PR bit
@@ -265,23 +265,36 @@ void TIM3_IRQHandler(void){
 }
 
 void USART2_IRQHandler(void){
-	mhal_uart2_handler();
+	/*mhal_uart2_handler();
 	if(mhal_uart_rx_msg[mhal_uart_rx_idx-1]=='f' && mhal_uart_rx_msg[mhal_uart_rx_idx-2]=='f' && mhal_uart_rx_msg[mhal_uart_rx_idx-3]=='o'){
 		mhal_gpio_off(PA5);
 	}
 	else if(mhal_uart_rx_msg[mhal_uart_rx_idx-1]=='n' && mhal_uart_rx_msg[mhal_uart_rx_idx-2]=='o'){
 		mhal_gpio_on(PA5);
+	}*/
+
+	if(USART2->SR & USART_SR_RXNE){
+		uint8_t pc_data = USART2->DR;
+
+		while(!(USART1->SR & USART_SR_TXE));
+		USART1->DR = pc_data;
 	}
 }
 
 void USART1_IRQHandler(void){
-	mhal_uart1_handler();
+	/*mhal_uart1_handler();
 	if(mhal_uart_rx_msg[mhal_uart_rx_idx-1]=='f' && mhal_uart_rx_msg[mhal_uart_rx_idx-2]=='f' && mhal_uart_rx_msg[mhal_uart_rx_idx-3]=='o'){
 			mhal_gpio_off(PA5);
 		}
 		else if(mhal_uart_rx_msg[mhal_uart_rx_idx-1]=='n' && mhal_uart_rx_msg[mhal_uart_rx_idx-2]=='o'){
 			mhal_gpio_on(PA5);
-		}
+		}*/
+	if(USART1->SR & USART_SR_RXNE){
+		uint8_t pi_data = USART1->DR;
+
+		while(!(USART2->SR & USART_SR_TXE));
+		USART2->DR = pi_data;
+	}
 }
 
 void USART6_IRQHandler(void){

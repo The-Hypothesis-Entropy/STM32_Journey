@@ -1,4 +1,4 @@
-05:12:45 **** Build of configuration Debug for project Level2_ADC ****
+01:33:38 **** Incremental Build of configuration Debug for project Level2_ADC ****
 make -j16 all 
 arm-none-eabi-size  Level2_ADC.elf 
    text	   data	    bss	    dec	    hex	filename
@@ -6,5 +6,5 @@ arm-none-eabi-size  Level2_ADC.elf
 Finished building: default.size.stdout
  
 
-05:12:45 Build Finished. 0 errors, 0 warnings. (took 207ms)
+01:33:38 Build Finished. 0 errors, 0 warnings. (took 244ms)
 

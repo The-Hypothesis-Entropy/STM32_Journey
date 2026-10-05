@@ -123,7 +123,7 @@ extern "C" {
 /** @addtogroup Device_Included
   * @{
   */
-
+/*
 #if defined(STM32F405xx)
 #include "stm32f405xx.h"
 #elif defined(STM32F415xx)
@@ -173,7 +173,9 @@ extern "C" {
 #else
 #error "Please select first the target STM32F4xx device used in your application (in stm32f4xx.h file)"
 #endif
+*/
 
+#include "stm32f401xe.h"
 /**
   * @}
   */

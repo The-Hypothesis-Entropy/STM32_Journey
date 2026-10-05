@@ -1,0 +1,26 @@
+19:44:41 **** Incremental Build of configuration Debug for project box_project_demo ****
+make -j16 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Src/st7735.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/st7735.d" -MT"Src/st7735.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/st7735.o"
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:178,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_gpio.h:10,
+                 from ../Src/main.c:20:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h:139:10: fatal error: core_cm4.h: No such file or directory
+  139 | #include "core_cm4.h"             /* Cortex-M4 processor and core peripherals */
+      |          ^~~~~~~~~~~~
+compilation terminated.
+make: *** [Src/subdir.mk:28: Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:178,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_gpio.h:10,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal.h:4,
+                 from ../Src/st7735.c:2:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Bare Metal/start/Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h:139:10: fatal error: core_cm4.h: No such file or directory
+  139 | #include "core_cm4.h"             /* Cortex-M4 processor and core peripherals */
+      |          ^~~~~~~~~~~~
+compilation terminated.
+make: *** [Src/subdir.mk:28: Src/st7735.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+
+19:44:41 Build Failed. 5 errors, 0 warnings. (took 212ms)
+
