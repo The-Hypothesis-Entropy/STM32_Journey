@@ -1,0 +1,29 @@
+#include "dht.h"
+
+dht_status_t dht_init(){
+	//start delay will be done precisely by vTaskDelay before this function is called
+	//Hardware Preparation
+	mhal_delay_ms(1000);
+
+	//Start condition
+	mhal_gpio_init(DHT_PORT, DHT_PIN, &MHAL_GPIO_CFG_OUTPUT_OD);
+	mhal_gpio_write(DHT_PORT, DHT_PIN, 0);
+	mhal_delay_ms(18);
+	mhal_gpio_init(DHT_PORT, DHT_PIN, &MHAL_GPIO_CFG_INPUT_OD);
+
+	//Confirm sync
+	mhal_gpio_value_t sync_one, sync_two;
+	mhal_delay_us(5);
+	sync_one = mhal_gpio_read(DHT_PORT, DHT_PIN);
+	mhal_delay_us(80);
+	sync_two = mhal_gpio_read(DHT_PORT, DHT_PIN);
+	if(!(sync_one==MHAL_GPIO_LOW && sync_two==MHAL_GPIO_HIGH)){
+		return SYNC_TIMEOUT;
+	}
+	return SUCCESS;
+}
+
+dht_reading_t dht_read(GPIO_TypeDef *port, uint8_t pin){
+	uint8_t hum_h, hum_l, temp_h, temp_l;
+	while(mhal_gpio_read(DHT_PORT, DHT_PIN))
+}

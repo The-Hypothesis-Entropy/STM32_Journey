@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="true"/>
 		<list key="findhistory">
+			<item value="configQUEUE_REGISTRY_SIZE"/>
+			<item value="SPI2"/>
+			<item value="PIN_DC"/>
+			<item value="PIN_RST"/>
+			<item value="mhal_spi_write_byte"/>
+			<item value="RawSPI_Write"/>
+			<item value="RawDelayMs"/>
 			<item value="LV_USE_ST7735"/>
+		</list>
+		<list key="replacehistory">
+			<item value="spi"/>
+			<item value="pin_dc"/>
+			<item value="pin_rst"/>
+			<item value="ST7735_WriteCmd"/>
+			<item value="mhal_spi_write_byte"/>
 		</list>
 	</section>
 </section>

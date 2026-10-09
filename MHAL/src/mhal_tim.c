@@ -607,12 +607,66 @@ void mhal_tim_ic_clear_status(TIM_TypeDef *tim, mhal_tim_channel_t channel){
 
 //------------------------------------------------------------------------------------------------------------------------
 
+static void mhal_us_timer_init(void){
+	//Enable clock
+	RCC->APB2ENR |= RCC_APB2ENR_TIM10EN;
+
+	//Compute actual clock reaching tim10
+	//Get APB2 prescaler, if pre==1, clock is PCLK2. if>1, clock is 2xPCLK2
+	uint32_t ppre2 = (RCC->CFGR >> RCC_CFGR_PPRE2_Pos) & 0x7U;
+	uint32_t apb2_div = (ppre2<4U) ? 1U : (2U<<(ppre2-4U));
+	uint32_t pclk2 = SystemCoreClock / apb2_div;
+	uint32_t tim_clk = (apb2_div==1U) ? pclk2 : (pclk2*2U);
+
+	//Set prescaler so cnt increments every 1us
+	TIM10->PSC = (tim_clk/1000000U) - 1U;
+
+	//ARR to max
+	TIM10->ARR = 0xFFFF; //16-Bit timer
+
+	//Force update to load psc and arr
+	TIM10->EGR = TIM_EGR_UG;
+	TIM10->SR &= ~TIM_SR_UIF;
+
+}
+
+static void mhal_us_timer_start(void){
+	TIM10->CR1 |= TIM_CR1_CEN;
+}
 
 
+static void mhal_us_timer_reset(void){
+	TIM10->CNT = 0U;
+}
 
+static uint16_t mhal_us_timer_read(void){
+	return TIM10->CNT;
+}
 
+void mhal_us_timer_on(void){
+	mhal_us_timer_init();
+	mhal_us_timer_start();
+}
 
+void mhal_us_timer_off(void){
+	TIM10->CR1 &= ~TIM_CR1_CEN;
+}
 
+void mhal_delay_us(uint32_t delay_us){
+	/*
+	 * mhal_us_timer_on() should be done during inits
+	 * then use this function as you wish,
+	 * DELAY_US SHOULD NOT >= 65535
+	 */
+	uint16_t start = (uint16_t)TIM10->CNT;
+	while((uint16_t)(TIM10->CNT - start) < delay_us){}
+}
+
+void mhal_delay_ms(uint32_t delay_ms){
+	for (uint32_t i=0; i<delay_ms; i++){ //overhead source. eg, 100ms delay + 500us
+		mhal_delay_us(1000);
+	}
+}
 
 
 

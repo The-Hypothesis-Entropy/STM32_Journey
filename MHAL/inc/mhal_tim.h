@@ -104,6 +104,8 @@ void mhal_tim_base_stop(TIM_TypeDef *tim);
 
 uint32_t mhal_tim_get_counter(TIM_TypeDef *tim);
 
+
+
 //---------------------------------------------------------------------------------
 
 
@@ -157,4 +159,8 @@ void mhal_tim_ic_stop(TIM_TypeDef *tim, mhal_tim_channel_t channel);
 
 //------------------------------------------------------------------------------------------------------------------------
 
+void mhal_us_timer_on(void);
+void mhal_us_timer_off(void);
+void mhal_delay_us(uint32_t delay_us);
+void mhal_delay_ms(uint32_t delay_ms);
 #endif

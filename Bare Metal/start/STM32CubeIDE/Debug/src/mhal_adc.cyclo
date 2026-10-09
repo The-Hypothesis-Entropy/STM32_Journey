@@ -1,3 +1,5 @@
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_adc.c:11:16:mhal_adc_pin_to_channel	33
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_adc.c:70:6:mhal_adc_init	1
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_adc.c:103:10:mhal_adc_read	2
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_adc.c:112:6:mhal_adc_off	1
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_adc.c:116:6:mhal_adc_on	1

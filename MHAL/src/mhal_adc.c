@@ -108,3 +108,11 @@ uint32_t mhal_adc_read(ADC_TypeDef *adc){
 	while(!(adc->SR & ADC_SR_EOC)){}
 	return adc->DR;
 }
+
+void mhal_adc_off(ADC_TypeDef *adc){
+	adc->CR2 &= ~ADC_CR2_ADON;
+}
+
+void mhal_adc_on(ADC_TypeDef *adc){
+	adc->CR2 |= ADC_CR2_ADON;
+}

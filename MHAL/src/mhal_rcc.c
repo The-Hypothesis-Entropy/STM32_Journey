@@ -8,7 +8,7 @@ uint32_t mhal_rcc_get_periph_freq(mhal_peripheral_t periph){
 	//SYSCLK --(via AHB Prescaler)--> HCLK
 	//HCLK --(via APB Prescalers)--> PCLK1, PCLK2
 	uint32_t AHB_Pre, APB1_Pre, APB2_Pre;
-	switch (RCC->CFGR & RCC_CFGR_PPRE2_Msk){
+	switch ((RCC->CFGR & RCC_CFGR_PPRE2_Msk) >> RCC_CFGR_PPRE2_Pos){
 		case (0b100):
 				APB2_Pre = 2U;
 				break;
@@ -26,7 +26,7 @@ uint32_t mhal_rcc_get_periph_freq(mhal_peripheral_t periph){
 			break;
 	}
 
-	switch (RCC->CFGR & RCC_CFGR_PPRE1_Msk){
+	switch ((RCC->CFGR & RCC_CFGR_PPRE1_Msk) >> RCC_CFGR_PPRE1_Pos){
 		case (0b100):
 				APB1_Pre = 2U;
 				break;
@@ -44,7 +44,7 @@ uint32_t mhal_rcc_get_periph_freq(mhal_peripheral_t periph){
 			break;
 	}
 
-	switch (RCC->CFGR & RCC_CFGR_PPRE1_Msk){
+	switch ((RCC->CFGR & RCC_CFGR_HPRE_Msk) >> RCC_CFGR_HPRE_Pos){
 		case (0b1000):
 				AHB_Pre = 2U;
 				break;

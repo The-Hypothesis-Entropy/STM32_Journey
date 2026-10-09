@@ -1,0 +1,47 @@
+#include "dht.h"
+
+dht_status_t dht_init(void){
+	//start delay will be done precisely by vTaskDelay before this function is called
+	//Hardware Preparation
+	mhal_delay_ms(1000);
+
+	//Start condition
+	mhal_gpio_init(DHT_PORT, DHT_PIN, &MHAL_GPIO_CFG_OUTPUT_OD);
+	mhal_gpio_write(DHT_PORT, DHT_PIN, 0);
+	mhal_delay_ms(18);
+	mhal_gpio_init(DHT_PORT, DHT_PIN, &MHAL_GPIO_CFG_INPUT_OD);
+
+	//Confirm sync
+	mhal_gpio_value_t sync_one, sync_two;
+	mhal_delay_us(5);
+	sync_one = mhal_gpio_read(DHT_PORT, DHT_PIN);
+	mhal_delay_us(80);
+	sync_two = mhal_gpio_read(DHT_PORT, DHT_PIN);
+	if(!(sync_one==MHAL_GPIO_LOW && sync_two==MHAL_GPIO_HIGH)){
+		return SYNC_TIMEOUT;
+	}
+	return SUCCESS;
+}
+
+dht_reading_t dht_read(void){
+	uint64_t data = 0U;
+	uint8_t hum_h, hum_l, temp_h, temp_l, checksum;
+
+	for(uint8_t i=0; i<40; i++){
+		while(mhal_gpio_read(DHT_PORT, DHT_PIN)==MHAL_GPIO_HIGH); //wait for sync to end for first byte, or wait for high of previous byte to end if previous is 1
+		while(mhal_gpio_read(DHT_PORT, DHT_PIN)==MHAL_GPIO_LOW); //wait out the prior 50us
+		mhal_delay_us(30);
+		uint8_t bit = (mhal_gpio_read(DHT_PORT, DHT_PIN)==MHAL_GPIO_HIGH) ? 1 : 0;
+		data |= (uint_64)bit<<(39-i);
+	}
+	checksum = data&0xFF;
+	temp_l = (data>>8U)&0xFF;
+	temp_h = (data>>16U)&0xFF;
+	hum_l = (data>>24U)&0xFF;
+	hum_h = (data>>32U)&0xFF;
+	if(checksum == temp_l + temp_h + hum_l + hum_h){
+		return (dht_reading_t){.hum_h=hum_h, .hum_l=hum_l, .temp_h=temp_h, .temp_l=temp_l};
+	}
+}
+
+

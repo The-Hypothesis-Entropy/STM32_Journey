@@ -1,0 +1,5 @@
+#include "dht.h"
+
+void dht_init(GPIO_TypeDef *port, uint8_t pin){
+	//start delay will be done precisely by vTaskDelay before this function is called
+}

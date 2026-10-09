@@ -1,4 +1,4 @@
-01:33:38 **** Incremental Build of configuration Debug for project Level3_TIM ****
+22:40:06 **** Build of configuration Debug for project Level3_TIM ****
 make -j16 all 
 arm-none-eabi-size  Level3_TIM.elf 
    text	   data	    bss	    dec	    hex	filename
@@ -6,5 +6,5 @@ arm-none-eabi-size  Level3_TIM.elf
 Finished building: default.size.stdout
  
 
-01:33:38 Build Finished. 0 errors, 0 warnings. (took 252ms)
+22:40:06 Build Finished. 0 errors, 0 warnings. (took 236ms)
 

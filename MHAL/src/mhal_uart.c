@@ -96,7 +96,7 @@ static void mhal_uart_set_baud(USART_TypeDef *uart, uint32_t baud_rate){
 	}
 #endif
 
-	brr = (uart_clk + (baud_rate/2U)) / baud_rate; //round up
+	brr = (uart_clk + (baud_rate/2U)) / baud_rate; //round up, ONLY FOR OVER8=0
 	uart->BRR = brr;
 
 }
@@ -183,6 +183,17 @@ void mhal_uart_write_byte(USART_TypeDef *uart, uint8_t byte){
 	 */
 	while(!(uart->SR & USART_SR_TXE)){} //Transmit data not register empty
 	uart->DR = byte;
+
+}
+
+void mhal_uart_write(USART_TypeDef *uart, uint8_t *buffer, uint8_t len){
+	/*
+	 * POLLING: write one byte to the data register.
+	 */
+	for(uint16_t i=0; i<len; i++){
+	while(!(uart->SR & USART_SR_TXE)){} //Transmit data not register empty
+	uart->DR = buffer[i];
+	}
 
 }
 

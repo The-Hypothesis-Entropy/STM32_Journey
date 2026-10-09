@@ -1,6 +1,0 @@
-#include "st7735.h"
-
-#define PIN_CS "PC4"
-#define PIN_RST "PB1"
-#define PIN_DC "PB2"
-

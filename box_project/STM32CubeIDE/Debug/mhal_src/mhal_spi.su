@@ -6,7 +6,7 @@ C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_spi.c:101:13
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_spi.c:149:6:mhal_spi_write_byte	32	static
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_spi.c:189:9:mhal_spi_read_byte	16	static
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_spi.c:196:6:mhal_spi_master_device	40	static
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_spi.c:204:6:mhal_spi_slave_device	32	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_spi.c:204:6:mhal_spi_slave_device	40	static
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_spi.c:211:6:mhal_spi_write	32	static
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_spi.c:242:6:mhal_spi_receive_begin	32	static
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_spi.c:263:6:mhal_spi_receive_end	24	static

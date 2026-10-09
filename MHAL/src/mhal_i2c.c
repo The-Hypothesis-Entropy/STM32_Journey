@@ -89,7 +89,7 @@ static uint8_t mhal_i2c_read_byte(I2C_TypeDef *i2c, uint8_t ack, uint8_t *out){
 }
 
 static void mhal_i2c_gpio_config(I2C_TypeDef *i2c){
-	mhal_gpio_config_t config = MHAL_GPIO_CFG_AF;
+	mhal_gpio_config_t config = MHAL_GPIO_CFG_AF_OD_PU;
 	config.type = MHAL_GPIO_OT_OD;
 	config.af = 4U;
 

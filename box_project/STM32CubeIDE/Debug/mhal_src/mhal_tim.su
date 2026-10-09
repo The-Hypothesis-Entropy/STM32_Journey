@@ -30,3 +30,11 @@ C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:561:10
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:581:6:mhal_tim_ic_force_capture	16	static
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:586:13:mhal_tim_ic_check_flag	16	static
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:590:6:mhal_tim_ic_clear_status	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:610:13:mhal_us_timer_init	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:633:13:mhal_us_timer_start	4	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:638:13:mhal_us_timer_reset	4	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:642:17:mhal_us_timer_read	4	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:646:6:mhal_us_timer_on	8	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:651:6:mhal_us_timer_off	4	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:655:6:mhal_delay_us	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:665:6:mhal_delay_ms	24	static

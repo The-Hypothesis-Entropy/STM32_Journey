@@ -1,4 +1,4 @@
-01:33:37 **** Incremental Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
+22:40:05 **** Build of configuration Debug for project Level1_GPIO_IRQ_UART ****
 make -j16 all 
 arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf 
    text	   data	    bss	    dec	    hex	filename
@@ -6,5 +6,5 @@ arm-none-eabi-size  Level1_GPIO_IRQ_UART.elf
 Finished building: default.size.stdout
  
 
-01:33:38 Build Finished. 0 errors, 0 warnings. (took 191ms)
+22:40:05 Build Finished. 0 errors, 0 warnings. (took 245ms)
 

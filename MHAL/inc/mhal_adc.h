@@ -44,6 +44,8 @@ typedef struct{
 
 
 void mhal_adc_init(ADC_TypeDef *adc, const char* pin_name);
+void mhal_adc_on(ADC_TypeDef *adc);
+void mhal_adc_off(ADC_TypeDef *adc);
 uint32_t mhal_adc_read(ADC_TypeDef *adc);
 
 
