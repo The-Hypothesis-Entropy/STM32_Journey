@@ -19,330 +19,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
-
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-#include "st7735.h"
 #include "mhal.h"
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
-#include "semphr.h"
 #include "stdio.h"
-#include "string.h"
-#include "dht.h"
 
-
-/* USER CODE END Includes */
-
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-#define EYE_LEFT_CENTER_X 37
-#define EYE_RIGHT_CENTER_X 91
-#define EYE_CENTER_Y 50
-#define EYE_RADIUS 12
-
-#define BACKGROUND ST7735_CYAN
-#define COLOR ST7735_BROWN
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
-
-/* Private variables ---------------------------------------------------------*/
-
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
-
-/* Private function prototypes -----------------------------------------------*/
-void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
-void StartDefaultTask(void *argument);
-void rtos_tim1_Callback(void *argument);
-
-/* USER CODE BEGIN PFP */
-
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
- uint8_t toggler = 1U;
- void blink(void){
-	 //---------STATE 1: EYES OPEN----------
-	     ST7735_FillCircle(EYE_LEFT_CENTER_X, EYE_CENTER_Y, EYE_RADIUS, COLOR); //Left Eye Open
-	     ST7735_FillCircle(EYE_RIGHT_CENTER_X, EYE_CENTER_Y, EYE_RADIUS, COLOR); //Right Eye Open
-
-	     mhal_delay(3000); //eyes remain open for 3 seconds
-
-
-	     //---------STATE 2: BLINK-------------
-	     //overwrite open eyes with background color
-	     ST7735_FillCircle(EYE_LEFT_CENTER_X, EYE_CENTER_Y, EYE_RADIUS, BACKGROUND);
-	     ST7735_FillCircle(EYE_RIGHT_CENTER_X, EYE_CENTER_Y, EYE_RADIUS, BACKGROUND);
-	     //ST7735_FillRect(EYE_LEFT_CENTER_X-EYE_RADIUS-10, EYE_CENTER_Y+EYE_RADIUS+10, 2*EYE_RADIUS+5, 2*EYE_RADIUS+5, BACKGROUND);
-	     ST7735_FillRect(10, 10, 120 ,120, BACKGROUND);
-	     ST7735_FillRect(44, 90, 40, 6, COLOR);
-
-	     mhal_delay(100); //eyes remain open for 3 seconds
-
-	     //Draw blink slits
-	     ST7735_FillRect(EYE_LEFT_CENTER_X - EYE_RADIUS, EYE_CENTER_Y - 2, 2*EYE_RADIUS + 1, 4, COLOR);
-	     ST7735_FillRect(EYE_RIGHT_CENTER_X - EYE_RADIUS, EYE_CENTER_Y - 2, 2*EYE_RADIUS + 1, 4, COLOR);
-
-	     mhal_delay(300);
-
-	     //Clear slits before looping back to open state
-	     ST7735_FillRect(EYE_LEFT_CENTER_X - EYE_RADIUS, EYE_CENTER_Y - 2, 2*EYE_RADIUS + 1, 4, BACKGROUND);
-	     ST7735_FillRect(EYE_RIGHT_CENTER_X - EYE_RADIUS, EYE_CENTER_Y - 2, 2*EYE_RADIUS + 1, 4, BACKGROUND);
-
- }
-
-
- static QueueHandle_t joystick_q, dht_q;
- static SemaphoreHandle_t sem, binsem, countsem, adc_mutex, uart_mutex;
- static TaskHandle_t joystick_task, display_task, dht_task;
-
- const char *joystick_pin = "PA0";
- uint16_t joystick_data = 0U;
-
- /*
-  * ----------------------------------TASK FUNCTIONS---------------------------------
-  */
- static void joystick(void *param){
-	 (void)param;
-	 //joystick initialization
-	 mhal_adc_init(ADC1, joystick_pin);
-
-	 while(1){
-		 //Read joystick data
-		 xSemaphoreTake(adc_mutex, portMAX_DELAY);
-		 uint16_t value = mhal_adc_read(ADC1);
-		 xSemaphoreGive(adc_mutex);
-
-		 //Send to queue
-		 xQueueSend(joystick_q, &value, pdMS_TO_TICKS(10));
-
-		 //Rest
-		 vTaskDelay(pdMS_TO_TICKS(100));
-
-		 /*
-		 char buf[16];
-		 int n = sprintf(buf, "%d\n", value);
-
-		 xSemaphoreTake(uart_mutex, portMAX_DELAY);
-		 mhal_uart_write(USART2, (uint8_t*)buf, n);
-		 mhal_uart_write_byte(USART2, '\r');
-		 xSemaphoreGive(uart_mutex);
-		 */
-	 }
- }
-
- static void display(void *param){
-	 (void)param;
-	 //initialize the display
-	 mhal_spi_master_device(SPI2, PC4);
-	 ST7735_Init(SPI2, PB1, PB2, 128, 128); //Initialize the screen
-	 ST7735_Orient(ST7735_ORIENT_90);
-	 ST7735_FillRect(0, 0, 128, 128, BACKGROUND);
-	 uint16_t joystick_data = 0;
-	 dht_reading_t dht_data;
-	 char string_joystick[8];
-	 char string_dht_temp[8];
-	 char string_dht_hum[8];
-	 for(;;){
-		 xQueueReceive(joystick_q, &joystick_data, pdMS_TO_TICKS(1));
-		 sprintf(string_joystick, "%d", joystick_data);
-
-		 xQueueReceive(dht_q, &dht_data, pdMS_TO_TICKS(1));
-		 sprintf(string_dht_temp, "%d.%d", dht_data.temp_int, dht_data.temp_dec);
-		 sprintf(string_dht_hum, "%d.%d", dht_data.hum_int, dht_data.hum_dec);
-
-		 //Joystick print
-		 ST7735_DrawString(2, 10, "JOYSTICK: ", COLOR, 1);
-		 ST7735_DrawString(60, 10, string_joystick, COLOR, 2);
-
-		 //Dht print
-		 ST7735_DrawString(2, 30, "TEMP: ", COLOR, 1);
-		 ST7735_DrawString(60, 30, string_dht_temp, COLOR, 2);
-
-		 ST7735_DrawString(2, 50, "HUM: ", COLOR, 1);
-		 ST7735_DrawString(60, 50, string_dht_hum, COLOR, 2);
-
-		 vTaskDelay(pdMS_TO_TICKS(100));
-
-		 //Joystick wipe
-		 ST7735_DrawString(60, 10, string_joystick, BACKGROUND, 2);
-		 vTaskDelay(pdMS_TO_TICKS(1));
-
-		 //Dht wipe
-		 ST7735_DrawString(60, 30, string_dht_temp, BACKGROUND, 2);
-		 ST7735_DrawString(60, 50, string_dht_hum, BACKGROUND, 2);
-		 vTaskDelay(pdMS_TO_TICKS(1));
-	 }
- }
-
- static void dht(void *param){
-	 (void)param;
-	 for(;;){
-		 dht_reading_t data = dht_read();
-		 if(!(data.temp_int>150 || data.temp_dec>150)){
-		 xQueueSend(dht_q, &data, pdMS_TO_TICKS(10));}
-		 vTaskDelay(pdMS_TO_TICKS(100));
-	 }
-
- }
- static void producer(void *param){
-	 (void)param;
-	 uint32_t n=0;
-	 for (;;){
-		 n++;
-		 mhal_gpio_toggle(PA5);
-		 //xQueueSend(myq, &n, 10);
-		 vTaskDelay(pdMS_TO_TICKS(200));
-	 }
- }
-
- static void consumer(void *param){
-	 (void)param;
-	 uint32_t n;
-	 for (;;){
-		 vTaskDelay(pdMS_TO_TICKS(500));
-		 //xQueueReceive(myq, &n, portMAX_DELAY);
-		 //use n
-	 }
- }
-
-
-
-/* USER CODE END 0 */
-
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
-int main(void)
-{
-
-  /* USER CODE BEGIN 1 */
-
-  /* USER CODE END 1 */
-
-  /* MCU Configuration--------------------------------------------------------*/
-
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
-
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
-
-  /* Configure the system clock */
-  SystemClock_Config();
-
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
-
-
-  /* USER CODE BEGIN 2 */
-mhal_uart_receive(USART2);
-mhal_uart_init(USART6, PC6, AF8, PC7, AF8);
-
-  //mhal_spi_master_device(SPI2, PC4);
-
-  //ST7735_Init(SPI2, PB1, PB2, 128, 128); //Initialize the screen
-  //ST7735_Orient(ST7735_ORIENT_90);
-  //ST7735_FillRect(0, 0, 128, 128, BACKGROUND);
-  //ST7735_FillRect(44, 90, 40, 6, COLOR);
-
-  //mhal_interrupt(GPIOC, 13, GPIO_FALLING_EDGE, 0);
-  mhal_gpio_init(GPIOC, 13, &MHAL_GPIO_CFG_INPUT);
-  //ST7735_DrawRect(10, 10, 10, 70, COLOR);
-  //ST7735_DrawString(10,  10, "Hello", COLOR, 1);
-  //ST7735_DrawString(10,  30, "Bot Face", ST7735_BLUE, 2);
-  //ST7735_DrawString(10,  60, "12345", ST7735_CYAN, 3);
-  //------------------------------------------------------------------------------------
-  mhal_gpio_off(PA5);
-  //mhal_adc_init(ADC1, joystick);
-
-  joystick_q = xQueueCreate(1, sizeof(uint16_t));
-  dht_q = xQueueCreate(2, sizeof(uint64_t));
-  adc_mutex = xSemaphoreCreateMutex();
-
-  vQueueAddToRegistry(joystick_q, "data queue");
-  xTaskCreate(joystick, "joystick_task", 128, NULL, 2, &joystick_task);
-  xTaskCreate(display, "display_task", 256, NULL, 2, &display_task);
-  xTaskCreate(dht, "dht", 256, NULL, 2, &dht_task);
-
-  vTaskStartScheduler();
-
-  uint8_t data;
-  mhal_i2c_init(I2C1, &MHAL_I2C_CONFIG_DEFAULT);
-  mhal_uart_write_byte(USART2, mhal_i2c_read_reg(I2C1, 0x68, 0x75, &data, 1));
-
-
-
-
-
-
-
-
-
-  /* USER CODE END 2 */
-
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-	  //------------------------------------------------------------------------------------
-	  uint8_t data = 0;
-	  uint8_t r = mhal_i2c_read_reg(I2C1, 0x69, 0x75, &data, 1);
-	  char buf[16];
-
-	  if (r == MHAL_I2C_OK) {
-	      sprintf(buf, "WHO_AM_I = 0x%02X\n", data);
-	  } else {
-	      sprintf(buf, "I2C error: %u\n", r);
-	  }
-	  mhal_uart_write(USART2, (uint8_t *)buf, strlen(buf));
-
-	  mhal_delay_ms(1000);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	  //------------------------------------------------------------------------------------
-    //blink();
-
-  }
-  /* USER CODE END 3 */
-}
-
-/**
-  * @brief System Clock Configuration
-  * @retval None
-  */
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
@@ -365,10 +44,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLN = 336;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
   RCC_OscInitStruct.PLL.PLLQ = 7;
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
-    //Error_Handler();
-  }
+
 
   /** Initializes the CPU, AHB and APB buses clocks
   */
@@ -379,34 +55,47 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
-  {
-    //Error_Handler();
-  }
 }
 
-
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+/*
+ * FOR ANY PERIPHERAL:
+ * -> Create the handle/inittypedef
+ * -> Create an init function which: ACTIVATES CONCERNED CLOCKS, INITS MAIN PERIPHERAL,
+ * 									 INITS GPIO/RELATED PERIPHERALS
+ * -> in main, call HAL Init, then Clock Config. then your init.
+ * -> Now free to use the HAL functions
+ */
+static void dfplayer_play(uint8_t track)
 {
-  /* USER CODE BEGIN Callback 0 */
+    uint8_t pkt[10];
+    pkt[0] = 0x7E;
+    pkt[1] = 0xFF;
+    pkt[2] = 0x06;
+    pkt[3] = 0x03;              /* play track command */
+    pkt[4] = 0x00;
+    pkt[5] = 0x00;
+    pkt[6] = track;             /* track number, 1–255 */
 
-  /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM11)
-  {
-    HAL_IncTick();
-  }
-  /* USER CODE BEGIN Callback 1 */
+    uint16_t sum = 0;
+    for (int i = 1; i < 7; i++) sum += pkt[i];
+    uint16_t cksum = (uint16_t)(-sum);
+    pkt[7] = cksum >> 8;
+    pkt[8] = cksum & 0xFF;
+    pkt[9] = 0xEF;
 
-  /* USER CODE END Callback 1 */
+    mhal_uart_write(USART6, pkt, 10);
+    //mhal_uart_write(USART2, pkt, 10);
 }
+uint8_t msg[] = "Hello!\r\n";
+int main(){
+	mhal_uart_init(USART6, PC6, AF8, PC7, AF8);
+	//mhal_uart_set_baud(USART2, 9600);
+	//mhal_uart_init(USART2, PA2, AF7, PA3, AF7);
 
-void USART2_IRQHandler(){
-	//uint8_t byte = mhal_uart_read_byte(USART2);
-	    if (USART2->SR & USART_SR_RXNE) {
-	        volatile uint8_t ignored = (uint8_t)(USART2->DR & 0xFF);
-	        (void)ignored;
+	mhal_delay(1000);
+	mhal_uart_write(USART2, msg, 8);
+	dfplayer_play(1);
 
+	while(1);
 
-	    }
 }
-

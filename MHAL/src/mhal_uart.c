@@ -76,7 +76,7 @@ static void mhal_uart_interrupt_enable(USART_TypeDef *uart, uint8_t priority){
 		NVIC_EnableIRQ(irq_num);
 }
 
-static void mhal_uart_set_baud(USART_TypeDef *uart, uint32_t baud_rate){
+void mhal_uart_set_baud(USART_TypeDef *uart, uint32_t baud_rate){
 	uint32_t uart_clk, brr;
 #ifdef USART1
 	if (uart == USART1){
@@ -157,7 +157,7 @@ void mhal_uart_init(USART_TypeDef *uart, const char* tx, mhal_gpio_alt_fn_t tx_a
 
 
 	//uart->BRR = 0x8B;
-	mhal_uart_set_baud(uart, 115200);
+	mhal_uart_set_baud(uart, 9600);
 
 	uart->CR1 |= USART_CR1_UE;
 

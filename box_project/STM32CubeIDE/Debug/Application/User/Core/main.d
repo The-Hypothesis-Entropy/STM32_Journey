@@ -24,10 +24,13 @@ Application/User/Core/main.o: \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h \
+ ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h \
+ ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
+ ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
  ../../Core/Inc/FreeRTOSConfig.h \
@@ -39,27 +42,18 @@ Application/User/Core/main.o: \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
- C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/Middleware/inc/st7735.h \
- C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_spi.h \
- C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_gpio.h \
- C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h \
- ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h \
- C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_globals.h \
- C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_dma.h \
- C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_gpio.h \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal.h \
+ C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_gpio.h \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_exti.h \
+ ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h \
+ C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_adc.h \
+ C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_globals.h \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_rcc.h \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_uart.h \
+ C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_dma.h \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_spi.h \
- C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_i2c.h \
- ../../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
- ../../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
- ../../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h \
- ../../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
- C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/Middleware/inc/dht.h \
- C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h
+ C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_i2c.h
 ../../Core/Inc/main.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../../Core/Inc/stm32f4xx_hal_conf.h:
@@ -84,10 +78,13 @@ Application/User/Core/main.o: \
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h:
+../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h:
+../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
+../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h:
 ../../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../../Core/Inc/FreeRTOSConfig.h:
@@ -99,24 +96,15 @@ Application/User/Core/main.o: \
 ../../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 ../../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
 ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
-C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/Middleware/inc/st7735.h:
-C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_spi.h:
-C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_gpio.h:
-C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:
-../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h:
-C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_globals.h:
-C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_dma.h:
-C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_gpio.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal.h:
+C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_gpio.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_exti.h:
+../../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h:
+C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_adc.h:
+C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_globals.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_rcc.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_uart.h:
+C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_dma.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_spi.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_i2c.h:
-../../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:
-../../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
-../../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:
-../../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:
-C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/Middleware/inc/dht.h:
-C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:

@@ -1,147 +1,30 @@
-02:05:42 **** Incremental Build of configuration Debug for project box_project ****
+19:52:25 **** Incremental Build of configuration Debug for project box_project ****
 make -j16 all 
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/dht.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc" -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"middleware_src/dht.d" -MT"middleware_src/dht.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "middleware_src/dht.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/st7735.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc" -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"middleware_src/st7735.d" -MT"middleware_src/st7735.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "middleware_src/st7735.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_adc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc" -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"mhal_src/mhal_adc.d" -MT"mhal_src/mhal_adc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "mhal_src/mhal_adc.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_dma.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc" -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"mhal_src/mhal_dma.d" -MT"mhal_src/mhal_dma.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "mhal_src/mhal_dma.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_exti.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc" -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"mhal_src/mhal_exti.d" -MT"mhal_src/mhal_exti.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "mhal_src/mhal_exti.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_fsm.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc" -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"mhal_src/mhal_fsm.d" -MT"mhal_src/mhal_fsm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "mhal_src/mhal_fsm.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc" -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"mhal_src/mhal_gpio.d" -MT"mhal_src/mhal_gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "mhal_src/mhal_gpio.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_i2c.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc" -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"mhal_src/mhal_i2c.d" -MT"mhal_src/mhal_i2c.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "mhal_src/mhal_i2c.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_spi.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc" -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"mhal_src/mhal_spi.d" -MT"mhal_src/mhal_spi.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "mhal_src/mhal_spi.o"
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc" -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"mhal_src/mhal_tim.d" -MT"mhal_src/mhal_tim.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "mhal_src/mhal_tim.o"
-In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc/dht.h:5,
-                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/dht.c:1:
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:75:17: warning: 'mhal_tim_get_clock' declared 'static' but never defined [-Wunused-function]
-   75 | static uint32_t mhal_tim_get_clock(TIM_TypeDef *tim);
-      |                 ^~~~~~~~~~~~~~~~~~
-In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_spi.h:5,
-                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc/st7735.h:5,
-                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/st7735.c:1:
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:75:17: warning: 'mhal_tim_get_clock' declared 'static' but never defined [-Wunused-function]
-   75 | static uint32_t mhal_tim_get_clock(TIM_TypeDef *tim);
-      |                 ^~~~~~~~~~~~~~~~~~
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc" -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"mhal_src/mhal_uart.d" -MT"mhal_src/mhal_uart.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "mhal_src/mhal_uart.o"
-In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_adc.h:5,
-                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_adc.c:1:
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:75:17: warning: 'mhal_tim_get_clock' declared 'static' but never defined [-Wunused-function]
-   75 | static uint32_t mhal_tim_get_clock(TIM_TypeDef *tim);
-      |                 ^~~~~~~~~~~~~~~~~~
 arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc" -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/Core/main.d" -MT"Application/User/Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/Core/main.o"
-In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_fsm.h:5,
-                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_fsm.c:1:
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:75:17: warning: 'mhal_tim_get_clock' declared 'static' but never defined [-Wunused-function]
-   75 | static uint32_t mhal_tim_get_clock(TIM_TypeDef *tim);
-      |                 ^~~~~~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c: In function 'mhal_dename_pin':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:149:16: warning: comparison between pointer and integer
-  149 |         if (pin=='A' || pin=='B' || pin=='C' || pin=='D' || pin=='E' || pin=='F'){
-      |                ^~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:149:28: warning: comparison between pointer and integer
-  149 |         if (pin=='A' || pin=='B' || pin=='C' || pin=='D' || pin=='E' || pin=='F'){
-      |                            ^~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:149:40: warning: comparison between pointer and integer
-  149 |         if (pin=='A' || pin=='B' || pin=='C' || pin=='D' || pin=='E' || pin=='F'){
-      |                                        ^~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:149:52: warning: comparison between pointer and integer
-  149 |         if (pin=='A' || pin=='B' || pin=='C' || pin=='D' || pin=='E' || pin=='F'){
-      |                                                    ^~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:149:64: warning: comparison between pointer and integer
-  149 |         if (pin=='A' || pin=='B' || pin=='C' || pin=='D' || pin=='E' || pin=='F'){
-      |                                                                ^~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:149:76: warning: comparison between pointer and integer
-  149 |         if (pin=='A' || pin=='B' || pin=='C' || pin=='D' || pin=='E' || pin=='F'){
-      |                                                                            ^~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_gpio.c:150:24: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
-  150 |                 return (uint8_t)((pin-'A')+10U);
-      |                        ^
-In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_i2c.h:5,
-                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_i2c.c:1:
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:75:17: warning: 'mhal_tim_get_clock' declared 'static' but never defined [-Wunused-function]
-   75 | static uint32_t mhal_tim_get_clock(TIM_TypeDef *tim);
-      |                 ^~~~~~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_i2c.c:76:16: warning: 'mhal_i2c_read_byte' defined but not used [-Wunused-function]
-   76 | static uint8_t mhal_i2c_read_byte(I2C_TypeDef *i2c, uint8_t ack, uint8_t *out){
-      |                ^~~~~~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_i2c.c:61:16: warning: 'mhal_i2c_write_byte' defined but not used [-Wunused-function]
-   61 | static uint8_t mhal_i2c_write_byte(I2C_TypeDef *i2c, uint8_t b){
-      |                ^~~~~~~~~~~~~~~~~~~
-In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_spi.h:5,
-                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_spi.c:1:
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:75:17: warning: 'mhal_tim_get_clock' declared 'static' but never defined [-Wunused-function]
-   75 | static uint32_t mhal_tim_get_clock(TIM_TypeDef *tim);
-      |                 ^~~~~~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c: In function 'mhal_tim_ic_init':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:466:26: warning: unused variable 'tim_clk' [-Wunused-variable]
-  466 |                 uint32_t tim_clk = mhal_tim_get_clock(tim);
-      |                          ^~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c: At top level:
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:642:17: warning: 'mhal_us_timer_read' defined but not used [-Wunused-function]
-  642 | static uint16_t mhal_us_timer_read(void){
-      |                 ^~~~~~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_tim.c:638:13: warning: 'mhal_us_timer_reset' defined but not used [-Wunused-function]
-  638 | static void mhal_us_timer_reset(void){
-      |             ^~~~~~~~~~~~~~~~~~~
-In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:3:
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:75:17: warning: 'mhal_tim_get_clock' declared 'static' but never defined [-Wunused-function]
-   75 | static uint32_t mhal_tim_get_clock(TIM_TypeDef *tim);
-      |                 ^~~~~~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:108:16: warning: 'mhal_uart_rx_ready' defined but not used [-Wunused-function]
-  108 | static uint8_t mhal_uart_rx_ready(USART_TypeDef *uart){
-      |                ^~~~~~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:104:16: warning: 'mhal_uart_tx_busy' defined but not used [-Wunused-function]
-  104 | static uint8_t mhal_uart_tx_busy(USART_TypeDef *uart){
-      |                ^~~~~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c: In function 'consumer':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:215:19: warning: unused variable 'n' [-Wunused-variable]
-  215 |          uint32_t n;
-      |                   ^
-In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_spi.h:5,
-                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc/st7735.h:5,
-                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:25:
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c: In function 'SystemClock_Config':
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:28:22: warning: variable 'RCC_ClkInitStruct' set but not used [-Wunused-but-set-variable]
+   28 |   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+      |                      ^~~~~~~~~~~~~~~~~
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:27:22: warning: variable 'RCC_OscInitStruct' set but not used [-Wunused-but-set-variable]
+   27 |   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+      |                      ^~~~~~~~~~~~~~~~~
+In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal.h:6,
+                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:22:
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h: At top level:
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:75:17: warning: 'mhal_tim_get_clock' declared 'static' but never defined [-Wunused-function]
    75 | static uint32_t mhal_tim_get_clock(TIM_TypeDef *tim);
       |                 ^~~~~~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:67:13: warning: 'MX_GPIO_Init' declared 'static' but never defined [-Wunused-function]
-   67 | static void MX_GPIO_Init(void);
-      |             ^~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:213:14: warning: 'consumer' defined but not used [-Wunused-function]
-  213 |  static void consumer(void *param){
-      |              ^~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:202:14: warning: 'producer' defined but not used [-Wunused-function]
-  202 |  static void producer(void *param){
-      |              ^~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:110:61: warning: 'uart_mutex' defined but not used [-Wunused-variable]
-  110 |  static SemaphoreHandle_t sem, binsem, countsem, adc_mutex, uart_mutex;
-      |                                                             ^~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:110:40: warning: 'countsem' defined but not used [-Wunused-variable]
-  110 |  static SemaphoreHandle_t sem, binsem, countsem, adc_mutex, uart_mutex;
-      |                                        ^~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:110:32: warning: 'binsem' defined but not used [-Wunused-variable]
-  110 |  static SemaphoreHandle_t sem, binsem, countsem, adc_mutex, uart_mutex;
-      |                                ^~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:110:27: warning: 'sem' defined but not used [-Wunused-variable]
-  110 |  static SemaphoreHandle_t sem, binsem, countsem, adc_mutex, uart_mutex;
-      |                           ^~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c: In function 'main':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:314:48: warning: 'sprintf' writing a terminating nul past the end of the destination [-Wformat-overflow=]
-  314 |               sprintf(buf, "WHO_AM_I = 0x%02X\n", data);
-      |                                                ^
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:314:15: note: 'sprintf' output 17 bytes into a destination of size 16
-  314 |               sprintf(buf, "WHO_AM_I = 0x%02X\n", data);
-      |               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-arm-none-eabi-gcc -o "box_project.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\box_project\STM32CubeIDE\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="box_project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+arm-none-eabi-gcc -o "box_project.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\box_project\STM32CubeIDE\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="box_project.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: box_project.elf
  
 arm-none-eabi-size  box_project.elf 
 arm-none-eabi-objdump -h -S box_project.elf  > "box_project.list"
    text	   data	    bss	    dec	    hex	filename
-  31500	    116	  21244	  52860	   ce7c	box_project.elf
+  19128	    472	   3288	  22888	   5968	box_project.elf
 Finished building: default.size.stdout
  
 Finished building: box_project.list
  
 
-02:05:43 Build Finished. 0 errors, 31 warnings. (took 1s.35ms)
+19:52:25 Build Finished. 0 errors, 3 warnings. (took 821ms)
 

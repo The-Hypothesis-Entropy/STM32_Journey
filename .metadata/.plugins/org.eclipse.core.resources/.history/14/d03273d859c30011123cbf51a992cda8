@@ -1,5 +1,0 @@
-#include "dht.h"
-
-void dht_init(){
-
-}

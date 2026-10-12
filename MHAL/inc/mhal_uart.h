@@ -102,7 +102,7 @@ typedef struct {
 
 
 void mhal_uart_init(USART_TypeDef *uart, const char* tx, mhal_gpio_alt_fn_t tx_af, const char* rx, mhal_gpio_alt_fn_t rx_af);
-
+void mhal_uart_set_baud(USART_TypeDef *uart, uint32_t baud_rate);
 void mhal_uart_write_byte(USART_TypeDef *uart, uint8_t byte);
 void mhal_uart_write(USART_TypeDef *uart, uint8_t *buffer, uint8_t len);
 uint8_t mhal_uart_read_byte(USART_TypeDef *uart);

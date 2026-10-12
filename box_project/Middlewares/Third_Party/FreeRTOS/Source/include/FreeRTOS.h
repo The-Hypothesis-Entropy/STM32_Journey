@@ -299,7 +299,7 @@ hold explicit before calling the code. */
 #endif
 
 #ifndef configQUEUE_REGISTRY_SIZE
-	#define configQUEUE_REGISTRY_SIZE 16U
+	#define configQUEUE_REGISTRY_SIZE 0U
 #endif
 
 #if ( configQUEUE_REGISTRY_SIZE < 1 )
