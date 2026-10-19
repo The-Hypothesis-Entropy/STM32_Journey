@@ -24,6 +24,13 @@
 #include "st7735.h"
 #include "peripherals.h"
 
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+#include "semphr.h"
+#include "timers.h"
+
+
 int main(){
 	Begin();
 	uint8_t i = 0;

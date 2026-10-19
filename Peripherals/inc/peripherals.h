@@ -12,4 +12,4 @@ void tim_base_change_freq(TIM_TypeDef *tim, uint32_t freq_hz);
 void tim_pwm_init(TIM_TypeDef *tim, uint32_t channel, uint32_t freq_hz, uint8_t duty_percent);
 void tim_pwm_change_duty(TIM_TypeDef *tim, uint32_t channel, uint8_t duty);
 void tim_pwm_change_freq(TIM_TypeDef *tim, uint32_t channel, uint32_t freq_hz);
-
+void tim_capture_init(TIM_TypeDef *tim, uint32_t channel, uint32_t tick_hz);

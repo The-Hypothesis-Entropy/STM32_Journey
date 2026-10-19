@@ -783,8 +783,132 @@ void tim_capture_init(TIM_TypeDef *tim, uint32_t channel, uint32_t tick_hz){
 
 }
 
+void tim_capture_init(TIM_TypeDef *tim, uint32_t channel, uint32_t tick_hz){
+    // 1. Get the handle
+    TIM_HandleTypeDef *htim = (tim==TIM1) ? &htim1 :
+                              (tim==TIM2) ? &htim2 :
+                              (tim==TIM3) ? &htim3 :
+                              (tim==TIM4) ? &htim4 : &htim5;
+
+    // 2. Enable Timer Clock and GPIO (Example for TIM2_CH1 on PA0, AF1)
+    if (tim == TIM1) {
+        __HAL_RCC_TIM1_CLK_ENABLE();
+        if (channel == TIM_CHANNEL_1) {
+            __HAL_RCC_GPIOA_CLK_ENABLE();
+            gpio_af_pp_init(GPIOA, GPIO_PIN_8, 1); // PA8 = TIM1_CH1
+        }
+    } else if (tim == TIM2) {
+        __HAL_RCC_TIM2_CLK_ENABLE();
+        if (channel == TIM_CHANNEL_1) {
+            __HAL_RCC_GPIOA_CLK_ENABLE();
+            gpio_af_pp_init(GPIOA, GPIO_PIN_0, 1); // PA0 = TIM2_CH1
+        }
+    }
+    // (Add TIM3, TIM4, TIM5 pin routing here based on your schematic)
+
+    // 3. Determine the actual clock feeding the timer
+    uint32_t tim_clk;
+    if (tim == TIM1 || tim == TIM9 || tim == TIM10 || tim == TIM11) {
+        tim_clk = HAL_RCC_GetPCLK2Freq();
+        if ((RCC->CFGR & RCC_CFGR_PPRE2) != RCC_CFGR_PPRE2_DIV1) tim_clk *= 2;
+    } else {
+        tim_clk = HAL_RCC_GetPCLK1Freq();
+        if ((RCC->CFGR & RCC_CFGR_PPRE1) != RCC_CFGR_PPRE1_DIV1) tim_clk *= 2;
+    }
+
+    // 4. Configure the Base Timer (The Stopwatch)
+    // We want the timer to tick at exactly 'tick_hz' and count as high as possible.
+    uint32_t psc = (tim_clk / tick_hz) - 1;
+    uint32_t max_arr = (tim == TIM2 || tim == TIM5) ? 0xFFFFFFFF : 0xFFFF;
+
+    htim->Instance = tim;
+    htim->Init.Prescaler = psc;
+    htim->Init.Period = max_arr;
+    htim->Init.CounterMode = TIM_COUNTERMODE_UP;
+    HAL_TIM_IC_Init(htim);
+
+    // 5. Configure the Capture Channel
+    TIM_IC_InitTypeDef sConfigIC = {0};
+    sConfigIC.ICPolarity = TIM_ICPOLARITY_RISING; // Capture on rising edge
+    sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
+    sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;       // Capture every edge
+    sConfigIC.ICFilter = 0;                       // No hardware noise filter
+
+    HAL_TIM_IC_ConfigChannel(htim, &sConfigIC, channel);
+
+    // 6. Enable NVIC and Start Capture with Interrupt
+    IRQn_Type irqn = (tim==TIM1) ? TIM1_CC_IRQn : ((tim==TIM2) ? TIM2_IRQn : ((tim==TIM3) ? TIM3_IRQn : ((tim==TIM4) ? TIM4_IRQn : TIM5_IRQn)));
+    HAL_NVIC_EnableIRQ(irqn);
+    HAL_TIM_IC_Start_IT(htim, channel);
+}
+
 void TIM1_UP_TIM10_IRQHandler(void){HAL_TIM_IRQHandler(&htim1);}
 void TIM2_IRQHandler(void) {HAL_TIM_IRQHandler(&htim2);}
 void TIM3_IRQHandler(void) {HAL_TIM_IRQHandler(&htim3); mhal_gpio_toggle(PA5);}
 void TIM4_IRQHandler(void) {HAL_TIM_IRQHandler(&htim4);}
 void TIM5_IRQHandler(void) {HAL_TIM_IRQHandler(&htim5);}
+//========================================================================================================================================================
+/*
+ *                                  FREERTOS
+ * *TASKS: Independent thread of execution with its own stack and priority
+ *         ->TaskHandle_t myTaskHandle = NULL;
+ *         ->xTaskCreate(myTaskFunction, "MyTask", 256, NULL, 2, &myTaskHandle);
+ *         ->myTaskFunction must never end. Yield control using vTaskDelay or blocking on a queue/semaphore
+ *         Watch out for stack overflow
+ *
+ * *QUEUES: fifo buffer used to pass data between tasks or from ISR to task
+ * 		   -> QueueHandle_t myQueue = xQueueCreate(#items, sizeof(uint32_t));
+ * 		   -> xQueueSend/Receive
+ * 		   -> BaseType_t woken = pdFalse; xQueueSendFromISR(myQueue, &data, &woken); portYIELD_FROM_ISR(woken);
+ * 					if the action regarding queue made any high priority task ready, then yield to them
+ *
+ * *BINARY SEMAPHORE: QUEUE OF LENGTH 1 THAT HOLDS NO DATA
+ * 		Signals that an event has happened.
+ * 		A task could either be a doer of or a responder to an event
+ * 		Any doer task can give the semaphore. Any responder task can take the semaphore to show the event has been handled
+ *
+ * 		SemaphoreHandle_t myBinSem = xSemaphoreCreateBinary();
+ * 		//in isr
+ * 		BaseType_t woken = pdFALSE;
+ * 		xSemaphoreGiveFromISR(myBinSem, &woken);
+ * 		portYIELD_FROM_ISR(woken);
+ *		//in task
+ * 		xSemaphoreTake(myBinSem, portMAX_DELAY): //blocks until given
+ *
+ * *COUNTING SEMAPHORE: LIKE BINARY SEMAPHORE, BUT IT COUNTS
+ * 		SemaphoreHandle_t myCountSem = xSemaphoreCreateCounting(max, starting value);
+ * 		same give and take functions as binary semaphore
+ *
+ * *MUTEX: A BINARY SEMAPHORE WITH PRIORITY INHERITANCE AND OWNERSHIP
+ * 		SemaphoreHandle_t myMutex = xSemaphoreCreateMutex();
+ * 		xSemaphoreTake(myMutex, portMAX_DELAY);
+ * 		//Access shared resource(eg, I2C bus, global var, printf)
+ * 		xSemaphoreGive(myMutex);
+ *
+ * 		Can't be used in an isr because isr cannot block. Also, only the taker can give
+ *
+ * *SOFTWARE TIMERS: INDEPENDENT CLOCK THAT CALLS A CALLBACK. RUNS IN FREERTOS TIMER DAEMON TASK
+ * 		TimerHandle_t myTimer = xTimerCreate("mytimer", period_ticks, autoreload?, NULL, TimerCallback);
+ * 		xTimerStart(myTimer, 0);
+ *
+ * 		void TimerCallback(TimerHandle_t xTimer){
+ * 		//very short. blocks or delays here block or delay all other timers in the system
+ * 		}
+ *
+ * *NOTIFICATIONS:
+ * 		// From an ISR (Direct to Task Notification)
+ *		BaseType_t woken = pdFALSE;
+ *		vTaskNotifyGiveFromISR(myTaskHandle, &woken);
+ *		portYIELD_FROM_ISR(woken);
+ *
+ *		// In the Task (Wait for it)
+ *		ulTaskNotifyTake(pdTRUE, portMAX_DELAY); // Blocks until notified
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */

@@ -16933,3 +16933,31 @@ java.io.FileNotFoundException: C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Jou
 	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1052)
 	at org.eclipse.debug.internal.ui.DebugUIPlugin$1.run(DebugUIPlugin.java:1254)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-10-19 13:36:27.808
+!MESSAGE Executed PowerShell command powershell.exe -Command "Get-CimInstance -ClassName Win32_SerialPort | Select-Object -ExpandProperty DeviceID":
+COM10
+COM7
+COM5
+COM4
+COM6
+COM8
+
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-10-19 13:36:27.849
+!MESSAGE port: COM10
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-10-19 13:36:27.850
+!MESSAGE port: COM7
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-10-19 13:36:27.853
+!MESSAGE port: COM5
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-10-19 13:36:27.854
+!MESSAGE port: COM4
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-10-19 13:36:27.861
+!MESSAGE port: COM6
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-10-19 13:36:27.861
+!MESSAGE port: COM8
