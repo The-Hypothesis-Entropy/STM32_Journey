@@ -21,81 +21,66 @@
 #include "cmsis_os.h"
 #include "mhal.h"
 #include "stdio.h"
+#include "st7735.h"
+#include "peripherals.h"
 
-void SystemClock_Config(void)
-{
-  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-
-  /** Configure the main internal regulator output voltage
-  */
-  __HAL_RCC_PWR_CLK_ENABLE();
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
-
-  /** Initializes the RCC Oscillators according to the specified parameters
-  * in the RCC_OscInitTypeDef structure.
-  */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-  RCC_OscInitStruct.PLL.PLLM = 16;
-  RCC_OscInitStruct.PLL.PLLN = 336;
-  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
-  RCC_OscInitStruct.PLL.PLLQ = 7;
-
-
-  /** Initializes the CPU, AHB and APB buses clocks
-  */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
-
-}
-
-/*
- * FOR ANY PERIPHERAL:
- * -> Create the handle/inittypedef
- * -> Create an init function which: ACTIVATES CONCERNED CLOCKS, INITS MAIN PERIPHERAL,
- * 									 INITS GPIO/RELATED PERIPHERALS
- * -> in main, call HAL Init, then Clock Config. then your init.
- * -> Now free to use the HAL functions
- */
-static void dfplayer_play(uint8_t track)
-{
-    uint8_t pkt[10];
-    pkt[0] = 0x7E;
-    pkt[1] = 0xFF;
-    pkt[2] = 0x06;
-    pkt[3] = 0x03;              /* play track command */
-    pkt[4] = 0x00;
-    pkt[5] = 0x00;
-    pkt[6] = track;             /* track number, 1–255 */
-
-    uint16_t sum = 0;
-    for (int i = 1; i < 7; i++) sum += pkt[i];
-    uint16_t cksum = (uint16_t)(-sum);
-    pkt[7] = cksum >> 8;
-    pkt[8] = cksum & 0xFF;
-    pkt[9] = 0xEF;
-
-    mhal_uart_write(USART6, pkt, 10);
-    //mhal_uart_write(USART2, pkt, 10);
-}
-uint8_t msg[] = "Hello!\r\n";
 int main(){
-	mhal_uart_init(USART6, PC6, AF8, PC7, AF8);
-	//mhal_uart_set_baud(USART2, 9600);
-	//mhal_uart_init(USART2, PA2, AF7, PA3, AF7);
+	Begin();
+	uint8_t i = 0;
+	//SPI_HandleTypeDef *hspi = spi_init(SPI2);
+	//display_device_t display = display_init(*hspi, GPIOC, GPIO_PIN_4, GPIOB, GPIO_PIN_1, GPIOB, GPIO_PIN_2, 128U, 128U);
 
-	mhal_delay(1000);
-	mhal_uart_write(USART2, msg, 8);
-	dfplayer_play(1);
+	//UART_HandleTypeDef *huart = uart_init(USART6);
+	//display_orient(display, ST7735_ORIENT_90);
+	//display_SetBackground(display, ST7735_MAGENTA);
+	//display_DrawString(display, 10, 10, "Hellooo!", ST7735_WHITE, 2);
+	//mhal_gpio_init(GPIOA, 5, &MHAL_GPIO_CFG_OUTPUT);
+	//tim_base_init(TIM3, 1);
+	tim_pwm_init(TIM2, TIM_CHANNEL_1, 2000, 10);
+	while(1){
+		//display_FillCircle(display, 30, 30, 10, ST7735_WHITE);
+		//HAL_Delay(1500);
+		//display_FillCircle(display, 30, 30, 10, ST7735_MAGENTA);
+		//display_FillRect(display, 20, 30, 20, 5, ST7735_WHITE);
+		//HAL_Delay(90);
+		//display_FillRect(display, 20, 30, 20, 5, ST7735_MAGENTA);
+		//HAL_UART_Transmit_IT(huart, (uint8_t *)"HELLO FRIEND!! Hello Embedded! \r\n", 19);
+		HAL_Delay(2000);
+		tim_pwm_change_duty(TIM2, TIM_CHANNEL_1, 80);
+		HAL_Delay(2000);
+		tim_pwm_change_duty(TIM2, TIM_CHANNEL_1, 2);
 
-	while(1);
+		//tim_base_change_freq(TIM3, i++);
+	}
 
+}
+
+/* rtos_tim1_Callback function */
+//void rtos_tim1_Callback(void *argument)
+//{
+  /* USER CODE BEGIN rtos_tim1_Callback */
+
+  /* USER CODE END rtos_tim1_Callback */
+//}
+
+/**
+  * @brief  Period elapsed callback in non blocking mode
+  * @note   This function is called  when TIM9 interrupt took place, inside
+  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+  * a global variable "uwTick" used as application time base.
+  * @param  htim : TIM handle
+  * @retval None
+  */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  /* USER CODE BEGIN Callback 0 */
+
+  /* USER CODE END Callback 0 */
+  if (htim->Instance == TIM9)
+  {
+    HAL_IncTick();
+  }
+  /* USER CODE BEGIN Callback 1 */
+
+  /* USER CODE END Callback 1 */
 }

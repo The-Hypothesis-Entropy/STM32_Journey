@@ -1,0 +1,25 @@
+../../Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	16	static,ignoring_inline_asm
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:6:13:SystemClock_Config	88	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:41:6:Begin	16	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:58:13:gpio_af_pp_init	40	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:81:21:uart_init	64	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:138:6:USART1_IRQHandler	8	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:139:6:USART2_IRQHandler	8	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:140:6:USART6_IRQHandler	8	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:151:20:spi_init	64	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:208:6:SPI1_IRQHandler	8	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:209:6:SPI2_IRQHandler	8	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:210:6:SPI3_IRQHandler	8	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:223:20:i2c_init	64	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:286:6:adc_init	64	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:336:6:adc_read	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:363:6:tim_base_init	40	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:404:6:tim_base_change_freq	32	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:438:6:tim_pwm_init	168	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:575:6:tim_pwm_change_duty	40	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:596:6:tim_pwm_change_freq	56	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:637:6:TIM1_UP_TIM10_IRQHandler	8	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:638:6:TIM2_IRQHandler	8	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:639:6:TIM3_IRQHandler	8	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:640:6:TIM4_IRQHandler	8	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/src/peripherals.c:641:6:TIM5_IRQHandler	8	static

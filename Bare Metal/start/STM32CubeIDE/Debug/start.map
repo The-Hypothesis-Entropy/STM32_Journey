@@ -1925,6 +1925,7 @@ LOAD C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.exte
                 0x08001644       0x40 ./src/mhal_uart.o
  .text.mhal_uart_set_baud
                 0x08001684       0x64 ./src/mhal_uart.o
+                0x08001684                mhal_uart_set_baud
  .text.mhal_uart_init
                 0x080016e8      0x100 ./src/mhal_uart.o
                 0x080016e8                mhal_uart_init
@@ -2188,7 +2189,7 @@ LOAD C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_line_str
                 0x00000000       0x89 ./Application/Startup/startup_stm32f401retx.o
 
-.debug_info     0x00000000     0x7159
+.debug_info     0x00000000     0x715b
  .debug_info    0x00000000       0x30 ./Application/Startup/startup_stm32f401retx.o
  .debug_info    0x00000030      0x8cf ./Application/User/main.o
  .debug_info    0x000008ff      0x135 ./Application/User/stm32f4xx_it.o
@@ -2201,9 +2202,9 @@ LOAD C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_info    0x0000344e      0x30e ./src/mhal_rcc.o
  .debug_info    0x0000375c     0x1253 ./src/mhal_spi.o
  .debug_info    0x000049af     0x15a8 ./src/mhal_tim.o
- .debug_info    0x00005f57     0x1202 ./src/mhal_uart.o
+ .debug_info    0x00005f57     0x1204 ./src/mhal_uart.o
 
-.debug_abbrev   0x00000000     0x16cf
+.debug_abbrev   0x00000000     0x16cd
  .debug_abbrev  0x00000000       0x24 ./Application/Startup/startup_stm32f401retx.o
  .debug_abbrev  0x00000024      0x229 ./Application/User/main.o
  .debug_abbrev  0x0000024d       0x80 ./Application/User/stm32f4xx_it.o
@@ -2216,7 +2217,7 @@ LOAD C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_abbrev  0x00000c1e      0x118 ./src/mhal_rcc.o
  .debug_abbrev  0x00000d36      0x2f4 ./src/mhal_spi.o
  .debug_abbrev  0x0000102a      0x364 ./src/mhal_tim.o
- .debug_abbrev  0x0000138e      0x341 ./src/mhal_uart.o
+ .debug_abbrev  0x0000138e      0x33f ./src/mhal_uart.o
 
 .debug_aranges  0x00000000      0x578
  .debug_aranges

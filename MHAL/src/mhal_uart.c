@@ -157,7 +157,7 @@ void mhal_uart_init(USART_TypeDef *uart, const char* tx, mhal_gpio_alt_fn_t tx_a
 
 
 	//uart->BRR = 0x8B;
-	mhal_uart_set_baud(uart, 9600);
+	mhal_uart_set_baud(uart, 115200);
 
 	uart->CR1 |= USART_CR1_UE;
 

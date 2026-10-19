@@ -1,13 +1,10 @@
-19:52:25 **** Incremental Build of configuration Debug for project box_project ****
+12:38:24 **** Incremental Build of configuration Debug for project box_project ****
 make -j16 all 
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc" -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/Core/main.d" -MT"Application/User/Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/Core/main.o"
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c: In function 'SystemClock_Config':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:28:22: warning: variable 'RCC_ClkInitStruct' set but not used [-Wunused-but-set-variable]
-   28 |   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-      |                      ^~~~~~~~~~~~~~~~~
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:27:22: warning: variable 'RCC_OscInitStruct' set but not used [-Wunused-but-set-variable]
-   27 |   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-      |                      ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/modules/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc" -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/Core/main.d" -MT"Application/User/Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/Core/main.o"
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c: In function 'main':
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:29:17: warning: unused variable 'i' [-Wunused-variable]
+   29 |         uint8_t i = 0;
+      |                 ^
 In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal.h:6,
                  from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:22:
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h: At top level:
@@ -20,11 +17,11 @@ Finished building target: box_project.elf
 arm-none-eabi-size  box_project.elf 
 arm-none-eabi-objdump -h -S box_project.elf  > "box_project.list"
    text	   data	    bss	    dec	    hex	filename
-  19128	    472	   3288	  22888	   5968	box_project.elf
+  29064	    468	   4140	  33672	   8388	box_project.elf
 Finished building: default.size.stdout
  
 Finished building: box_project.list
  
 
-19:52:25 Build Finished. 0 errors, 3 warnings. (took 821ms)
+12:38:25 Build Finished. 0 errors, 2 warnings. (took 868ms)
 

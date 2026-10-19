@@ -64,7 +64,7 @@ typedef struct{
 	mhal_tim_ic_edge_t edge;
 }mhal_tim_ic_config_t;
 
-#define MHAL_TIM_IC_CONFIG_DEFAULT ((mhal_tim_ic_config_t){.prescaler = 83U; .channel = MHAL_TIM_CH1; .edge = HAL_TIM_IC_RISING;})
+#define MHAL_TIM_IC_CONFIG_DEFAULT ((mhal_tim_ic_config_t){.prescaler = 83U, .channel = MHAL_TIM_CH1, .edge = HAL_TIM_IC_RISING,})
 
 
 //--------------------------------------------------------------------------------

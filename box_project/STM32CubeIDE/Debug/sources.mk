@@ -27,6 +27,7 @@ Application/User/Startup \
 Drivers/CMSIS \
 Drivers/STM32F4xx_HAL_Driver \
 Middlewares/FreeRTOS \
+Peripherals \
 mhal_src \
-middleware_src \
+modules \
 

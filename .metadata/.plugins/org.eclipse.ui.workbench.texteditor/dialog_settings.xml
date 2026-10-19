@@ -3,6 +3,8 @@
 	<section name="java.lang.Class">
 		<item key="replaceBarOpen" value="true"/>
 		<list key="findhistory">
+			<item value="writecmd"/>
+			<item value="writedata"/>
 			<item value="HAL_I2C_MODULE_ENABLED"/>
 			<item value="hi2c1"/>
 			<item value="configQUEUE_REGISTRY_SIZE"/>
@@ -15,6 +17,8 @@
 			<item value="LV_USE_ST7735"/>
 		</list>
 		<list key="replacehistory">
+			<item value="writeCmd"/>
+			<item value="writeData"/>
 			<item value="spi"/>
 			<item value="pin_dc"/>
 			<item value="pin_rst"/>

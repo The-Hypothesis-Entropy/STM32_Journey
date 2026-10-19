@@ -21,6 +21,9 @@ Application/User/Core/main.o: \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h \
+ ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h \
+ ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_adc.h \
+ ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h \
@@ -28,6 +31,7 @@ Application/User/Core/main.o: \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
+ ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
@@ -53,7 +57,9 @@ Application/User/Core/main.o: \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_uart.h \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_dma.h \
  C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_spi.h \
- C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_i2c.h
+ C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_i2c.h \
+ C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/modules/inc/st7735.h \
+ C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/Peripherals/inc/peripherals.h
 ../../Core/Inc/main.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../../Core/Inc/stm32f4xx_hal_conf.h:
@@ -75,6 +81,9 @@ Application/User/Core/main.o: \
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h:
+../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:
+../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_adc.h:
+../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h:
@@ -82,6 +91,7 @@ Application/User/Core/main.o: \
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
+../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
@@ -108,3 +118,5 @@ C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_uart.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_dma.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_spi.h:
 C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_i2c.h:
+C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/modules/inc/st7735.h:
+C:/Users/PETER\ MBUA\ JR/Documents/GitHub/STM32_Journey/Peripherals/inc/peripherals.h:

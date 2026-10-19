@@ -1,0 +1,214 @@
+#include "st7735.h"
+#include "mhal.h"
+
+static void command_mode(display_device_t display){
+	HAL_GPIO_WritePin(display.dc_port, display.dc_pin, 0); //command
+}
+
+static void data_mode(display_device_t display){
+	HAL_GPIO_WritePin(display.dc_port, display.dc_pin, 1); //command
+}
+
+static void hardware_reset(display_device_t display){
+	HAL_GPIO_WritePin(display.res_port, display.res_pin, 0);
+	HAL_Delay(50);
+	HAL_GPIO_WritePin(display.res_port, display.res_pin, 1);
+	HAL_Delay(120);
+}
+
+static void cs_low(display_device_t display){
+	HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 0);
+}
+
+static void cs_high(display_device_t display){
+	HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 1);
+}
+
+static void writeCmd(display_device_t display, uint8_t cmd){
+	command_mode(display);
+	//HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 0);
+	HAL_SPI_Transmit(&display.hspi, &cmd, 1, 100);
+	//HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 1);
+}
+
+static void writeData(display_device_t display, uint8_t data){
+	data_mode(display);
+	//HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 0);
+	HAL_SPI_Transmit(&display.hspi, &data, 1, 100);
+	//HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 1);
+}
+
+static uint8_t x_offset(display_device_t display){
+	if(display.width==128 && display.height==128){return 2U;}
+}
+
+static uint8_t y_offset(display_device_t display){
+	if(display.width==128 && display.height==128){return 3U;}
+}
+
+static void setWindow(display_device_t display, uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1){
+	writeCmd(display, 0x2A); //column address set
+	writeData(display, 0x00); writeData(display, x0 + x_offset(display));
+	writeData(display, 0x00); writeData(display, x1 + x_offset(display));
+
+	writeCmd(display, 0x2B); //row address set
+	writeData(display, 0x00); writeData(display, y0 + y_offset(display));
+	writeData(display, 0x00); writeData(display, y1 + y_offset(display));
+
+	writeCmd(display, 0x2C); //memory write
+}
+
+display_device_t display_init(SPI_HandleTypeDef HSPI, GPIO_TypeDef *cs_port, uint16_t cs_pin, GPIO_TypeDef *res_port, uint16_t res_pin, GPIO_TypeDef *dc_port, uint16_t dc_pin, uint16_t screen_width, uint16_t screen_height){
+	/*
+	 * SPI MUST BE CONFIGURED ALREADY
+	 */
+	//Init display struct
+	display_device_t display;
+	display.hspi = HSPI;
+	display.cs_port = cs_port;
+	display.res_port = res_port;
+	display.dc_port = dc_port;
+	display.cs_pin = cs_pin;
+	display.res_pin = res_pin;
+	display.dc_pin = dc_pin;
+	display.width = screen_width;
+	display.height = screen_height;
+
+	//GPIO Initialization
+	if(cs_port==GPIOA||res_port==GPIOA||dc_port==GPIOA)__HAL_RCC_GPIOA_CLK_ENABLE();
+	if(cs_port==GPIOB||res_port==GPIOB||dc_port==GPIOB)__HAL_RCC_GPIOB_CLK_ENABLE();
+	if(cs_port==GPIOC||res_port==GPIOC||dc_port==GPIOC)__HAL_RCC_GPIOC_CLK_ENABLE();
+	if(cs_port==GPIOD||res_port==GPIOD||dc_port==GPIOD)__HAL_RCC_GPIOD_CLK_ENABLE();
+
+	GPIO_InitTypeDef gpio = {0};
+	gpio.Pin = cs_pin;
+	gpio.Mode = GPIO_MODE_OUTPUT_PP;
+	gpio.Pull = GPIO_NOPULL;
+	gpio.Speed = GPIO_SPEED_FREQ_HIGH;
+	gpio.Alternate = 0;
+	HAL_GPIO_Init(cs_port, &gpio);
+	HAL_GPIO_WritePin(cs_port, cs_pin, 1);
+
+	gpio.Pin = res_pin;
+	HAL_GPIO_Init(res_port, &gpio);
+	gpio.Pin = dc_pin;
+	HAL_GPIO_Init(dc_port, &gpio);
+
+	//Run initialization sequence
+	hardware_reset(display);
+	HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 0);
+
+	writeCmd(display, 0x01); //software reset
+	HAL_Delay(150);
+
+	writeCmd(display, 0x11); //sleep out
+	HAL_Delay(200);
+
+	writeCmd(display, 0xC0); //Power control 1
+	writeData(display, 0xA2); writeData(display, 0x02); writeData(display, 0x84);
+
+	writeCmd(display, 0xC1); //Power control 2
+	writeData(display, 0xC5);
+
+	writeCmd(display, 0xC2); //Power control 3
+	writeData(display, 0x0A); writeData(display, 0x00);
+
+	writeCmd(display, 0xC3); //Power control 4
+	writeData(display, 0x8A); writeData(display, 0x2A);
+
+	writeCmd(display, 0xC4); //Power control 5
+	writeData(display, 0x8A); writeData(display, 0x2E);
+
+	writeCmd(display, 0xC5); //Vcom control 1
+	writeData(display, 0x0E);
+
+	writeCmd(display, 0x36); //Orientation (MADCTL)
+	writeData(display, 0xC8);
+
+	writeCmd(display, 0x3A); //interface pixel format
+	writeData(display, 0x05); //16bit/pixel (rgb565)
+
+	writeCmd(display, 0x29);
+
+	HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 1);
+	HAL_Delay(100);
+
+
+	return display;
+}
+
+void display_on(display_device_t display){
+	writeCmd(display, 0x29);
+}
+
+void display_off(display_device_t display){
+	writeCmd(display, 0x29);
+}
+
+void display_FillRect(display_device_t display, uint8_t x, uint8_t y, uint8_t w, uint8_t h, uint16_t color){
+	uint8_t hi = color >> 8;
+	uint8_t lo = color & 0xFF;
+
+	HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 0);
+	setWindow(display, x, y, x+w-1, y+h-1);
+	//HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 1);
+
+	HAL_GPIO_WritePin(display.dc_port, display.dc_pin, 1);
+
+	//HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 0);
+	for(uint16_t i=0; i<(w*h); i++){
+		HAL_SPI_Transmit(&display.hspi, &hi, 1, 100);
+		HAL_SPI_Transmit(&display.hspi, &lo, 1, 100);
+	}
+	HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 1);
+}
+
+void display_SetBackground(display_device_t display, uint16_t color){
+	display_FillRect(display, 0, 0, display.width, display.height, color);
+}
+
+void display_orient(display_device_t display, display_orientation_t orient){
+	cs_low(display);
+	writeCmd(display, 0x36);
+	switch(orient){
+		case ST7735_ORIENT_0:
+			writeData(display, 0xC8);
+			break;
+		case ST7735_ORIENT_90:
+			writeData(display, 0xA8);
+			break;
+		case ST7735_ORIENT_180:
+			writeData(display, 0x08);
+			break;
+		case ST7735_ORIENT_270:
+			writeData(display, 0x68);
+			break;
+		default:
+			writeData(display, 0xC8);
+			break;
+		}
+
+	cs_high(display);
+}
+
+void display_DrawPixel(display_device_t display, uint8_t x, uint8_t y, uint16_t color){
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
