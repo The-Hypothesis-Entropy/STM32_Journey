@@ -27,23 +27,23 @@ static void cs_high(display_device_t display){
 static void writeCmd(display_device_t display, uint8_t cmd){
 	command_mode(display);
 	//HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 0);
-	HAL_SPI_Transmit(&display.hspi, &cmd, 1, 100);
+	HAL_SPI_Transmit(display.hspi, &cmd, 1, 100);
 	//HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 1);
 }
 
 static void writeData(display_device_t display, uint8_t data){
 	data_mode(display);
 	//HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 0);
-	HAL_SPI_Transmit(&display.hspi, &data, 1, 100);
+	HAL_SPI_Transmit(display.hspi, &data, 1, 100);
 	//HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 1);
 }
 
 static uint8_t x_offset(display_device_t display){
-	if(display.width==128 && display.height==128){return 0U;}
+	if(display.width==128 && display.height==128){return 2U;}
 }
 
 static uint8_t y_offset(display_device_t display){
-	if(display.width==128 && display.height==128){return 0U;}
+	if(display.width==128 && display.height==128){return 3U;}
 }
 
 static void setWindow(display_device_t display, uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1){
@@ -60,7 +60,7 @@ static void setWindow(display_device_t display, uint8_t x0, uint8_t y0, uint8_t 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-display_device_t display_init(SPI_HandleTypeDef HSPI, GPIO_TypeDef *cs_port, uint16_t cs_pin, GPIO_TypeDef *res_port, uint16_t res_pin, GPIO_TypeDef *dc_port, uint16_t dc_pin, uint16_t screen_width, uint16_t screen_height){
+display_device_t display_init(SPI_HandleTypeDef *HSPI, GPIO_TypeDef *cs_port, uint16_t cs_pin, GPIO_TypeDef *res_port, uint16_t res_pin, GPIO_TypeDef *dc_port, uint16_t dc_pin, uint16_t screen_width, uint16_t screen_height){
 	/*
 	 * SPI MUST BE CONFIGURED ALREADY
 	 */
@@ -135,7 +135,7 @@ display_device_t display_init(SPI_HandleTypeDef HSPI, GPIO_TypeDef *cs_port, uin
 	HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 1);
 	HAL_Delay(100);
 
-
+	display_SetBackground(display, ST7735_BLACK);
 	return display;
 }
 
@@ -159,8 +159,8 @@ void display_FillRect(display_device_t display, uint8_t x, uint8_t y, uint8_t w,
 
 	//HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 0);
 	for(uint16_t i=0; i<(w*h); i++){
-		HAL_SPI_Transmit(&display.hspi, &hi, 1, 100);
-		HAL_SPI_Transmit(&display.hspi, &lo, 1, 100);
+		HAL_SPI_Transmit(display.hspi, &hi, 1, 100);
+		HAL_SPI_Transmit(display.hspi, &lo, 1, 100);
 	}
 	HAL_GPIO_WritePin(display.cs_port, display.cs_pin, 1);
 }

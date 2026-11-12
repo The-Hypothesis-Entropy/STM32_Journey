@@ -1,0 +1,64 @@
+#include "platform.h"
+#include "stm32f4xx.h"
+#include "stm32f4xx_hal.h"
+
+//PERIPHERAL CONFIGURATION
+void ET_GPIO_config(uint8_t *gpio_config){
+	/*
+	 * ARRAY: [LENGTH OF ARRAY][PORT LETTER][PIN NUMBER][MODE][AF]
+	 */
+	GPIO_TypeDef *port = (gpio_config[1] == 'A') ? GPIOA :
+						 (gpio_config[1] == 'B') ? GPIOB :
+						 (gpio_config[1] == 'C') ? GPIOC :
+						 (gpio_config[1] == 'D') ? GPIOD : GPIOA;
+
+	GPIO_InitTypeDef gpio={0};
+	gpio.Pin = gpio_config[2];
+	gpio.Mode = (gpio_config[3] == 0U) ? GPIO_MODE_INPUT:
+				(gpio_config[3] == 1U) ? GPIO_MODE_OUTPUT_PP:
+				(gpio_config[3] == 2U) ? GPIO_MODE_OUTPUT_OD:
+				(gpio_config[3] == 3U) ? GPIO_MODE_AF_PP:
+				(gpio_config[3] == 4U) ? GPIO_MODE_AF_OD:
+				(gpio_config[3] == 5U) ? GPIO_MODE_ANALOG:
+				(gpio_config[3] == 6U) ? GPIO_MODE_IT_RISING:
+				(gpio_config[3] == 7U) ? GPIO_MODE_IT_FALLING:
+				(gpio_config[3] == 8U) ? GPIO_MODE_IT_RISING_FALLING:
+				(gpio_config[3] == 9U) ? GPIO_MODE_EVT_RISING:
+				(gpio_config[3] == 10U) ? GPIO_MODE_EVT_FALLING: GPIO_MODE_EVT_RISING_FALLING;
+	gpio.Speed = GPIO_SPEED_FREQ_MEDIUM;
+	if(gpio_config[4]!=0){
+		gpio.Alternate = gpio_config[4];
+	}
+	HAL_GPIO_Init(port, &gpio);
+}
+
+void ET_UART_config(uint8_t *uart_config){
+
+}
+
+void ET_SPI_config(uint8_t *spi_config){
+
+}
+
+void ET_I2C_config(uint8_t *i2c_config){
+
+}
+
+void ET_ADC_config(uint8_t *adc_config){
+
+}
+
+void ET_TIM_config(uint8_t *tim_config){
+
+}
+
+
+//PERIPHERAL ACCESS AND CONTROL
+
+void ET_GPIO_access(uint8_t *gpio_settings){
+
+}
+
+
+
+

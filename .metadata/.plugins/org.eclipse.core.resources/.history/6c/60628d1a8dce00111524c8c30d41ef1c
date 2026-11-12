@@ -1,0 +1,228 @@
+#include "etonde.h"
+/*
+ *                    ETONDE: THE LINK THAT BRINGS THINGS TOGETHER
+ *
+ * 								       FRAME
+ * 			    [START1][START2][DST][SRC][TYPE][LEN][...PAYLOAD...][CRC]
+ *
+ * Usage example
+ * -> uint16_t frame_length = ET_buildFrame(ET_STM32_NF401RE, ET_ESP32C3, ET_RESPONSE, 30, data, msg); //data is payload (of length 30's) pointer, msg is frame pointer
+ * -> ET_Status_t sign = ET_parseFrame(mhal_uart_rx_byte, &frame); //sign will only be ET_SUCCESS after crc passed and entire frame is valid. DO THIS FOR EVERY RECEIVED BYTE
+ * -> Access valid frame: if(sign==ET_SUCCESS){
+							mhal_uart_write(USART2, frame.payload, frame.length);
+							sign = ET_RECV_BUSY;}
+ */
+
+//-----------------------------BUILDER------------------------
+static uint16_t ET_calcCRC16(const uint8_t *d, uint16_t n){
+	uint16_t c = 0xFFFF;
+	while(n--){
+		c ^= ((uint16_t)*d++) << 8 ;
+		for(uint8_t i = 0; i<8; i++){
+			c = (c & 0x8000) ? (c<<1)^0x1021 : (c<<1U);
+		}
+	}
+	return c;
+}
+
+uint16_t ET_buildPacket(uint8_t dst, uint8_t src, uint8_t type, uint8_t len, uint8_t *payload, uint8_t *packet){
+	/*
+	 * dst: destination address
+	 * src: source address (of this device)
+	 * type: code denoting the nature/intent of this frame
+	 * len: length of the payload
+	 * payload: data to be sent
+	 * crc: CRC value (two bytes)
+	 * returns the number of bytes in the frame
+	 */
+	uint16_t index = 0;
+
+	//START BYTES
+	packet[index++] = START1;
+	packet[index++] = START2;
+
+	//DESTINATION BYTE
+	packet[index++] = dst;
+
+	//SOURCE BYTE
+	packet[index++] = src;
+
+	//TYPE BYTE
+	packet[index++] = type;
+
+	//LENGTH BYTE
+	packet[index++] = len;
+
+	//PAYLOAD BYTES
+	for(uint16_t i=0; i<len; i++){
+		packet[index++] = payload[i];
+	}
+
+	//CRC BYTE //little endian
+	uint16_t crc = ET_calcCRC16(packet+2U, len+4U);
+	packet[index++] = (uint8_t)(crc & 0xFF);
+	packet[index++] = (uint8_t)(crc >> 8U);
+
+	return index++; //overall number of bytes in frame
+}
+
+//--------------------------------------------------------------
+
+//---------------------------PARSER-----------------------------
+ET_State_t state = ET_WAIT_START1;
+volatile uint8_t crc1, crc2;
+volatile uint8_t payloadCounter = 0;
+volatile uint8_t hold_crc1 = 0U;
+static void ET_clearFrame(ET_Frame_t *frame){
+	uint16_t i = frame->length + 6U;
+	for(uint16_t x=0; x<i; x++){
+		*(&(frame->dst)+x) = 0U;
+	}
+}
+
+ET_Status_t ET_parseFrame(uint8_t byte, ET_Frame_t *frame){
+	/*
+	 * byte: most recently received byte
+	 * frame: pointer to a ET_Frame_t object the user created; this will store the parsed frame
+	 * 		  Parsed frame contains dst, src, type, length and payload
+	 * returns either ET_SUCCESS when a frame is completely parsed, or ET_RECV_BUSY when not so.
+	 *
+	 * Usage: for every received byte, call this function, pass the byte and the frame memory to hold the data
+	 * Check for when the function returns ET_SUCCESS. That is when the *frame data is reliable
+	 */
+	switch(state){
+		case ET_WAIT_START1:
+			if(byte==START1){state=ET_WAIT_START2;}
+			break;
+		case ET_WAIT_START2:
+			if(byte==START1){return ET_RECV_BUSY;}
+			else{
+				if(byte==START2){state=ET_WAIT_DST;}
+				else{state=ET_WAIT_START1;}
+			}
+			break;
+		case ET_WAIT_DST:
+			if(byte==ET_SELF){frame->dst = byte; state=ET_WAIT_SRC;}
+			else{state=ET_WAIT_START1;}
+			break;
+		case ET_WAIT_SRC:
+			frame->src = byte;
+			state=ET_WAIT_TYPE;
+			break;
+		case ET_WAIT_TYPE:
+			frame->type = byte;
+			state=ET_WAIT_LEN;
+			break;
+		case ET_WAIT_LEN:
+			frame->length = byte;
+			state=ET_WAIT_PAYLOAD;
+			payloadCounter = 0U;
+			if(byte==0U){state=ET_WAIT_CRC1;}
+			break;
+		case ET_WAIT_PAYLOAD:
+			frame->payload[payloadCounter++] = byte;
+			if(frame->length==payloadCounter){ //length==counter?
+				state=ET_WAIT_CRC1;
+			}
+			break;
+		case ET_WAIT_CRC1:
+			hold_crc1 = (uint8_t)byte;
+			state=ET_WAIT_CRC2;
+			break;
+		case ET_WAIT_CRC2:
+			state=ET_WAIT_START1;
+			uint16_t crc = ET_calcCRC16(&(frame->dst), frame->length+4U);
+			crc1 = (uint8_t)(crc & 0xFF);
+			crc2 = (uint8_t)(crc >> 8U);
+			if((byte==crc2) && (crc1==hold_crc1)){return ET_SUCCESS;}
+			ET_clearFrame(frame);
+			return ET_ERROR_CRC;
+			break;
+	}
+	return ET_RECV_BUSY;
+}
+
+ET_Device_t ET_readSource(ET_Frame_t *frame){
+	return frame->src;
+}
+
+ET_Type_t ET_readType(ET_Frame_t *frame){
+	return frame->type;
+}
+
+uint8_t ET_readLength(ET_Frame_t *frame){
+	return frame->length;
+}
+
+uint8_t *ET_readPayload(ET_Frame_t *frame){
+	return frame->payload;
+}
+
+//--------------------------------------------------------------
+
+//----------------------------DISPATCHER------------------------
+
+/*
+ *
+ */
+
+void ET_dispatchResetTable(void){
+	for(uint16_t i=0; i<256; i++){
+		ET_dispatchTable[i] = NULL;
+	}
+}
+
+uint16_t ET_dispatch_Handler(const ET_Frame_t *frame){
+	if (frame == NULL){
+		return ET_ERROR_NOFRAME;
+	}
+	ET_Handler h = ET_dispatchTable[frame->type];
+	if (h==NULL){
+		return ET_ERROR_NOHANDLERFORTYPE;
+	}
+	return h(frame);
+}
+
+ET_Status_t ET_dispatch_regHandler(uint8_t type, ET_Handler h){
+	if(h == NULL){
+		return ET_ERROR_NOHANDLE;
+	}
+	if(ET_dispatchTable[type] != NULL){
+		return ET_ERROR_ATTEMPTEDHANDLEOVERRIDE;
+	}
+	ET_dispatchTable[type] = h;
+	return ET_SUCCESS;
+}
+
+
+/*
+ * HANDLERS: ALL HAVE SAME SIGNATURE
+ * THE RETURNED VALUE IS THE SIZE OF THE ENTIRE RESPONSE PACKET. USE THIS WHEN SENDING THE PACKET
+ * IF THERE IS NO RESPONSE PACKET, RETURN 0
+ */
+
+uint8_t ET_responsePacket[270];
+static uint16_t ET_handle_PING(const ET_Frame_t *frame){
+	//PING RECEIVED, RESPOND WITH PONG
+	return ET_buildPacket(frame->src, ET_SELF, ET_TypePONG, 0, (uint8_t *)0, ET_responsePacket);
+}
+
+
+
+
+void ET_dispatchInit(void){
+	ET_dispatchResetTable();
+	ET_dispatch_regHandler(ET_TypePING, ET_handle_PING);
+}
+
+
+
+
+
+
+
+
+
+
+
+//--------------------------------------------------------------

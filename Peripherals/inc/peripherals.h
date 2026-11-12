@@ -2,6 +2,8 @@
 #include "mhal.h"
 
 void Begin(void);
+void IWDG_Start(void);
+void IWDG_Feed(void);
 UART_HandleTypeDef *uart_init(USART_TypeDef *uart, uint32_t baud);
 SPI_HandleTypeDef *spi_init(SPI_TypeDef *spi);
 I2C_HandleTypeDef *i2c_init(I2C_TypeDef *i2c);

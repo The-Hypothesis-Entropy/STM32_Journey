@@ -4,4 +4,4 @@
 //org.eclipse.debug.core.PREFERRED_DELEGATES/org.eclipse.cdt.launch.postmortemLaunchType=org.eclipse.cdt.dsf.gdb.launch.coreCLaunch,debug,;
 //org.eclipse.debug.core.PREFERRED_DELEGATES/org.eclipse.cdt.launch.remoteApplicationLaunchType=org.eclipse.rse.remotecdt.dsf.debug,debug,;
 eclipse.preferences.version=1
-prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<watchExpressions>\r\n    <expression enabled\="true" text\="i"/>\r\n    <expression enabled\="true" text\="GPIO"/>\r\n</watchExpressions>\r\n
+prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<watchExpressions>\r\n    <expression enabled\="true" text\="mhal_uart_rx_msg"/>\r\n    <expression enabled\="true" text\="mhal_uart_rx_byte"/>\r\n    <expression enabled\="true" text\="sign"/>\r\n    <expression enabled\="true" text\="frame"/>\r\n    <expression enabled\="true" text\="mhal_uart_rx_byte"/>\r\n</watchExpressions>\r\n

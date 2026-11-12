@@ -1,0 +1,207 @@
+#include "platform.h"
+#include "stm32f4xx.h"
+#include "stm32f4xx_hal.h"
+
+
+//PERIPHERAL CONFIGURATION
+void ET_GPIO_config(uint8_t *gpio_config){
+	/*
+	 * ARRAY: [PORT LETTER][GPIO NUM][MODE]
+	 */
+	GPIO_TypeDef *port;
+	IRQn_Type irqn;
+	if(gpio_config[0]=='B'){
+		__HAL_RCC_GPIOB_CLK_ENABLE();
+		port = GPIOB;
+
+		}
+	else if(gpio_config[0]=='C'){
+		__HAL_RCC_GPIOC_CLK_ENABLE();
+		port = GPIOC;
+		}
+	else if(gpio_config[0]=='D'){
+		__HAL_RCC_GPIOD_CLK_ENABLE();
+		port = GPIOD;
+		}
+	else{
+		__HAL_RCC_GPIOA_CLK_ENABLE();
+		port = GPIOA;
+	}
+
+	GPIO_InitTypeDef gpio={0};
+	gpio.Pin = (uint16_t)(0x0001<<gpio_config[1]);
+	gpio.Mode = (gpio_config[2] == 0U) ? GPIO_MODE_INPUT:
+				(gpio_config[2] == 1U) ? GPIO_MODE_OUTPUT_PP:
+				(gpio_config[2] == 2U) ? GPIO_MODE_OUTPUT_OD:
+				(gpio_config[2] == 3U) ? GPIO_MODE_AF_PP:
+				(gpio_config[2] == 4U) ? GPIO_MODE_AF_OD:
+				(gpio_config[2] == 5U) ? GPIO_MODE_ANALOG:
+				(gpio_config[2] == 6U) ? GPIO_MODE_IT_RISING:
+				(gpio_config[2] == 7U) ? GPIO_MODE_IT_FALLING:
+				(gpio_config[2] == 8U) ? GPIO_MODE_IT_RISING_FALLING:
+				(gpio_config[2] == 9U) ? GPIO_MODE_EVT_RISING:
+				(gpio_config[2] == 10U) ? GPIO_MODE_EVT_FALLING: GPIO_MODE_EVT_RISING_FALLING;
+	gpio.Speed = GPIO_SPEED_FREQ_MEDIUM;
+	HAL_GPIO_Init(port, &gpio);
+
+	if(gpio_config[2]==6U || gpio_config[2]==7U || gpio_config[2]==8U){
+		irqn = (gpio_config[1]==0) ? EXTI0_IRQn :
+			   (gpio_config[1]==1) ? EXTI1_IRQn :
+			   (gpio_config[1]==2) ? EXTI2_IRQn :
+			   (gpio_config[1]==3) ? EXTI3_IRQn :
+			   (gpio_config[1]==4) ? EXTI4_IRQn :
+			   (gpio_config[1]<=9) ? EXTI9_5_IRQn : EXTI15_10_IRQn;
+		HAL_NVIC_SetPriority(irqn, 0, 0);
+		HAL_NVIC_EnableIRQ(irqn);
+	}
+}
+
+void ET_UART_config(uint8_t *uart_config){
+/*
+ * ARRAY: [UART NUM][BAUD][INTERRUPT ENABLE]
+ * baud values
+ *		1: 4800,      4: 19200          7: 57600
+ *		2: 9600,      5: 38400          8: 115200
+ *		3: 11400,     6: 56000          9:
+*/
+	uint32_t baud = (uart_config[1]==0) ? 4800 :
+					(uart_config[1]==1) ? 9600 :
+					(uart_config[1]==2) ? 11400 :
+					(uart_config[1]==3) ? 19200 :
+					(uart_config[1]==4) ? 38400 :
+					(uart_config[1]==5) ? 56000 :
+					(uart_config[1]==6) ? 57600 :
+					(uart_config[1]==7) ? 115200 :
+					(uart_config[1]==8) ? 230400 :
+					(uart_config[1]==9) ? 460800 : 921600 ;
+
+USART_TypeDef *uart = (uart_config[0]==1U) ? USART1 : (uart_config[0] == 2U) ? USART2 : USART6;
+	static UART_HandleTypeDef huart = {0};
+	IRQn_Type irqn = USART2_IRQn;
+	huart->Instance = uart;
+	huart->Init.BaudRate = baud;
+	huart->Init.Mode = UART_MODE_TX_RX;
+	huart->Init.StopBits = UART_STOPBITS_1;
+
+	GPIO_InitTypeDef gpio = {0};
+	#ifdef USART1
+		if(uart==USART1){
+		__HAL_RCC_USART1_CLK_ENABLE();
+		__HAL_RCC_GPIOA_CLK_ENABLE();
+
+		gpio.Pin = GPIO_PIN_9 | GPIO_PIN_10;
+		gpio.Mode = GPIO_MODE_AF_PP;
+		gpio.Pull = GPIO_PULLUP;
+		gpio.Speed = GPIO_SPEED_FREQ_HIGH;
+		gpio.Alternate = GPIO_AF7_USART1;
+		HAL_GPIO_Init(GPIOA, &gpio);
+		irqn = USART1_IRQn;
+		}
+	#endif
+	#ifdef USART2
+		if(uart==USART2){
+		__HAL_RCC_USART2_CLK_ENABLE();
+		__HAL_RCC_GPIOA_CLK_ENABLE();
+
+		gpio.Pin = GPIO_PIN_2 | GPIO_PIN_3;
+		gpio.Mode = GPIO_MODE_AF_PP;
+		gpio.Pull = GPIO_PULLUP;
+		gpio.Speed = GPIO_SPEED_FREQ_HIGH;
+		gpio.Alternate = GPIO_AF7_USART2;
+		HAL_GPIO_Init(GPIOA, &gpio);
+		irqn = USART2_IRQn;
+		}
+	#endif
+	#ifdef USART6
+		if(uart==USART6){
+		__HAL_RCC_USART6_CLK_ENABLE();
+		__HAL_RCC_GPIOA_CLK_ENABLE();
+
+		gpio.Pin = GPIO_PIN_11 | GPIO_PIN_12;
+		gpio.Mode = GPIO_MODE_AF_PP;
+		gpio.Pull = GPIO_PULLUP;
+		gpio.Speed = GPIO_SPEED_FREQ_HIGH;
+		gpio.Alternate = GPIO_AF8_USART6;
+		HAL_GPIO_Init(GPIOA, &gpio);
+		irqn = USART6_IRQn;
+		}
+	#endif
+		if(uart_config[2]==1){ //interrupt enable
+		HAL_UART_Init(huart);
+		NVIC_EnableIRQ(irqn);
+		}
+
+}
+
+void ET_SPI_config(uint8_t *spi_config){
+
+}
+
+void ET_I2C_config(uint8_t *i2c_config){
+
+}
+
+void ET_ADC_config(uint8_t *adc_config){
+
+}
+
+void ET_TIM_config(uint8_t *tim_config){
+
+}
+
+
+//PERIPHERAL ACCESS AND CONTROL
+
+void ET_GPIO_write(uint8_t *gpio_settings){
+/*
+ * ARRAY: [PORT LETTER][GPIO NUM][VALUE]
+ */
+	GPIO_TypeDef *port;
+	if(gpio_settings[0]=='B'){port = GPIOB;}
+	else if(gpio_settings[0]=='C'){port = GPIOC;}
+	else if(gpio_settings[0]=='D'){port = GPIOD;}
+	else{port = GPIOA;}
+
+	HAL_GPIO_WritePin(port, (uint16_t)(0x0001<<gpio_settings[1]), gpio_settings[2]);
+}
+
+uint8_t ET_GPIO_read(uint8_t *gpio_settings){
+/*
+ * ARRAY: [PORT LETTER][GPIO NUM]
+ */
+	GPIO_TypeDef *port;
+	if(gpio_settings[0]=='B'){port = GPIOB;}
+	else if(gpio_settings[0]=='C'){port = GPIOC;}
+	else if(gpio_settings[0]=='D'){port = GPIOD;}
+	else{port = GPIOA;}
+
+	return HAL_GPIO_ReadPin(port, (uint16_t)(0x0001<<gpio_settings[1]));
+}
+
+void ET_UART_send(uint8_t *uart_settings){
+/*
+ * ARRAY: [UART NUM][SEND_ADDRESS][LENGTH OF DATA][DATA begin]...[DATA end]
+ */
+	USART_TypeDef *uart = (uart_settings[0]==1U) ? USART1 : (uart_settings[0] == 2U) ? USART2 : USART6;
+	for(uint16_t i = 0; i<uart_settings[2]; i++){
+
+	}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

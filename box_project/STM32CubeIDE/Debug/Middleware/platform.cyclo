@@ -1,0 +1,12 @@
+../../Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	2
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:8:6:ET_GPIO_config	24
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:60:6:ET_UART_config	17
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:137:6:ET_SPI_config	16
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:215:6:ET_I2C_config	4
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:273:6:ET_ADC_config	12
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:310:6:ET_TIM_config	51
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:576:6:ET_GPIO_write	4
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:589:9:ET_GPIO_read	4
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:603:6:ET_UART_send	5
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:615:6:ET_UART_recv	5
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:629:6:ET_ADC_read	3

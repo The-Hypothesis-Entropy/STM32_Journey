@@ -14,6 +14,6 @@ C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:212:6
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:239:6:mhal_uart_transmit	4
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:274:6:mhal_uart_dma_send	4
 C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:310:6:mhal_uart_dma_rcv	4
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:360:6:mhal_uart1_handler	10
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:405:6:mhal_uart2_handler	10
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:450:6:mhal_uart6_handler	10
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:360:6:mhal_uart1_handler	6
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:415:6:mhal_uart2_handler	6
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/src/mhal_uart.c:475:6:mhal_uart6_handler	6

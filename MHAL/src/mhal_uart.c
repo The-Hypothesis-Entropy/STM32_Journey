@@ -371,6 +371,15 @@ void mhal_uart1_handler(void){
 
 		}
 
+	if (USART1->SR & USART_SR_RXNE){
+				if(mhal_uart_rx_idx>=MHAL_UART_RX_MAX_BUF_SIZE)mhal_uart_rx_idx=0U;
+				mhal_uart_rx_byte = USART1->DR;
+				mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
+				mhal_uart_rx_len++;
+			}
+}
+
+	/*
 		if (USART1->SR & USART_SR_RXNE){
 			if(mhal_uart_rx_len==0U){
 				mhal_uart_rx_len++;
@@ -401,6 +410,7 @@ void mhal_uart1_handler(void){
 				}
 			}
 }
+*/
 
 void mhal_uart2_handler(void){
 	if((USART2->SR & USART_SR_TXE) && (USART2->CR1 & USART_CR1_TXEIE)){ //meaning we are coming from mhal_uart_transmit call
@@ -417,11 +427,16 @@ void mhal_uart2_handler(void){
 		}
 
 		if (USART2->SR & USART_SR_RXNE){
-			if(mhal_uart_rx_len==0U){
+			if(mhal_uart_rx_idx>=MHAL_UART_RX_MAX_BUF_SIZE)mhal_uart_rx_idx=0U;
+			mhal_uart_rx_byte = USART2->DR;
+			mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
+			mhal_uart_rx_len++;
+		}
+/*			if(mhal_uart_rx_len==0U){
 				mhal_uart_rx_len++;
 				mhal_uart_rx_byte = USART2->DR;
-				mhal_uart_rx_msg[mhal_uart_rx_idx] = mhal_uart_rx_byte;
-				USART2->CR1 &= ~USART_CR1_RXNEIE;
+				mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
+				//USART2->CR1 &= ~USART_CR1_RXNEIE;
 				}
 			else{ //called from general receive
 				mhal_uart_rx_byte = USART2->DR;
@@ -442,9 +457,19 @@ void mhal_uart2_handler(void){
 				else{
 					mhal_uart_rx_idx = 0U; //loop around
 					//USART2->CR1 &= ~USART_CR1_RXNEIE; //buffer full, stop receiving. you can change this if you prefer to override.
+					}
+*/
+/*				if(mhal_uart_rx_idx<MHAL_UART_RX_MAX_BUF_SIZE){//buffer not full
+					mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
+					mhal_uart_rx_len++;
+					}
+				else{
+					mhal_uart_rx_idx = 0U;
+					}
 				}
-				}
-			}
+			*/
+
+			//}
 }
 
 void mhal_uart6_handler(void){
@@ -461,6 +486,15 @@ void mhal_uart6_handler(void){
 
 		}
 
+	if (USART6->SR & USART_SR_RXNE){
+				if(mhal_uart_rx_idx>=MHAL_UART_RX_MAX_BUF_SIZE)mhal_uart_rx_idx=0U;
+				mhal_uart_rx_byte = USART6->DR;
+				mhal_uart_rx_msg[mhal_uart_rx_idx++] = mhal_uart_rx_byte;
+				mhal_uart_rx_len++;
+			}
+}
+
+	/*
 		if (USART6->SR & USART_SR_RXNE){
 			if(mhal_uart_rx_len==0U){
 				mhal_uart_rx_len++;
@@ -491,3 +525,4 @@ void mhal_uart6_handler(void){
 				}
 			}
 }
+*/

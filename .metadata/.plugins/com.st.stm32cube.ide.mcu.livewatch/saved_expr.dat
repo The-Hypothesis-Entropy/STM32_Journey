@@ -1,5 +1,0 @@
-GPIOA
-USART2->SR
-*(volatile uint32_t *)0x40004400
-*(volatile uint32_t *)0x40004404
-GPIOA

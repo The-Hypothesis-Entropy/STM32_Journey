@@ -45,6 +45,8 @@ void Begin(void){
 	mhal_uart_init(USART2, PA2, AF7, PA3, AF7); //personal debug
 }
 
+
+
 /*
  * FOR ANY PERIPHERAL:
  * -> Create the handle/inittypedef
@@ -64,7 +66,32 @@ static void gpio_af_pp_init(GPIO_TypeDef *port, uint16_t pin, uint8_t af){
 	   HAL_GPIO_Init(port, &gpio);
 }
 
+void IWDG_Start(void)
+{
+	/*
+	 * DEFAULT ~ 32s
+	 */
+    /* 1. Enable the IWDG */
+    IWDG->KR = 0xCCCC;
 
+    /* 2. Enable write access to PR and RLR */
+    IWDG->KR = 0x5555;
+
+    /* 3. Write the values */
+    IWDG->PR = IWDG_PRESCALER_256;
+    IWDG->RLR = 8100;
+
+    /* 4. WAIT for the hardware to sync the values */
+    while (IWDG->SR & IWDG_SR_PVU) {} // Wait for Prescaler to be updated
+    while (IWDG->SR & IWDG_SR_RVU) {} // Wait for Reload to be updated
+
+    /* 5. Reload the counter */
+    IWDG->KR = 0xAAAA;
+}
+
+void IWDG_Feed(void){
+	IWDG->KR = 0xAAAA;
+}
 
 //============================================================================
 /*
@@ -77,7 +104,7 @@ static void gpio_af_pp_init(GPIO_TypeDef *port, uint16_t pin, uint8_t af){
 static UART_HandleTypeDef huart1 = {0};
 static UART_HandleTypeDef huart2 = {0};
 static UART_HandleTypeDef huart6 = {0};
-UART_HandleTypeDef *huart = NULL;
+static UART_HandleTypeDef *huart = NULL;
 UART_HandleTypeDef *uart_init(USART_TypeDef *uart, uint32_t baud){
 	huart = (uart==USART1) ? &huart1 : ((uart==USART2) ? &huart2 : &huart6);
 
@@ -85,6 +112,7 @@ UART_HandleTypeDef *uart_init(USART_TypeDef *uart, uint32_t baud){
 	huart->Instance = uart;
 	huart->Init.BaudRate = baud;
 	huart->Init.Mode = UART_MODE_TX_RX;
+	huart->Init.StopBits = UART_STOPBITS_1;
 	//HAL_UART_Init(&huart); ONLY DO AFTER CLOCK IS ACTIVATED!
 
 	GPIO_InitTypeDef gpio = {0};
@@ -136,8 +164,8 @@ UART_HandleTypeDef *uart_init(USART_TypeDef *uart, uint32_t baud){
 }
 
 void USART1_IRQHandler(void){HAL_UART_IRQHandler(&huart1);}
-void USART2_IRQHandler(void){HAL_UART_IRQHandler(&huart2);}
-void USART6_IRQHandler(void){HAL_UART_IRQHandler(&huart6);}
+//void USART2_IRQHandler(void){HAL_UART_IRQHandler(&huart2);}
+//void USART6_IRQHandler(void){HAL_UART_IRQHandler(&huart6);}
 
 //============================================================================
 
@@ -147,7 +175,7 @@ void USART6_IRQHandler(void){HAL_UART_IRQHandler(&huart6);}
 static SPI_HandleTypeDef hspi1 = {0};
 static SPI_HandleTypeDef hspi2 = {0};
 static SPI_HandleTypeDef hspi3 = {0};
-SPI_HandleTypeDef *hspi = NULL;
+static SPI_HandleTypeDef *hspi = NULL;
 SPI_HandleTypeDef *spi_init(SPI_TypeDef *spi){
 	hspi = (spi==SPI1) ? &hspi1 : ((spi==SPI2) ? &hspi2 : &hspi3);
 
@@ -219,7 +247,7 @@ void SPI3_IRQHandler(void){HAL_SPI_IRQHandler(&hspi3);}
 static I2C_HandleTypeDef hi2c1 = {0};
 static I2C_HandleTypeDef hi2c2 = {0};
 static I2C_HandleTypeDef hi2c3 = {0};
-I2C_HandleTypeDef *hi2c = NULL;
+static I2C_HandleTypeDef *hi2c = NULL;
 I2C_HandleTypeDef *i2c_init(I2C_TypeDef *i2c){
 	hi2c = (i2c==I2C1) ? &hi2c1 : ((i2c==I2C2) ? &hi2c2 : &hi2c3);
 
@@ -281,7 +309,7 @@ I2C_HandleTypeDef *i2c_init(I2C_TypeDef *i2c){
  * ADC:
  */
 
-ADC_HandleTypeDef *hadc = NULL;
+static ADC_HandleTypeDef *hadc = NULL;
 uint8_t numberOfADCChannels = 0;
 void adc_init(uint8_t numOfChannels){
 	/*
@@ -781,65 +809,6 @@ void tim_capture_init(TIM_TypeDef *tim, uint32_t channel, uint32_t tick_hz){
 	       HAL_NVIC_EnableIRQ(irqn);
 	       HAL_TIM_IC_Start_IT(htim, channel);
 
-}
-
-void tim_capture_init(TIM_TypeDef *tim, uint32_t channel, uint32_t tick_hz){
-    // 1. Get the handle
-    TIM_HandleTypeDef *htim = (tim==TIM1) ? &htim1 :
-                              (tim==TIM2) ? &htim2 :
-                              (tim==TIM3) ? &htim3 :
-                              (tim==TIM4) ? &htim4 : &htim5;
-
-    // 2. Enable Timer Clock and GPIO (Example for TIM2_CH1 on PA0, AF1)
-    if (tim == TIM1) {
-        __HAL_RCC_TIM1_CLK_ENABLE();
-        if (channel == TIM_CHANNEL_1) {
-            __HAL_RCC_GPIOA_CLK_ENABLE();
-            gpio_af_pp_init(GPIOA, GPIO_PIN_8, 1); // PA8 = TIM1_CH1
-        }
-    } else if (tim == TIM2) {
-        __HAL_RCC_TIM2_CLK_ENABLE();
-        if (channel == TIM_CHANNEL_1) {
-            __HAL_RCC_GPIOA_CLK_ENABLE();
-            gpio_af_pp_init(GPIOA, GPIO_PIN_0, 1); // PA0 = TIM2_CH1
-        }
-    }
-    // (Add TIM3, TIM4, TIM5 pin routing here based on your schematic)
-
-    // 3. Determine the actual clock feeding the timer
-    uint32_t tim_clk;
-    if (tim == TIM1 || tim == TIM9 || tim == TIM10 || tim == TIM11) {
-        tim_clk = HAL_RCC_GetPCLK2Freq();
-        if ((RCC->CFGR & RCC_CFGR_PPRE2) != RCC_CFGR_PPRE2_DIV1) tim_clk *= 2;
-    } else {
-        tim_clk = HAL_RCC_GetPCLK1Freq();
-        if ((RCC->CFGR & RCC_CFGR_PPRE1) != RCC_CFGR_PPRE1_DIV1) tim_clk *= 2;
-    }
-
-    // 4. Configure the Base Timer (The Stopwatch)
-    // We want the timer to tick at exactly 'tick_hz' and count as high as possible.
-    uint32_t psc = (tim_clk / tick_hz) - 1;
-    uint32_t max_arr = (tim == TIM2 || tim == TIM5) ? 0xFFFFFFFF : 0xFFFF;
-
-    htim->Instance = tim;
-    htim->Init.Prescaler = psc;
-    htim->Init.Period = max_arr;
-    htim->Init.CounterMode = TIM_COUNTERMODE_UP;
-    HAL_TIM_IC_Init(htim);
-
-    // 5. Configure the Capture Channel
-    TIM_IC_InitTypeDef sConfigIC = {0};
-    sConfigIC.ICPolarity = TIM_ICPOLARITY_RISING; // Capture on rising edge
-    sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
-    sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;       // Capture every edge
-    sConfigIC.ICFilter = 0;                       // No hardware noise filter
-
-    HAL_TIM_IC_ConfigChannel(htim, &sConfigIC, channel);
-
-    // 6. Enable NVIC and Start Capture with Interrupt
-    IRQn_Type irqn = (tim==TIM1) ? TIM1_CC_IRQn : ((tim==TIM2) ? TIM2_IRQn : ((tim==TIM3) ? TIM3_IRQn : ((tim==TIM4) ? TIM4_IRQn : TIM5_IRQn)));
-    HAL_NVIC_EnableIRQ(irqn);
-    HAL_TIM_IC_Start_IT(htim, channel);
 }
 
 void TIM1_UP_TIM10_IRQHandler(void){HAL_TIM_IRQHandler(&htim1);}

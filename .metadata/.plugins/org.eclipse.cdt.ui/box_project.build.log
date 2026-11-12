@@ -1,27 +1,28 @@
-12:38:24 **** Incremental Build of configuration Debug for project box_project ****
+01:25:50 **** Incremental Build of configuration Debug for project box_project ****
 make -j16 all 
-arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/modules/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc" -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Application/User/Core/main.d" -MT"Application/User/Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Application/User/Core/main.o"
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c: In function 'main':
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:29:17: warning: unused variable 'i' [-Wunused-variable]
-   29 |         uint8_t i = 0;
-      |                 ^
-In file included from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal.h:6,
-                 from C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/box_project/Core/Src/main.c:22:
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h: At top level:
-C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc/mhal_tim.h:75:17: warning: 'mhal_tim_get_clock' declared 'static' but never defined [-Wunused-function]
-   75 | static uint32_t mhal_tim_get_clock(TIM_TypeDef *tim);
-      |                 ^~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc "C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../../Core/Inc -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Peripherals/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/modules/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/MHAL/inc" -I"C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/inc" -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../Drivers/CMSIS/Include -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middleware/platform.d" -MT"Middleware/platform.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middleware/platform.o"
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c: In function 'ET_UART_recv':
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:622:17: warning: this 'while' clause does not guard... [-Wmisleading-indentation]
+  622 |                 while (!(uart->SR & USART_SR_RXNE));
+      |                 ^~~~~
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:623:25: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'while'
+  623 |                         param[i+3] = uart->DR;
+      |                         ^~~~~
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c: In function 'ET_ADC_read':
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:630:17: warning: variable 'adc' set but not used [-Wunused-but-set-variable]
+  630 |         uint8_t adc, ch;
+      |                 ^~~
 arm-none-eabi-gcc -o "box_project.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PETER MBUA JR\Documents\GitHub\STM32_Journey\box_project\STM32CubeIDE\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="box_project.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: box_project.elf
  
 arm-none-eabi-size  box_project.elf 
 arm-none-eabi-objdump -h -S box_project.elf  > "box_project.list"
    text	   data	    bss	    dec	    hex	filename
-  29064	    468	   4140	  33672	   8388	box_project.elf
+  37648	    472	   5512	  43632	   aa70	box_project.elf
 Finished building: default.size.stdout
  
 Finished building: box_project.list
  
 
-12:38:25 Build Finished. 0 errors, 2 warnings. (took 868ms)
+01:25:51 Build Finished. 0 errors, 2 warnings. (took 842ms)
 

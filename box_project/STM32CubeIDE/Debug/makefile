@@ -13,6 +13,7 @@ RM := rm -rf
 -include mhal_src/subdir.mk
 -include Peripherals/subdir.mk
 -include Middlewares/FreeRTOS/subdir.mk
+-include Middleware/subdir.mk
 -include Drivers/STM32F4xx_HAL_Driver/subdir.mk
 -include Drivers/CMSIS/subdir.mk
 -include Application/User/Startup/subdir.mk

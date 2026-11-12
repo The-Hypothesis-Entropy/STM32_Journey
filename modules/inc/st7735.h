@@ -123,7 +123,7 @@ typedef enum{
 }display_orientation_t;
 
 typedef struct{
-	SPI_HandleTypeDef hspi;
+	SPI_HandleTypeDef *hspi;
 	GPIO_TypeDef *cs_port;
 	GPIO_TypeDef *res_port;
 	GPIO_TypeDef *dc_port;
@@ -139,7 +139,7 @@ typedef enum{
 	DISPLAY_FAILED_INIT = 1,
 }display_status_t;
 
-display_device_t display_init(SPI_HandleTypeDef HSPI, GPIO_TypeDef *cs_port, uint16_t cs_pin, GPIO_TypeDef *res_port, uint16_t res_pin, GPIO_TypeDef *dc_port, uint16_t dc_pin, uint16_t screen_width, uint16_t screen_height);
+display_device_t display_init(SPI_HandleTypeDef *HSPI, GPIO_TypeDef *cs_port, uint16_t cs_pin, GPIO_TypeDef *res_port, uint16_t res_pin, GPIO_TypeDef *dc_port, uint16_t dc_pin, uint16_t screen_width, uint16_t screen_height);
 void display_on(display_device_t display);
 void display_off(display_device_t display);
 void display_FillRect(display_device_t display, uint8_t x, uint8_t y, uint8_t w, uint8_t h, uint16_t color);

@@ -10,7 +10,7 @@
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 	</section>
 	<section name="CleanDialogSettings">
-		<item key="BUILD_NOW" value="true"/>
+		<item key="BUILD_NOW" value="false"/>
 		<item key="BUILD_ALL" value="false"/>
 		<item key="TOGGLE_SELECTED" value="true"/>
 		<item key="DIALOG_WIDTH" value="499"/>

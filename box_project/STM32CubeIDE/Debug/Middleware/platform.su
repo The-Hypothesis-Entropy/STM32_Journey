@@ -1,0 +1,12 @@
+../../Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	16	static,ignoring_inline_asm
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:8:6:ET_GPIO_config	64	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:60:6:ET_UART_config	72	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:137:6:ET_SPI_config	160	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:215:6:ET_I2C_config	152	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:273:6:ET_ADC_config	136	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:310:6:ET_TIM_config	120	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:576:6:ET_GPIO_write	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:589:9:ET_GPIO_read	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:603:6:ET_UART_send	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:615:6:ET_UART_recv	24	static
+C:/Users/PETER MBUA JR/Documents/GitHub/STM32_Journey/Middleware/src/platform.c:629:6:ET_ADC_read	24	static

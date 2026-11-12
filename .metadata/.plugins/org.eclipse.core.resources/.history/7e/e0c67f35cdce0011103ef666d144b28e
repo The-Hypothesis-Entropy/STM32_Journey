@@ -1,0 +1,37 @@
+#include "platform.h"
+
+//PERIPHERAL CONFIGURATION
+void ET_GPIO_config(uint8_t *gpio_config){
+
+}
+
+void ET_UART_config(uint8_t *uart_config){
+
+}
+
+void ET_SPI_config(uint8_t *spi_config){
+
+}
+
+void ET_I2C_config(uint8_t *i2c_config){
+
+}
+
+void ET_ADC_config(uint8_t *adc_config){
+
+}
+
+void ET_TIM_config(uint8_t *tim_config){
+
+}
+
+
+//PERIPHERAL ACCESS AND CONTROL
+
+void ET_GPIO_Access(uint8_t *gpio_settings){
+
+}
+
+
+
+

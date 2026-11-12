@@ -5,7 +5,7 @@ uint8_t *mhal_uart_tx_msg = (void *)0;
 uint8_t mhal_uart_tx_len = 0U;
 uint8_t mhal_uart_tx_idx = 0U;
 uint8_t mhal_uart_rx_byte = 0U;
-uint8_t mhal_uart_rx_len = 1U;
+uint32_t mhal_uart_rx_len = 1U;
 uint8_t mhal_uart_rx_idx = 0U;
 uint8_t mhal_uart_rx_msg[MHAL_UART_RX_MAX_BUF_SIZE];
 
